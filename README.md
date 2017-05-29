@@ -2,9 +2,7 @@
 
 
 ## About
-
-
-![playlist](README-img/playlists.png)
+This is an app for ultimate frisbee tournaments. Teams can use this app to update their scores, see their matches, and publish the end results of their match.
 
 
 ## Install the app
