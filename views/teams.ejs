@@ -8,8 +8,8 @@
   <ul class="teamlist">
     <% teams.forEach(function (obj) { %>
     <li class="team">
-      <a href="#/<%= obj.team.id %>">
-        <h3 class="teamName"> <%= obj.team.name %> </h3>
+      <a href="/teams/<%= obj.team.id %>">
+        <h3 class="teamName"> <%= obj.team.short_name %> </h3>
       </a>
     </li>
     <% }) %>
