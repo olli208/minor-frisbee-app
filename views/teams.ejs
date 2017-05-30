@@ -1,0 +1,19 @@
+<% include partials/head.ejs %>
+
+<header class="">
+  <h1>Teams<span></h1>
+</header>
+
+<section>
+  <ul class="teamlist">
+    <% teams.forEach(function (obj) { %>
+    <li class="team">
+      <a href="#/<%= obj.team.id %>">
+        <h3 class="teamName"> <%= obj.team.name %> </h3>
+      </a>
+    </li>
+    <% }) %>
+  </ul>
+</section>
+
+<% include partials/footer.ejs %>

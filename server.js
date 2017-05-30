@@ -33,6 +33,7 @@ io.on('connect', onConnect);
 app.get('/', index);
 app.get('/login', login);
 app.get('/callback', callback);
+app.get('/teams', getTeams);
 app.get('/games', getGames);
 
 function index (req , res) {
@@ -64,20 +65,23 @@ function callback (req, res) {
         apiResponse = JSON.parse(body);
         acccessToken = apiResponse.access_token;
 
-        res.redirect('/games');
+        res.redirect('/teams');
     });
 }
 
-function getGames (req, res) {
-  rp('http://api.playwithlv.com/v1/tournaments/20059/teams/?access_token=' + acccessToken)
+function getTeams (req, res) {
+  rp('http://api.playwithlv.com/v1/tournament_teams/?tournament_ids=%5B20059%5D&access_token=' + acccessToken)
       .then(function (body) {
         var data = JSON.parse(body);
-        console.log(data);
 
-        res.render('games', {
-          tournamentName: data.name
+        res.render('teams', {
+          teams: data.objects
         });
     });
+}
+
+function getGames() {
+  console.log('games');
 }
 
 // SOCKET THINGIESS HERE
