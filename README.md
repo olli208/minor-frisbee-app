@@ -16,9 +16,10 @@ From the root of the directory run
 npm install
 ```
 
-Then change these to your own you can get them [here](https://developer.spotify.com/)
+Then change these to your own you can get them [here](https://www.leaguevine.com/docs/api/)
 ```
-
+var client_id = (your client id)
+var client_secret = (your client secret)
 ```
 
 Then
@@ -29,7 +30,7 @@ npm start
 
 
 
-### TO DO
-- Unfollow playlist (have some code already but it doesnt do anything to my playlist)
+### [TO DO](https://github.com/olli208/minor-frisbee-app/projects/1)
+
 
 ## source
