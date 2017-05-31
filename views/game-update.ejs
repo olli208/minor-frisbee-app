@@ -1,0 +1,20 @@
+<% include partials/head.ejs %>
+
+<header class="">
+  <h1>update game</h1>
+</header>
+
+<%# TODO update score on this page %>
+<section>
+  <div class="game-scoreboard">
+    <label for="team1">Team 1:</label>
+    <input type="button" name="team1" value="+"/>
+    <input type="number" value="0" id="score-team1">
+
+    <label for="team2">Team 2:</label>
+    <input type="button" name="team2" value="+"/>
+    <input type="number" value="0" id="score-team2">
+  </div>
+</section>
+
+<% include partials/footer.ejs %>

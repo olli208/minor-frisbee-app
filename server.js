@@ -28,14 +28,22 @@ app.set('view engine' , 'ejs')
 var apiResponse,
     acccessToken;
 
+// TO-DO Modular routes
+
 io.on('connect', onConnect);
 
+// Oauth
 app.get('/', index);
 app.get('/login', login);
 app.get('/callback', callback);
+
+// Teams
 app.get('/teams', getTeams);
 app.get('/teams/:id', getTeamDetail);
+
+// Game
 app.get('/games', getGames);
+app.get('/game-update', gameUpdate);
 
 function index (req , res) {
   if (acccessToken) {
@@ -79,24 +87,19 @@ function getTeams (req, res) {
 }
 
 function getTeamDetail (req, res) {
-  //  https://api.leaguevine.com/v1/teams/29639/?access_token=f35d78be4c
-  console.log(req.params.id);
 
   rp('http://api.playwithlv.com/v1/teams/'+ req.params.id + '/?access_token=' + acccessToken)
     .then(function (body) {
       var data = JSON.parse(body);
-      console.log(data);
 
-      res.render('teams-detail', {
-        teamName: data.name
-      });
+      res.render('teams-detail', {data});
     })
     .catch(function (err) {
       console.log('error getting TEAM DETAIL');
     });
 }
 
-function getGames() {
+function getGames(req, res) {
   rp('http://api.playwithlv.com/v1/games/tournament_teams/?tournament_ids=%5B20059%5D&access_token=' + acccessToken)
     .then(function (body) {
       var data = JSON.parse(body);
@@ -108,6 +111,10 @@ function getGames() {
     .catch(function (err) {
       console.log('error getting GAMES');
     });
+}
+
+function gameUpdate(req, res) {
+  res.render('game-update');
 }
 
 //  SOCKET THINGIESS HERE

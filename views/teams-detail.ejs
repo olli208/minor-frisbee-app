@@ -1,11 +1,28 @@
 <% include partials/head.ejs %>
 
 <header class="">
-  <h1> <%= teamName %> <h1>
+  <h1> <%= data.name %> </h1>
+  <div class="team-quick-info">
+    <div>
+      <img src="<%= data.profile_image_50 %>" alt="">
+    </div>
+    <div>
+      <p>
+        <%= data.city %>, <%= data.country %>
+      </p>
+    </div>
+    <div>
+      <p>
+        record: <%= data.wins %>-<%= data.losses %>-<%= data.ties %>
+      </p>
+    </div>
+  </div>
 </header>
 
-<section>
-
+<section class="team-desc">
+  <p>
+    <%= data.info %>
+  </p>
 </section>
 
 <% include partials/footer.ejs %>

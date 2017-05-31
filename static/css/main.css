@@ -1,4 +1,4 @@
-html {
+html, body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -10,6 +10,8 @@ h1, h2, h3, h4 {
 
 p {
   color: #666;
+  width: 100%;
+  margin: 1em 0;
 }
 
 span {
@@ -25,8 +27,8 @@ h2 {
     font-size: 1.5em;
 }
 
-p {
-    margin: 1em 0;
+section {
+  width: 100%;
 }
 
 @media (min-width: 40em) {
@@ -60,14 +62,6 @@ body {
     min-height: 100vh;
 }
 
-section {
-    padding: 1em;
-    width: 100vw;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
 .intro {
     min-height: 100vh;
 }
@@ -85,4 +79,31 @@ section {
     padding: 1em 1.5em;
     text-decoration: none;
     color: #fff;
+}
+
+/*
+  TEAM DETAIL PAGE
+ */
+.team-quick-info {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.team-quick-info div img {
+  margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+.team-quick-info div {
+  width: 6em;
+  padding: 0.25em;
+  border: 1px solid hotpink;
+}
+
+.team-desc {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.5em;
 }
