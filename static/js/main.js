@@ -1,7 +1,9 @@
 (function () {
-  var scoreBoard = document.querySelectorAll('.game-scoreboard input');
-  var scoreTeam1 = parseInt(document.getElementById('score-team1').value);
-  var scoreTeam2 = parseInt(document.getElementById('score-team2').value);
+  var scoreBoard = document.querySelectorAll('.scoreboard input');
+  var scoreBoard1 = document.getElementById('score-team1');
+  var scoreBoard2 = document.getElementById('score-team2');
+  var scoreTeam1 = parseInt(scoreBoard1.value);
+  var scoreTeam2 = parseInt(scoreBoard2.value);
 
   scoreBoard.forEach(function (el) {
     el.addEventListener('click', addScore);
@@ -12,12 +14,13 @@
       if (e.target.name === 'team1') {
         var newScore = ++scoreTeam1;
         scoreTeam1 = newScore;
+        scoreBoard1.value = newScore;
         console.log('team1', scoreTeam1);
       }
       else if (e.target.name === 'team2') {
-        var oldScore = parseInt(document.getElementById('score-team1').value);
         var newScore = ++scoreTeam2;
         scoreTeam2 = newScore;
+        scoreBoard2.value = newScore;
         console.log('team2', scoreTeam2);
       }
     }

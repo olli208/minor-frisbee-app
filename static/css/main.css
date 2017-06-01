@@ -82,7 +82,7 @@ body {
 }
 
 /*
-  TEAM DETAIL PAGE
+    TEAM DETAIL PAGE
 */
 .team-quick-info {
   display: flex;
@@ -106,4 +106,27 @@ body {
   box-sizing: border-box;
   width: 100%;
   padding: 0.5em;
+}
+
+/*
+    Update game page (Score)
+*/
+.scoreboard {
+    /*display: flex;*/
+    /*justify-content: space-around;*/
+    /*flex-wrap: wrap;*/
+}
+
+.scoreboard-team {
+    display: block;
+    width: 4.5rem;
+    height: 6.5rem;
+    border: 1px solid #666;
+    padding: 1rem;
+    font-size: 4em;
+}
+
+label[for="team1"], label[for="team2"] {
+    margin: 0 1em;
+    display: inline-block;
 }

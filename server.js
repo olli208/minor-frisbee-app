@@ -100,13 +100,11 @@ function getTeamDetail (req, res) {
 }
 
 function getGames(req, res) {
-  rp('http://api.playwithlv.com/v1/games/tournament_teams/?tournament_ids=%5B20059%5D&access_token=' + acccessToken)
+    rp('http://api.playwithlv.com/v1/games/?tournament_id=20059&access_token=' + acccessToken)
     .then(function (body) {
       var data = JSON.parse(body);
 
-      res.render('games', {
-        games: data.objects
-      });
+      res.render('games', {games: data});
     })
     .catch(function (err) {
       console.log('error getting GAMES');

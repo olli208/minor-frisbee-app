@@ -4,17 +4,35 @@
   <h1>update game</h1>
 </header>
 
-<%# TODO update score on this page %>
+<!-- TODO -->
+<%# Send updated score to leaguevine %>
+<%# Set rules for people woh are allowed to update score %>
 <section>
-  <div class="game-scoreboard">
-    <label for="team1">Team 1:</label>
-    <input type="button" name="team1" value="+"/>
-    <input type="number" value="0" id="score-team1">
+  <form class="" method="post">
+    <fieldset class="scoreboard">
+      <label for="team1">
+        Team 1:
+        <input type="number" value="0" min="0" max="30" id="score-team1" class="scoreboard-team">
+        <input type="button" name="team1" value="+"/>
+      </label>
 
-    <label for="team2">Team 2:</label>
-    <input type="button" name="team2" value="+"/>
-    <input type="number" value="0" id="score-team2">
-  </div>
+      <label for="team2">
+        Team 2:
+        <input type="number" value="0" min="0" max="30" id="score-team2" class="scoreboard-team">
+        <input type="button" name="team2" value="+"/>
+      </label>
+    </fieldset>
+
+
+    <fieldset>
+      <label for="scorer">
+        Who
+        <input type="text" name="scorer">
+      </label>
+    </fieldset>
+
+
+  </form>
 </section>
 
 <% include partials/footer.ejs %>
