@@ -47,7 +47,7 @@ app.get('/game-update', gameUpdate);
 
 function index (req , res) {
   if (acccessToken) {
-    res.redirect('games');
+    res.redirect('/games');
   } else {
     res.render('index');
   }
