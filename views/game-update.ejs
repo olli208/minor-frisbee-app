@@ -4,21 +4,23 @@
   <h1>update game</h1>
 </header>
 
-<!-- TODO -->
-<%# Send updated score to leaguevine %>
-<%# Set rules for people woh are allowed to update score %>
+<!--
+TODO Send updated score to leaguevine
+TODO Set rules for people woh are allowed to update score
+-->
+
 <section>
   <form class="" method="post">
     <fieldset class="scoreboard">
       <label for="team1">
-        Team 1:
-        <input type="number" value="0" min="0" max="30" id="score-team1" class="scoreboard-team">
+        <%= game.team_1.short_name %>:
+        <input type="number" value="<%= game.team_1_score %>" min="0" max="30" id="score-team1" class="scoreboard-team">
         <input type="button" name="team1" value="+"/>
       </label>
 
       <label for="team2">
-        Team 2:
-        <input type="number" value="0" min="0" max="30" id="score-team2" class="scoreboard-team">
+        <%= game.team_2.short_name %>:
+        <input type="number" value="<%= game.team_2_score %>" min="0" max="30" id="score-team2" class="scoreboard-team">
         <input type="button" name="team2" value="+"/>
       </label>
     </fieldset>

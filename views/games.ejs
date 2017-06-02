@@ -1,16 +1,21 @@
 <% include partials/head.ejs %>
 
 <header class="">
-  <h1>Welcome to <span><%=  %><span></h1>
+  <h1>Welcome to <span>[name]<span></h1>
 </header>
 
 <section>
+  <a href="/game-update">update game page</a>
   <ul class="gameslist">
+    <% games.forEach(function (obj) { %>
     <li class="game">
-      <h2 class="team1">Team 1 </h2>
-      <h3 class="gamebegin"> <b>13:00</b> </h3>
-      <h2 class="team2">Team 2 </h2>
+      <a href="/games/<%= obj.id %>">
+        <h2 class="team1"><%= obj.team_1.short_name %></h2>
+        <h3 class="gamebegin"> <b><%= obj.start_time %></b> </h3>
+        <h2 class="team2"><%= obj.team_2.short_name %></h2>
+      </a>
     </li>
+    <% }) %>
   </ul>
 </section>
 

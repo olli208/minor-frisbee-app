@@ -28,8 +28,7 @@ app.set('view engine' , 'ejs')
 var apiResponse,
     acccessToken;
 
-// TO-DO Modular routes
-
+// TODO Modular routes
 io.on('connect', onConnect);
 
 // Oauth
@@ -43,11 +42,11 @@ app.get('/teams/:id', getTeamDetail);
 
 // Game
 app.get('/games', getGames);
-app.get('/game-update', gameUpdate);
+app.get('/games/:id', gameUpdate);
 
 function index (req , res) {
   if (acccessToken) {
-    res.redirect('/games');
+    res.redirect('/teams'); // change to '/games' later
   } else {
     res.render('index');
   }
@@ -65,7 +64,7 @@ function callback (req, res) {
       apiResponse = JSON.parse(body);
       acccessToken = apiResponse.access_token;
 
-      res.redirect('/teams');
+      res.redirect('/teams'); // change to '/games' later
     })
     .catch(function (err) {
       console.log('CALLBACK error');
@@ -87,7 +86,6 @@ function getTeams (req, res) {
 }
 
 function getTeamDetail (req, res) {
-
   rp('http://api.playwithlv.com/v1/teams/'+ req.params.id + '/?access_token=' + acccessToken)
     .then(function (body) {
       var data = JSON.parse(body);
@@ -104,7 +102,7 @@ function getGames(req, res) {
     .then(function (body) {
       var data = JSON.parse(body);
 
-      res.render('games', {games: data});
+      res.render('games', {games: data.objects});
     })
     .catch(function (err) {
       console.log('error getting GAMES');
@@ -112,7 +110,16 @@ function getGames(req, res) {
 }
 
 function gameUpdate(req, res) {
-  res.render('game-update');
+  rp('http://api.playwithlv.com/v1/games/'+ req.params.id +'/?access_token=' + acccessToken)
+    .then(function (body) {
+      var data = JSON.parse(body);
+      console.log(data)
+
+      res.render('game-update' , {game: data});
+    })
+    .catch(function (err) {
+      console.log('error getting GAMES');
+    });
 }
 
 //  SOCKET THINGIESS HERE

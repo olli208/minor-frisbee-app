@@ -85,27 +85,27 @@ body {
     TEAM DETAIL PAGE
 */
 .team-quick-info {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
 }
 
 .team-quick-info div img {
-  margin-left: auto;
-	margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
 	display: block;
 }
 
 .team-quick-info div {
-  width: 6em;
-  padding: 0.25em;
-  border: 1px solid hotpink;
+    width: 6em;
+    padding: 0.25em;
+    border: 1px solid hotpink;
 }
 
 .team-desc {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 0.5em;
+    xbox-sizing: border-box;
+    xwidth: 100%;
+    xpadding: 0.5em;
 }
 
 /*
