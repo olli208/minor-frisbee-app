@@ -15,7 +15,7 @@ var bodyParser = require('body-parser');
 
 var client_id = process.env.CLIENT_ID;
 var client_secret = process.env.CLIENT_SECRET;
-var redirect_uri = 'http://localhost:8888/callback'; // For local testing !!
+var redirect_uri = 'http://localhost:8000/callback'; // For local testing !! (8888 for real / 8000 for test api)
 
 app.set('view engine' , 'ejs')
     .set('views' , path.join(__dirname, 'views'))
@@ -57,13 +57,13 @@ function index (req , res) {
 }
 
 function login (req, res) {
-  res.redirect('https://www.leaguevine.com/oauth2/authorize/?' + 'client_id=' + client_id + '&response_type=code' + '&redirect_uri=' + redirect_uri + '&scope=universal');
+  res.redirect('http://www.playwithlv.com/oauth2/authorize/?' + 'client_id=' + client_id + '&response_type=code' + '&redirect_uri=' + redirect_uri + '&scope=universal');
 }
 
 function callback (req, res) {
   var code = req.query.code;
 
-  rp('https://www.leaguevine.com/oauth2/token/' + '?client_id=' + client_id + '&client_secret=' + client_secret + '&code='+ code + '&grant_type=authorization_code' + '&redirect_uri=' + redirect_uri)
+  rp('http://www.playwithlv.com/oauth2/token/' + '?client_id=' + client_id + '&client_secret=' + client_secret + '&code='+ code + '&grant_type=authorization_code' + '&redirect_uri=' + redirect_uri)
     .then(function (body) {
       apiResponse = JSON.parse(body);
       acccessToken = apiResponse.access_token;
@@ -71,7 +71,7 @@ function callback (req, res) {
       res.redirect('/games');
     })
     .catch(function (err) {
-      console.log('CALLBACK error');
+      console.log('CALLBACK error', err);
     });
 }
 
@@ -130,15 +130,34 @@ function updateScore(req, res) {
   team2_score = req.body.team2_score;
   scorer = req.body.scorer;
   assist = req.body.assist;
-  console.log(team1_score, team2_score, scorer, assist);
+  gameID = req.body.game_id;
+
+  var score = {
+    'game_id': gameID,
+    'team_1_score': team1_score,
+    'team_2_score': team2_score,
+    'is_final': 'False'
+  };
+
+  request.post({
+    url: 'http://api.playwithlv.com/v1/game_scores/',
+    headers: {
+      'Authorization': `bearer ${acccessToken}` //  TODO -> acccess token has to be the latest? sometimes fails..
+    },
+    json: true,
+    body: score
+  }, function (err, response, body) {
+    console.log(body);
+    res.redirect('/games')
+  });
 }
 
 //  SOCKET THINGIESS HERE
 function onConnect (socket) {
-  //  socket stuff
+  //  TODO -> socket stuff
 }
 
-var port = process.env.PORT || 8888;
+var port = process.env.PORT || 8000; // 8888 for real/ 8000 for testing
 
 http.listen(port, function (){
     console.log('server is running on: ' + port);
