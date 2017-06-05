@@ -15,13 +15,11 @@
         var newScore = ++scoreTeam1;
         scoreTeam1 = newScore;
         scoreBoard1.value = newScore;
-        console.log('team1', scoreTeam1);
       }
       else if (e.target.name === 'team2') {
         var newScore = ++scoreTeam2;
         scoreTeam2 = newScore;
         scoreBoard2.value = newScore;
-        console.log('team2', scoreTeam2);
       }
     }
   }

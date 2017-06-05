@@ -10,29 +10,34 @@ TODO Set rules for people woh are allowed to update score
 -->
 
 <section>
-  <form class="" method="post">
+  <form action="/update_score" method="post">
     <fieldset class="scoreboard">
-      <label for="team1">
+      <label for="team1_score">
         <%= game.team_1.short_name %>:
-        <input type="number" value="<%= game.team_1_score %>" min="0" max="30" id="score-team1" class="scoreboard-team">
+        <input type="number" name="team1_score" value="<%= game.team_1_score %>" min="0" max="30" id="score-team1" class="scoreboard-team">
         <input type="button" name="team1" value="+"/>
       </label>
 
-      <label for="team2">
+      <label for="team2_score">
         <%= game.team_2.short_name %>:
-        <input type="number" value="<%= game.team_2_score %>" min="0" max="30" id="score-team2" class="scoreboard-team">
+        <input type="number" name="team2_score" value="<%= game.team_2_score %>" min="0" max="30" id="score-team2" class="scoreboard-team">
         <input type="button" name="team2" value="+"/>
       </label>
     </fieldset>
 
-
     <fieldset>
       <label for="scorer">
-        Who
+        scorer:
         <input type="text" name="scorer">
+      </label>
+
+      <label for="assist">
+        assist by:
+        <input type="text" name="assist">
       </label>
     </fieldset>
 
+    <input type="submit" value="update score">
 
   </form>
 </section>

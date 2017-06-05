@@ -21,7 +21,8 @@
     "socket.io": "1.7.3"
   },
   "devDependencies": {
-    "standard": "^10.0.1",
-    "compression": "^1.6.2"
+    "body-parser": "^1.17.2",
+    "compression": "^1.6.2",
+    "standard": "^10.0.1"
   }
 }

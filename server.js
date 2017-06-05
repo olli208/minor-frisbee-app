@@ -11,6 +11,7 @@ var request = require('request');
 var rp = require('request-promise'); // request promise package
 var querystring = require('querystring');
 require('dotenv').config(); //secret stuff
+var bodyParser = require('body-parser');
 
 var client_id = process.env.CLIENT_ID;
 var client_secret = process.env.CLIENT_SECRET;
@@ -23,7 +24,9 @@ app.set('view engine' , 'ejs')
         secret: 'superGeheim',
         resave: false,
         saveUninitialized: true
-    }));
+    }))
+  .use(bodyParser.json())
+  .use(bodyParser.urlencoded({ extended: false }));
 
 var apiResponse,
     acccessToken;
@@ -43,10 +46,11 @@ app.get('/teams/:id', getTeamDetail);
 // Game
 app.get('/games', getGames);
 app.get('/games/:id', gameUpdate);
+app.post('/update_score', updateScore);
 
 function index (req , res) {
   if (acccessToken) {
-    res.redirect('/teams'); // change to '/games' later
+    res.redirect('/games');
   } else {
     res.render('index');
   }
@@ -64,7 +68,7 @@ function callback (req, res) {
       apiResponse = JSON.parse(body);
       acccessToken = apiResponse.access_token;
 
-      res.redirect('/teams'); // change to '/games' later
+      res.redirect('/games');
     })
     .catch(function (err) {
       console.log('CALLBACK error');
@@ -113,13 +117,20 @@ function gameUpdate(req, res) {
   rp('http://api.playwithlv.com/v1/games/'+ req.params.id +'/?access_token=' + acccessToken)
     .then(function (body) {
       var data = JSON.parse(body);
-      console.log(data)
 
       res.render('game-update' , {game: data});
     })
     .catch(function (err) {
-      console.log('error getting GAMES');
+      console.log('error UPDATING GAME');
     });
+}
+
+function updateScore(req, res) {
+  team1_score = req.body.team1_score;
+  team2_score = req.body.team2_score;
+  scorer = req.body.scorer;
+  assist = req.body.assist;
+  console.log(team1_score, team2_score, scorer, assist);
 }
 
 //  SOCKET THINGIESS HERE
