@@ -53,7 +53,7 @@ function index (req , res) {
   if (acccessToken === undefined) {
     res.redirect('/login');
   } else {
-    res.redirect('/games');
+    res.render('index ')
   }
 }
 
@@ -107,6 +107,8 @@ function getGames(req, res) {
   rp('http://api.playwithlv.com/v1/games/?tournament_id=20059&access_token=' + acccessToken)
     .then(function (body) {
       var data = JSON.parse(body);
+
+      console.log(data.objects)
 
       res.render('games', {
         games: data.objects

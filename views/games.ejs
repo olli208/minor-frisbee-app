@@ -1,7 +1,7 @@
 <% include partials/head.ejs %>
 
 <header class="">
-  <h1>Welcome to <span>[name]<span></h1>
+  <h1>Welcome to <span>Windmill</span> 2017</h1>
   <a href="/teams">All participating teams</a>
   <div>
     <a href="#">Yesterday</a>
@@ -20,12 +20,21 @@
 <section>
   <ul class="gameslist">
     <% games.forEach(function (obj) { %>
-    <li class="game">
+    <li>
       <a href="/games/<%= obj.id %>">
-        <h2 class="team1"><%= obj.team_1.short_name %></h2>
-        <h3 class="gamebegin"> <b><%= new Date(obj.start_time).toLocaleString() %></b> </h3>
-        <h3 class="gamebegin"> <b><%= obj.start_time %></b> </h3>
-        <h2 class="team2"><%= obj.team_2.short_name %></h2>
+        <div class="team1">
+          <h3 class="team1"><%= obj.team_1.short_name %></h3>
+        </div>
+
+        <div class="info">
+          <!--<h4> <b><%= new Date(obj.start_time).toLocaleString() %></b> </h4>-->
+          <h4> <b><%= new Date(obj.start_time).toString().substr(15,6) %></b></h4> <!-- TODO -> substr() needs testing! -->
+          <p><%= obj.game_site.name %></p>
+        </div>
+
+        <div class="team2">
+          <h3 class="team2"><%= obj.team_2.short_name %></h3>
+        </div>
       </a>
     </li>
     <% }) %>
