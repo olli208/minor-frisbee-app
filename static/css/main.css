@@ -159,15 +159,15 @@ label[for="team1"], label[for="team2"] {
     margin-bottom: 1em;
     border: 1px solid pink;
     width: 100%;
+    padding: 0.25em;
 }
 
 .gameslist a {
     display: flex;
-    padding: 0.25em;
+    justify-content: space-between;
     margin: 0.5em 0;
     width: 100%;
     text-decoration: none;
-    justify-content: center;
     align-items: center;
 }
 
@@ -178,7 +178,6 @@ label[for="team1"], label[for="team2"] {
 .gameslist .info {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     width: 5em;
     margin: 0 0.5em;
     border: 1px solid red;
@@ -187,4 +186,11 @@ label[for="team1"], label[for="team2"] {
 .gameslist .info * {
     margin: 0;
     width: 100%;
+    flex-basis: 1;
+}
+
+.gameslist .team1, .team2 {
+    flex-basis: 1;
+    width: 7em;
+    word-wrap: break-word;
 }
