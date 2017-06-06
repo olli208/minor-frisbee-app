@@ -2,15 +2,28 @@
 
 <header class="">
   <h1>Welcome to <span>[name]<span></h1>
+  <a href="/teams">All participating teams</a>
+  <div>
+    <a href="#">Yesterday</a>
+  </div>
+  <div>
+    <a href="#">TODAY</a>
+  </div>
+  <div>
+    <a href="#">10 june</a>
+  </div>
+  <div>
+    <a href="#">11 june</a>
+  </div>
 </header>
 
 <section>
-  <a href="/teams">update game page</a>
   <ul class="gameslist">
     <% games.forEach(function (obj) { %>
     <li class="game">
       <a href="/games/<%= obj.id %>">
         <h2 class="team1"><%= obj.team_1.short_name %></h2>
+        <h3 class="gamebegin"> <b><%= new Date(obj.start_time).toLocaleString() %></b> </h3>
         <h3 class="gamebegin"> <b><%= obj.start_time %></b> </h3>
         <h2 class="team2"><%= obj.team_2.short_name %></h2>
       </a>

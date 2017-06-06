@@ -1,11 +1,10 @@
 (function () {
-  var scoreBoard = document.querySelectorAll('.scoreboard input');
   var scoreBoard1 = document.getElementById('score-team1');
   var scoreBoard2 = document.getElementById('score-team2');
   var scoreTeam1 = parseInt(scoreBoard1.value);
   var scoreTeam2 = parseInt(scoreBoard2.value);
 
-  scoreBoard.forEach(function (el) {
+  document.querySelectorAll('.scoreboard input').forEach(function (el) {
     el.addEventListener('click', addScore);
   });
 

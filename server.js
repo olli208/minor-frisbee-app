@@ -10,12 +10,13 @@ var path = require('path');
 var request = require('request');
 var rp = require('request-promise'); // request promise package
 var querystring = require('querystring');
-require('dotenv').config(); //secret stuff
 var bodyParser = require('body-parser');
+require('dotenv').config(); // secret stuff
 
 var client_id = process.env.CLIENT_ID;
 var client_secret = process.env.CLIENT_SECRET;
-var redirect_uri = 'http://localhost:8000/callback'; // For local testing !! (8888 for real / 8000 for test api)
+var redirect_uri =  process.env.REDIRECT_URI; // For local testing !! (8888 for real / 8000 for test api)
+var port = process.env.PORT || 8000; // 8888 for real/ 8000 for testing
 
 app.set('view engine' , 'ejs')
     .set('views' , path.join(__dirname, 'views'))
@@ -49,10 +50,10 @@ app.get('/games/:id', gameUpdate);
 app.post('/update_score', updateScore);
 
 function index (req , res) {
-  if (acccessToken) {
-    res.redirect('/games');
+  if (acccessToken === undefined) {
+    res.redirect('/login');
   } else {
-    res.render('index');
+    res.redirect('/games');
   }
 }
 
@@ -102,11 +103,14 @@ function getTeamDetail (req, res) {
 }
 
 function getGames(req, res) {
-    rp('http://api.playwithlv.com/v1/games/?tournament_id=20059&access_token=' + acccessToken)
+  console.log('ACCESTOKEN?:' , acccessToken)
+  rp('http://api.playwithlv.com/v1/games/?tournament_id=20059&access_token=' + acccessToken)
     .then(function (body) {
       var data = JSON.parse(body);
 
-      res.render('games', {games: data.objects});
+      res.render('games', {
+        games: data.objects
+      });
     })
     .catch(function (err) {
       console.log('error getting GAMES');
@@ -114,15 +118,19 @@ function getGames(req, res) {
 }
 
 function gameUpdate(req, res) {
-  rp('http://api.playwithlv.com/v1/games/'+ req.params.id +'/?access_token=' + acccessToken)
-    .then(function (body) {
-      var data = JSON.parse(body);
+  if (acccessToken === undefined) {
+    res.redirect('/')
+  } else {
+    rp('http://api.playwithlv.com/v1/games/'+ req.params.id +'/?access_token=' + acccessToken)
+      .then(function (body) {
+        var data = JSON.parse(body);
 
-      res.render('game-update' , {game: data});
-    })
-    .catch(function (err) {
-      console.log('error UPDATING GAME');
-    });
+        res.render('game-update' , {game: data});
+      })
+      .catch(function (err) {
+        console.log('error UPDATING GAME');
+      });
+  }
 }
 
 function updateScore(req, res) {
@@ -142,7 +150,7 @@ function updateScore(req, res) {
   request.post({
     url: 'http://api.playwithlv.com/v1/game_scores/',
     headers: {
-      'Authorization': `bearer ${acccessToken}` //  TODO -> acccess token has to be the latest? sometimes fails..
+      'Authorization': `bearer ${acccessToken}` //  TODO -> acccess token has to be the latest? sometimes fails when restart server + refresh page..
     },
     json: true,
     body: score
@@ -154,10 +162,8 @@ function updateScore(req, res) {
 
 //  SOCKET THINGIESS HERE
 function onConnect (socket) {
-  //  TODO -> socket stuff
+  //  TODO -> socket stuff (if needed)
 }
-
-var port = process.env.PORT || 8000; // 8888 for real/ 8000 for testing
 
 http.listen(port, function (){
     console.log('server is running on: ' + port);
