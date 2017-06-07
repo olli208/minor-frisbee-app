@@ -19,9 +19,9 @@ var redirect_uri =  process.env.REDIRECT_URI; // For local testing !! (8888 for 
 var port = process.env.PORT || 8000; // 8888 for real/ 8000 for testing
 
 app.set('view engine' , 'ejs')
-    .set('views' , path.join(__dirname, 'views'))
-    .use(express.static('static'))
-    .use(session({
+  .set('views' , path.join(__dirname, 'views'))
+  .use(express.static('static'))
+  .use(session({
         secret: 'superGeheim',
         resave: false,
         saveUninitialized: true
@@ -152,7 +152,7 @@ function updateScore(req, res) {
   request.post({
     url: 'http://api.playwithlv.com/v1/game_scores/',
     headers: {
-      'Authorization': `bearer ${acccessToken}` //  TODO -> acccess token has to be the latest? sometimes fails when restart server + refresh page..
+      'Authorization': `bearer ${acccessToken}` //  TODO -> acccess token has to be the defined before this. Fails when restart server + refresh page..
     },
     json: true,
     body: score
