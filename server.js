@@ -53,7 +53,7 @@ function index (req , res) {
   if (acccessToken === undefined) {
     res.redirect('/login');
   } else {
-    res.render('index ')
+    res.redirect('/games');
   }
 }
 
@@ -69,7 +69,7 @@ function callback (req, res) {
       apiResponse = JSON.parse(body);
       acccessToken = apiResponse.access_token;
 
-      res.redirect('/games');
+      res.redirect('/games')
     })
     .catch(function (err) {
       console.log('CALLBACK error', err);
@@ -108,7 +108,7 @@ function getGames(req, res) {
     .then(function (body) {
       var data = JSON.parse(body);
 
-      console.log(data.objects)
+      // console.log(data.objects)
 
       res.render('games', {
         games: data.objects

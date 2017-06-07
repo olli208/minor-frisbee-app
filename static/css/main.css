@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -40,7 +44,7 @@ p {
 }
 
 section {
-  width: 100%;
+    width: 100%;
 }
 
 @media (min-width: 40em) {
@@ -56,6 +60,18 @@ section {
     h2 {
         font-size: 2em;
     }
+
+    h3 {
+        font-size: 1.5em;
+    }
+
+    h4 {
+        font-size: 1.25em;
+    }
+
+    p {
+        font-size: 1em
+    }
 }
 
 @media (min-width: 60em) {
@@ -66,11 +82,19 @@ section {
     h2 {
         font-size: 3em;
     }
+
+    h3 {
+        font-size: 2em;
+    }
+
+    h4 {
+        font-size: 1.5em;
+    }
 }
 
 body {
     font: 1em 'roboto', Arial;
-    background: #fff;
+    background: #f9f9f9;
     min-height: 100vh;
 }
 
@@ -87,10 +111,87 @@ body {
     text-transform: uppercase;
 }
 
-.intro button a{
+.intro button a {
     padding: 1em 1.5em;
     text-decoration: none;
     color: #fff;
+}
+
+header section{
+    padding: 0.25rem;
+}
+
+header .background {
+    background: dodgerblue;
+    margin: 0;
+    width: 100%;
+    clip-path: polygon(0 0, 100% 0, 100% 40%, 0 100%);
+    height: 100vh;
+    z-index: -1;
+    position: absolute;
+    top: 0;
+}
+
+header h1 {
+    color: #fff;
+    -webkit-transform: skew(-15deg, 0);
+    -moz-transform: skew(-15deg, 0);
+    -ms-transform: skew(-15deg, 0);
+    -o-transform skew(-15deg, 0);
+    transform: skew(-15deg, 0);
+}
+
+h1 span {
+    color: coral;
+}
+
+nav {
+    border: 1px solid white;
+    position: absolute;
+    top: 0;
+    left: -15em;
+    padding: 1em;
+    z-index: 999;
+    background: royalblue;
+    color: #fff;
+    height: 100vh;
+}
+
+nav li {
+    padding: 0.5em;
+    list-style: none;
+}
+
+.header-section {
+    padding: 0 1rem;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-btn {
+    -webkit-transform: rotate(-70deg) skew(-15deg, 0); /* Chrome, Safari, Opera */
+    transform: rotate(-70deg) skew(-15deg, 0);
+    align-self: flex-start;
+    border: 0;
+    background: dodgerblue;
+    margin-top: 4em;
+    transition: .1s ease-in;
+}
+
+.nav-btn span {
+    font-weight: 700;
+    border-bottom: 0.3rem solid royalblue;
+    border-top: 4rem solid royalblue;
+    padding: 0.25em;
+    color: #fff;
+    font-size: 1.2em;
+    box-shadow: 0 2px 0 0 rgba(0,0,0,0.1);
+}
+
+.nav-btn:active {
+    background: royalblue;
 }
 
 /*
@@ -147,6 +248,7 @@ label[for="team1"], label[for="team2"] {
     Games Page
 */
 .gameslist {
+    box-sizing: border-box;
     margin:0;
     padding: 0;
     display: flex;
@@ -157,15 +259,16 @@ label[for="team1"], label[for="team2"] {
     list-style: none;
     min-height: 6em;
     margin-bottom: 1em;
-    border: 1px solid pink;
     width: 100%;
-    padding: 0.25em;
+    padding: 0 0.25em;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 2px 0 0 rgba(0,0,0,0.1);
 }
 
 .gameslist a {
     display: flex;
-    justify-content: space-between;
-    margin: 0.5em 0;
+    justify-content: space-around;
     width: 100%;
     text-decoration: none;
     align-items: center;
@@ -178,9 +281,8 @@ label[for="team1"], label[for="team2"] {
 .gameslist .info {
     display: flex;
     flex-wrap: wrap;
-    width: 5em;
-    margin: 0 0.5em;
-    border: 1px solid red;
+    text-align: center;
+    width: 4em;
 }
 
 .gameslist .info * {
@@ -192,5 +294,16 @@ label[for="team1"], label[for="team2"] {
 .gameslist .team1, .team2 {
     flex-basis: 1;
     width: 7em;
-    word-wrap: break-word;
+}
+
+.gameslist .team1 h3, .team2 h3 {
+    height: 3.5em;
+}
+
+.gameslist .team1 {
+    text-align: right;
+}
+
+.gameslist .team1 p, .team2 p {
+
 }

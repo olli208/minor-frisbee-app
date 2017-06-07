@@ -1,20 +1,28 @@
 <% include partials/head.ejs %>
 
 <header class="">
-  <h1>Welcome to <span>Windmill</span> 2017</h1>
-  <a href="/teams">All participating teams</a>
-  <div>
-    <a href="#">Yesterday</a>
+  <div class="background"></div>
+
+  <div class="header-section">
+    <button class="nav-btn"><span>menu</span></button>
+    <h1>Welcome to <span>Windmill</span></h1>
   </div>
-  <div>
-    <a href="#">TODAY</a>
-  </div>
-  <div>
-    <a href="#">10 june</a>
-  </div>
-  <div>
-    <a href="#">11 june</a>
-  </div>
+
+  <nav>
+    <a href="/teams">All participating teams</a>
+    <li>
+      <a href="#">Yesterday</a>
+    </li>
+    <li>
+      <a href="#">TODAY</a>
+    </li>
+    <li>
+      <a href="#">10 june</a>
+    </li>
+    <li>
+      <a href="#">11 june</a>
+    </li>
+  </nav>
 </header>
 
 <section>
@@ -23,16 +31,18 @@
     <li>
       <a href="/games/<%= obj.id %>">
         <div class="team1">
+          <p>team 1</p>
           <h3><%= obj.team_1.short_name %></h3>
         </div>
 
         <div class="info">
           <!--<h4> <b><%= new Date(obj.start_time).toLocaleString() %></b> </h4>-->
-          <h4> <b><%= new Date(obj.start_time).toString().substr(15,6) %></b></h4> <!-- TODO -> substr() needs testing! -->
+          <p> <b><%= new Date(obj.start_time).toString().substr(15,6) %></b></p> <!-- TODO -> substr() needs testing! -->
           <p><%= obj.game_site.name %></p>
         </div>
 
         <div class="team2">
+          <p>team 2</p>
           <h3><%= obj.team_2.short_name %></h3>
         </div>
       </a>
