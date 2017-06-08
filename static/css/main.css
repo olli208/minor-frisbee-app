@@ -237,9 +237,35 @@ nav li {
     font-size: 4em;
 }
 
+.form-scoreboard {
+    background: #fff;
+    width: 95%;
+    margin: 0 auto;
+}
+
+.score-info input {
+    display: block;
+}
+
+fieldset {
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
 label[for="team1"], label[for="team2"] {
     margin: 0 1em;
     display: inline-block;
+}
+
+input[type="submit"] {
+    display: block;
+    padding: 1em 1.5em;
+    background: dodgerblue;
+    border: 0;
+    border-radius: 500px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 1em 0;
 }
 
 /*

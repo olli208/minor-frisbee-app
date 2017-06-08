@@ -1,16 +1,21 @@
 <% include partials/head.ejs %>
 
 <header class="">
-  <h1>update game</h1>
+  <div class="background"></div>
+  <div class="header-section">
+    <!--<button class="nav-btn"><span>menu</span></button>-->
+    <button class=""><span><</span></button>
+    <h1>update game</h1>
+  </div>
 </header>
 
-<!--rs
+<!--
 
 TODO Set rules for people woh are allowed to update score
 -->
 
 <section>
-  <form action="/update_score" method="post">
+  <form action="/update_score" method="post" class="form-scoreboard">
     <fieldset class="scoreboard">
       <label for="team1_score">
         <%= game.team_1.short_name %>:
@@ -25,7 +30,7 @@ TODO Set rules for people woh are allowed to update score
       </label>
     </fieldset>
 
-    <fieldset>
+    <fieldset class="score-info">
       <label for="scorer">
         scorer:
         <input type="text" name="scorer">
@@ -38,10 +43,16 @@ TODO Set rules for people woh are allowed to update score
 
 
       <input type="hidden" name="game_id" value="<%= game.id %>">
-
     </fieldset>
 
-    <input type="submit" value="update score">
+    <fieldset>
+      <label for="final-score">
+        final score?
+        <input type="checkbox">
+      </label>
+
+      <input type="submit" value="update score">
+    </fieldset>
 
   </form>
 </section>
