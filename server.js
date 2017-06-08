@@ -11,12 +11,15 @@ var request = require('request');
 var rp = require('request-promise'); // request promise package
 var querystring = require('querystring');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 require('dotenv').config(); // secret stuff
 
 var client_id = process.env.CLIENT_ID;
 var client_secret = process.env.CLIENT_SECRET;
 var redirect_uri =  process.env.REDIRECT_URI; // For local testing !! (8888 for real / 8000 for test api)
 var port = process.env.PORT || 8000; // 8888 for real/ 8000 for testing
+
+// mongoose.connect()
 
 app.set('view engine' , 'ejs')
   .set('views' , path.join(__dirname, 'views'))
@@ -39,6 +42,7 @@ io.on('connect', onConnect);
 app.get('/', index);
 app.get('/login', login);
 app.get('/callback', callback);
+app.get('/confirm', confirmOauth);
 
 // Teams
 app.get('/teams', getTeams);
@@ -51,10 +55,14 @@ app.post('/update_score', updateScore);
 
 function index (req , res) {
   if (acccessToken === undefined) {
-    res.redirect('/login');
+    res.render('index')
   } else {
     res.redirect('/games');
   }
+}
+
+function confirmOauth (req, res) {
+  res.render('confirm-oauth');
 }
 
 function login (req, res) {
@@ -102,13 +110,11 @@ function getTeamDetail (req, res) {
     });
 }
 
-function getGames(req, res) {
+function getGames (req, res) {
   console.log('ACCESTOKEN?:' , acccessToken)
   rp('http://api.playwithlv.com/v1/games/?tournament_id=20059&access_token=' + acccessToken)
     .then(function (body) {
       var data = JSON.parse(body);
-
-      // console.log(data.objects)
 
       res.render('games', {
         games: data.objects
@@ -119,9 +125,9 @@ function getGames(req, res) {
     });
 }
 
-function gameUpdate(req, res) {
+function gameUpdate (req, res) {
   if (acccessToken === undefined) {
-    res.redirect('/')
+    res.redirect('/confirm')
   } else {
     rp('http://api.playwithlv.com/v1/games/'+ req.params.id +'/?access_token=' + acccessToken)
       .then(function (body) {
@@ -135,7 +141,7 @@ function gameUpdate(req, res) {
   }
 }
 
-function updateScore(req, res) {
+function updateScore (req, res) {
   team1_score = req.body.team1_score;
   team2_score = req.body.team2_score;
   scorer = req.body.scorer;
@@ -146,6 +152,7 @@ function updateScore(req, res) {
     'game_id': gameID,
     'team_1_score': team1_score,
     'team_2_score': team2_score,
+    // 'what_happened': `scorer: ${scorer} , assist: ${assist}`, // TODO -> store scorer and assist on own db
     'is_final': 'False'
   };
 
