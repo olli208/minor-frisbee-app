@@ -1,10 +1,7 @@
 var express = require('express');
 var session = require('express-session');
 var path = require('path');
-var querystring = require('querystring');
 var bodyParser = require('body-parser');
-
-var routes = require('./routes/index')
 
 var app = express();
 
@@ -17,7 +14,10 @@ app.set('view engine' , 'ejs')
   .use(bodyParser.urlencoded({ extended: false }))
   .use(session({ secret: 'superGeheim', resave: false, saveUninitialized: false}));
 
-app.use('/', routes);
+var indexRoute = require('./routes/index');
+
+// My Routes are here
+app.use('/', indexRoute);
 
 http.listen(process.env.PORT, function (){
     console.log('server is running on: ' + process.env.PORT);

@@ -19,13 +19,13 @@ TODO Set rules for people woh are allowed to update score
     <fieldset class="scoreboard">
       <label for="team1_score">
         <%= game.team_1.short_name %>:
-        <input type="number" name="team1_score" value="<%= game.team_1_score %>" min="0" max="30" id="score-team1" class="scoreboard-team">
+        <input type="number" name="team1_score" value="<%= game.team_1_score %>" min="<%= game.team_1_score %>" max="30" id="score-team1" class="scoreboard-team">
         <input type="button" name="team1" value="+"/>
       </label>
 
       <label for="team2_score">
         <%= game.team_2.short_name %>:
-        <input type="number" name="team2_score" value="<%= game.team_2_score %>" min="0" max="30" id="score-team2" class="scoreboard-team">
+        <input type="number" name="team2_score" value="<%= game.team_2_score %>" min="<%= game.team_2_score %>" max="30" id="score-team2" class="scoreboard-team">
         <input type="button" name="team2" value="+"/>
       </label>
     </fieldset>
@@ -41,16 +41,15 @@ TODO Set rules for people woh are allowed to update score
         <input type="text" name="assist">
       </label>
 
-
-      <input type="hidden" name="game_id" value="<%= game.id %>">
-    </fieldset>
-
-    <fieldset>
       <label for="final-score">
         final score?
         <input type="checkbox">
       </label>
 
+      <input type="hidden" name="game_id" value="<%= game.id %>">
+    </fieldset>
+
+    <fieldset>
       <input type="submit" value="update score">
     </fieldset>
 

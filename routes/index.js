@@ -2,12 +2,7 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 var rp = require('request-promise');
-
-var app = express();
-
-// Socket requires
-var http = require('http').createServer(app);
-var io = require('socket.io')(http);
+var querystring = require('querystring');
 
 require('dotenv').config(); // secret stuff
 
@@ -17,8 +12,6 @@ var redirect_uri =  process.env.REDIRECT_URI; // For local testing !! (8888 for 
 
 var apiResponse,
   acccessToken;
-
-io.on('connect', onConnect);
 
 // Oauth
 router.get('/', index);
@@ -30,7 +23,7 @@ router.get('/confirm', confirmOauth);
 router.get('/teams', getTeams);
 router.get('/teams/:id', getTeamDetail);
 
-// Game
+// games + score
 router.get('/games', getGames);
 router.get('/games/:id', gameUpdate);
 router.post('/update_score', updateScore);
@@ -149,11 +142,6 @@ function updateScore (req, res) {
     console.log(body);
     res.redirect('/games')
   });
-}
-
-//  SOCKET THINGIESS HERE
-function onConnect (socket) {
-  //  TODO -> socket stuff (if needed)
 }
 
 module.exports = router;
