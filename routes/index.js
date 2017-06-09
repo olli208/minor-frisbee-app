@@ -91,6 +91,8 @@ function getGames (req, res) {
     .then(function (body) {
       var data = JSON.parse(body);
 
+      console.log(data)
+
       res.render('games', {
         games: data.objects
       });
