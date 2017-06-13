@@ -1,0 +1,13 @@
+<% include partials/head.ejs %>
+
+<header class="">
+  <h1>Swiss sSwiss</h1>
+</header>
+
+<section>
+  <% data.forEach(function (obj) { %>
+    <li><%= obj.team.short_name %>, <%= obj.swiss_score %></li>
+  <% }) %>
+</section>
+
+<% include partials/footer.ejs %>

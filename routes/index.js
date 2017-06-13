@@ -32,7 +32,16 @@ function getSwissStandings (req, res) {
   rp(`http://api.playwithlv.com/v1/swiss_rounds/?swiss_round_ids=%5B${req.params.id}%5D&access_token=${acccessToken}`)
     .then( function (body) {
       var data = JSON.parse(body);
-      console.log(data.objects.games)
+      var games = data.objects;
+      var swissStandings;
+
+      var standings = games.forEach(function (obj){
+        swissStandings = obj.standings.sort((a , b) => parseInt(b.swiss_score) > parseInt(a.swiss_score) ? 1 : -1);
+      })
+
+      console.log(swissStandings);
+
+      res.render('swiss-standings', {data: swissStandings})
     })
 }
 
