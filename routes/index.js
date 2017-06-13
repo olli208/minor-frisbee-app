@@ -24,6 +24,18 @@ router.get('/games', getGames);
 router.get('/games/:id', gameUpdate);
 router.post('/update_score', updateScore);
 
+// Swiss Standings + rounds etc
+router.get('/swiss-standings/:id', getSwissStandings)
+
+function getSwissStandings (req, res) {
+  console.log(req.params.id)
+  rp(`http://api.playwithlv.com/v1/swiss_rounds/?swiss_round_ids=%5B${req.params.id}%5D&access_token=${acccessToken}`)
+    .then( function (body) {
+      var data = JSON.parse(body);
+      console.log(data.objects.games)
+    })
+}
+
 function index (req , res) {
   if (acccessToken === undefined) {
     res.render('index')
@@ -87,15 +99,12 @@ function getGames (req, res) {
     .then(function (body) {
       var data = JSON.parse(body);
 
-      // data.forEach(function (obj) {
-      //   console.log(obj)
-      // })
-
-      console.log(data);
+      // console.log(data)
 
       res.render('games', {
         games: data.objects
       });
+
     })
     .catch(function (err) {
       console.log('error getting GAMES', err);
