@@ -2,7 +2,7 @@
 
 
 ## About
-This is an app for ultimate frisbee tournaments. Teams can use this app to update their scores, see their matches, and publish the end results of their match.
+This is an app for ultimate frisbee tournaments. Teams can use this app to update their scores, see their matches, and publish the end results of their match. People can see an overview of games during the [Windmill Tournament](http://windmilltournament.com). Using this app users can log in to Leaguevine to update scores directly from within the app.
 
 
 ## Install the app
@@ -34,3 +34,6 @@ npm start
 
 
 ## source
+- [Swiss Pairing](http://senseis.xmp.net/?SwissPairing)
+- [Windmill Tournament Rules & Format](http://windmilltournament.com/tournament-info/rules-and-format/)
+- [Power Rankings](https://www.leaguevine.com/blog/134/power-rankings-in-ultimate/)
