@@ -26,7 +26,21 @@
 </header>
 
 <section>
+  <button> CREATE NEXT ROUND </button>
+  <div>
+    <!-- Hier komen de hightlights in-->
+  </div>
   <ul class="gameslist">
+    <h2>Highlights</h2>
+    <li>team awesome vs another awesome team</li>
+    <li>wow team vs Hey man</li>
+  </ul>
+
+  <div>
+    <!-- Hier koment de games in-->
+  </div>
+  <ul class="gameslist">
+    <h2>Games today</h2>
     <% games.forEach(function (obj) { %>
     <li>
       <a href="/games/<%= obj.id %>">
@@ -38,7 +52,6 @@
         <div class="info">
           <p> <b><%= new Date(obj.start_time).toString().substr(15,6) %></b></p> <!-- TODO -> substr() needs testing! -->
           <p><%= obj.game_site.name %></p>
-
         </div>
 
         <div class="team2">

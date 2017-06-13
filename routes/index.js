@@ -6,10 +6,6 @@ var querystring = require('querystring');
 
 require('dotenv').config(); // secret stuff
 
-var client_id = process.env.CLIENT_ID;
-var client_secret = process.env.CLIENT_SECRET;
-var redirect_uri =  process.env.REDIRECT_URI; // For local testing !! (8888 for real / 8000 for test api)
-
 var apiResponse,
   acccessToken;
 
@@ -41,13 +37,13 @@ function confirmOauth (req, res) {
 }
 
 function login (req, res) {
-  res.redirect('http://www.playwithlv.com/oauth2/authorize/?' + 'client_id=' + client_id + '&response_type=code' + '&redirect_uri=' + redirect_uri + '&scope=universal');
+  res.redirect(`http://www.playwithlv.com/oauth2/authorize/?client_id=${process.env.CLIENT_ID}&response_type=code&redirect_uri=${process.env.REDIRECT_URI}&scope=universal`);
 }
 
 function callback (req, res) {
   var code = req.query.code;
 
-  rp('http://www.playwithlv.com/oauth2/token/' + '?client_id=' + client_id + '&client_secret=' + client_secret + '&code='+ code + '&grant_type=authorization_code' + '&redirect_uri=' + redirect_uri)
+  rp(`http://www.playwithlv.com/oauth2/token/?client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&code=${code}&grant_type=authorization_code&redirect_uri=${process.env.REDIRECT_URI}`)
     .then(function (body) {
       apiResponse = JSON.parse(body);
       acccessToken = apiResponse.access_token;
@@ -60,7 +56,7 @@ function callback (req, res) {
 }
 
 function getTeams (req, res) {
-  rp('http://api.playwithlv.com/v1/tournament_teams/?tournament_ids=%5B20059%5D&access_token=' + acccessToken)
+  rp(`http://api.playwithlv.com/v1/tournament_teams/?tournament_ids=%5B20059%5D&access_token=${acccessToken}`)
     .then(function (body) {
       var data = JSON.parse(body);
 
@@ -74,7 +70,7 @@ function getTeams (req, res) {
 }
 
 function getTeamDetail (req, res) {
-  rp('http://api.playwithlv.com/v1/teams/'+ req.params.id + '/?access_token=' + acccessToken)
+  rp(`http://api.playwithlv.com/v1/teams/${req.params.id}/?access_token=${acccessToken}`)
     .then(function (body) {
       var data = JSON.parse(body);
 
@@ -87,18 +83,22 @@ function getTeamDetail (req, res) {
 
 function getGames (req, res) {
   console.log('ACCESTOKEN?:' , acccessToken)
-  rp('http://api.playwithlv.com/v1/games/?tournament_id=20059&access_token=' + acccessToken)
+  rp(`http://api.playwithlv.com/v1/games/?tournament_id=20059&access_token=${acccessToken}`)
     .then(function (body) {
       var data = JSON.parse(body);
 
-      console.log(data)
+      // data.forEach(function (obj) {
+      //   console.log(obj)
+      // })
+
+      console.log(data);
 
       res.render('games', {
         games: data.objects
       });
     })
     .catch(function (err) {
-      console.log('error getting GAMES');
+      console.log('error getting GAMES', err);
     });
 }
 
@@ -106,7 +106,7 @@ function gameUpdate (req, res) {
   if (!acccessToken) {
     res.redirect('/confirm')
   } else {
-    rp('http://api.playwithlv.com/v1/games/'+ req.params.id +'/?access_token=' + acccessToken)
+    rp(`http://api.playwithlv.com/v1/games/${req.params.id}/?access_token=${acccessToken}`)
       .then(function (body) {
         var data = JSON.parse(body);
 

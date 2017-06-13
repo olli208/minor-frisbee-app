@@ -12,12 +12,10 @@ app.set('view engine' , 'ejs')
   .use(express.static('static'))
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: false }))
-  .use(session({ secret: 'superGeheim', resave: false, saveUninitialized: false}));
-
-var indexRoute = require('./routes/index');
+  .use(session({ secret: 'zoGeheim', resave: false, saveUninitialized: false}));
 
 // My Routes are here
-app.use('/', indexRoute);
+app.use('/', require('./routes/index'));
 
 http.listen(process.env.PORT, function (){
     console.log('server is running on: ' + process.env.PORT);
