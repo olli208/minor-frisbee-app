@@ -24,6 +24,9 @@ router.get('/games', getGames);
 router.get('/games/:id', gameUpdate);
 router.post('/update_score', updateScore);
 
+// Swiss Standings + rounds etc
+router.get('/swiss-standings/:id', getSwissStandings)
+
 function index (req , res) {
   if (acccessToken === undefined) {
     res.render('index')
@@ -83,19 +86,23 @@ function getTeamDetail (req, res) {
 
 function getGames (req, res) {
   console.log('ACCESTOKEN?:' , acccessToken)
-  rp(`http://api.playwithlv.com/v1/games/?tournament_id=20059&access_token=${acccessToken}`)
+  // ! playwithleaguevine api doent have 2017 games so we will have to hard code the dates for now
+  // http://api.playwithlv.com/v1/games/?tournament_id=20059&starts_before=2016-06-03T23%3A59%3A59.427144%2B00%3A00&starts_after=2016-06-03T06%3A00%3A00.427144%2B00%3A00&access_token=${acccessToken}
+  // rp(`http://api.playwithlv.com/v1/games/?tournament_id=20059&limit=20&access_token=${acccessToken}`)
+  rp(`http://api.playwithlv.com/v1/games/?
+      tournament_id=20059
+      &starts_before=2016-06-03T23%3A59%3A59.427144%2B00%3A00
+      &starts_after=2016-06-03T06%3A00%3A00.427144%2B00%3A00
+      &access_token=${acccessToken}`)
     .then(function (body) {
       var data = JSON.parse(body);
 
-      // data.forEach(function (obj) {
-      //   console.log(obj)
-      // })
-
-      console.log(data);
+      console.log(data.objects[0])
 
       res.render('games', {
         games: data.objects
       });
+
     })
     .catch(function (err) {
       console.log('error getting GAMES', err);
@@ -144,6 +151,22 @@ function updateScore (req, res) {
     console.log(body);
     res.redirect('/games')
   });
+}
+
+function getSwissStandings (req, res) {
+  rp(`http://api.playwithlv.com/v1/swiss_rounds/?swiss_round_ids=%5B${req.params.id}%5D&access_token=${acccessToken}`)
+    .then( function (body) {
+      var data = JSON.parse(body);
+      var swissStandings = data.objects[0];
+      var swissStandingsSort = swissStandings.standings.sort((a , b) => parseInt(b.swiss_score) > parseInt(a.swiss_score) ? 1 : -1);
+
+      // console.log(swissStandings);
+
+      res.render('swiss-standings', {
+        round_number: swissStandings.round_number,
+        data: swissStandingsSort
+      })
+    })
 }
 
 module.exports = router;

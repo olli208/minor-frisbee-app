@@ -32,8 +32,10 @@
   </div>
   <ul class="gameslist">
     <h2>Highlights</h2>
-    <li>team awesome vs another awesome team</li>
-    <li>wow team vs Hey man</li>
+    <% games.forEach(function (obj) { %>
+    <a href="/swiss-standings/<%= obj.swiss_round_id %>">
+    <li><%= obj.swiss_round_id %></li>
+    <% }) %>
   </ul>
 
   <div>
