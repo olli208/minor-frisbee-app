@@ -86,23 +86,28 @@ function getTeamDetail (req, res) {
 
 function getGames (req, res) {
   console.log('ACCESTOKEN?:' , acccessToken)
-  // ! playwithleaguevine api doent have 2017 games so we will have to hard code the dates for now
-  // http://api.playwithlv.com/v1/games/?tournament_id=20059&starts_before=2016-06-03T23%3A59%3A59.427144%2B00%3A00&starts_after=2016-06-03T06%3A00%3A00.427144%2B00%3A00&access_token=${acccessToken}
-  // rp(`http://api.playwithlv.com/v1/games/?tournament_id=20059&limit=20&access_token=${acccessToken}`)
-  rp(`http://api.playwithlv.com/v1/games/?
-      tournament_id=20059
-      &starts_before=2016-06-03T23%3A59%3A59.427144%2B00%3A00
-      &starts_after=2016-06-03T06%3A00%3A00.427144%2B00%3A00
-      &access_token=${acccessToken}`)
+  // ! playwithlv api doesnt have 2017 games so we will have to hard code the dates from 2016
+  // var now = new Date().toISOString(); // only works when tourney is on
+
+  var now = new Date('2016-06-03T12:00:00.427144+00:00');
+  var till = new Date(now);
+  till.setHours(till.getHours()+3)
+  var isoString = till.toISOString();
+
+  console.log(now , till)
+
+  var limit = '40'
+
+  // example request: `https://api.leaguevine.com/v1/games/?tournament_id=20059&starts_before=2016-06-03T13%3A00%3A00.427144%2B00%3A00&starts_after=2016-06-03T06%3A00%3A00.427144%2B00%3A00&order_by=%5Bstart_time%5D&access_token=${acccessToken}`
+  rp(`http://api.playwithlv.com/v1/games/?tournament_id=20059&starts_before=${isoString}&order_by=%5Bstart_time%5D&limit=${limit}&access_token=${acccessToken}`)
     .then(function (body) {
       var data = JSON.parse(body);
 
-      console.log(data.objects[0])
+      // console.log(data.objects)
 
       res.render('games', {
         games: data.objects
       });
-
     })
     .catch(function (err) {
       console.log('error getting GAMES', err);
