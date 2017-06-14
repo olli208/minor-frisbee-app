@@ -1,13 +1,31 @@
 <% include partials/head.ejs %>
 
 <header class="">
-  <h1>Swiss sSwiss</h1>
+  <div class="background"></div>
+  <div class="header-section">
+      <!--<button class="nav-btn"><span>menu</span></button>-->
+    <button class=""><a href="/games"><</a></button>
+    <h1>Swiss sSwiss</h1>
+  </div>
 </header>
 
 <section>
-  <% data.forEach(function (obj) { %>
-    <li><%= obj.team.short_name %>, <%= obj.swiss_score %></li>
-  <% }) %>
+  <p>Last updated: [DATE HERE]</p>
+  <table>
+    <tr>
+      <th>Ranking</th>
+      <th>TEAM</th>
+      <th>Swiss Points</th>
+    </tr>
+    <% data.forEach(function (obj) { %>
+    <tr>
+      <td><%= obj.ranking %>.</td>
+      <td><a href="/teams/<%= obj.team.id %>"><%= obj.team.short_name %></a></td>
+      <td><%= obj.swiss_score %></td>
+    </tr>
+    <% }) %>
+  </table>
+
 </section>
 
 <% include partials/footer.ejs %>
