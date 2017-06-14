@@ -2,6 +2,7 @@ var express = require('express');
 var session = require('express-session');
 var path = require('path');
 var bodyParser = require('body-parser');
+var compression = require('compression');
 
 var app = express();
 
@@ -12,7 +13,8 @@ app.set('view engine' , 'ejs')
   .use(express.static('static'))
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: false }))
-  .use(session({ secret: 'zoGeheim', resave: false, saveUninitialized: false}));
+  .use(session({ secret: 'zoGeheim', resave: false, saveUninitialized: false}))
+  .use(compression({threshold: 0, filter: () => true}));
 
 // My Routes are here
 app.use('/', require('./routes/index'));
