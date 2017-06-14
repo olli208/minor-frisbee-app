@@ -152,7 +152,7 @@ h1 span {
 
 nav {
     border: 1px solid white;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: -25em;
     padding: 1em;
