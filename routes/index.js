@@ -15,9 +15,6 @@ router.get('/login', login);
 router.get('/callback', callback);
 router.get('/confirm', confirmOauth);
 
-router.get('/test', function (req, res) {
-});
-
 // Teams
 router.get('/teams/:id', getTeamDetail);
 
@@ -60,25 +57,14 @@ function callback (req, res) {
     });
 }
 
-function getTeamDetail (req, res) {
-  rp(`http://api.playwithlv.com/v1/teams/${req.params.id}/?access_token=${acccessToken}`)
-    .then(function (body) {
-      var data = JSON.parse(body);
-
-      res.render('teams-detail', {data});
-    })
-    .catch(function (err) {
-      console.log('error getting TEAM DETAIL');
-    });
-}
-
 function getGames (req, res) {
   console.log('ACCESTOKEN?:' , acccessToken)
   // ! playwithlv api doesnt have 2017 games so we will have to hard code the dates from 2016
-  // var now = new Date().toISOString(); // only works when tourney is on
 
   // TODO -> Fix date so its from Netherlands (not super important ATM)
-  var now = new Date('2016-06-03T09:00:00.427144+02:00');
+  // TODO -> fix when changing date to 4 or 5 june no data is returned. (Working on normal leaguevine
+  // var now = new Date().toISOString(); // only works when tourney is on
+  var now = new Date('2016-06-03T11:00:00.427144+02:00');
   var till = new Date(now);
   till.setHours(till.getHours()+5)
   var nowISOString = toISO(now);
@@ -94,7 +80,7 @@ function getGames (req, res) {
   var swissStandings
 
   // example request: `https://api.leaguevine.com/v1/games/?tournament_id=20059&starts_before=2016-06-03T13%3A00%3A00.427144%2B00%3A00&starts_after=2016-06-03T06%3A00%3A00.427144%2B00%3A00&order_by=%5Bstart_time%5D&access_token=${acccessToken}`
-  rp(`http://api.playwithlv.com/v1/games/?tournament_id=20059&starts_before=${tillISOString}&starts_after=${nowISOString}&order_by=%5Bstart_time%5D&limit=${limit}&access_token=${acccessToken}`)
+  rp(`http://api.playwithlv.com/v1/games/?tournament_id=20059&starts_before=${tillISOString}&starts_after=${nowISOString}&order_by=['start_time']&limit=${limit}&access_token=${acccessToken}`)
     .then(function (body) {
       var data = JSON.parse(body);
 
@@ -106,9 +92,7 @@ function getGames (req, res) {
         return swissRounds.indexOf(elem) == pos;
       });
 
-      console.log(filterSwissRounds)
-
-      return rp(`http://api.playwithlv.com/v1/swiss_rounds/?swiss_round_ids=%5B${filterSwissRounds}%5D&limit=15&access_token=${acccessToken}`)
+      return rp(`http://api.playwithlv.com/v1/swiss_rounds/?swiss_round_ids=%5B${filterSwissRounds}%5D&access_token=${acccessToken}`)
         .then( function (body) {
           var data = JSON.parse(body);
 
@@ -121,8 +105,10 @@ function getGames (req, res) {
             parseInt(b.ranking) > parseInt(a.ranking) ? -1 : 1)
           .filter(team => (team.ranking >= 1 && team.ranking <= 15));
 
+          console.log(swissStandingsSort)
+
           res.render('games', {
-            games: data.objects,
+            games: data.objects, // this or swissStandings.games is also possible
             swiss: swissStandingsSort
           });
         })
@@ -195,6 +181,18 @@ function getSwissStandings (req, res) {
         data: swissStandingsSort
       })
     })
+}
+
+function getTeamDetail (req, res) {
+  rp(`http://api.playwithlv.com/v1/teams/${req.params.id}/?access_token=${acccessToken}`)
+    .then(function (body) {
+      var data = JSON.parse(body);
+
+      res.render('teams-detail', {data});
+    })
+    .catch(function (err) {
+      console.log('error getting TEAM DETAIL');
+    });
 }
 
 module.exports = router;

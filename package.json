@@ -20,11 +20,11 @@
     "querystring": "~0.2.0",
     "request": "~2.34.0",
     "request-promise": "^4.2.1",
-    "socket.io": "1.7.3"
+    "socket.io": "1.7.3",
+    "compression": "^1.6.2"
   },
   "devDependencies": {
     "body-parser": "^1.17.2",
-    "compression": "^1.6.2",
     "standard": "^10.0.1"
   }
 }

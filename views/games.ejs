@@ -18,19 +18,14 @@
 
 <section>
   <div class="background">
-    <h2>Top <%= Object.keys(swiss).length %> teams</h2>
+    <h2>Top <%= Object.keys(swiss).length %> - round 1</h2>
     <a href="/swiss-standings/<%= games[0].swiss_round_id %>">full standings - swiss id:<%= games[0].swiss_round_id %></a>
-    <!--<ul class="gameslist">-->
-      <!--<% games.forEach(function (obj) { %>-->
-      <!--<a href="/swiss-standings/<%= obj.swiss_round_id %>">-->
-        <!--<li><%= obj.swiss_round_id %></li>-->
-        <!--<% }) %>-->
-    <!--</ul>-->
+
     <table>
       <tr>
         <th>#</th>
         <th>TEAM</th>
-        <th>Swiss Points</th>
+        <th>Strength</th>
       </tr>
       <% swiss.forEach(function (obj) { %>
       <tr>
@@ -40,7 +35,33 @@
       </tr>
       <% }) %>
     </table>
+  </div>
 
+  <div class="background">
+    <ul class="gameslist">
+      <h2>Games to watch</h2>
+      <li>
+        <p>swiss round 2</p>
+        <p>name tourney</p>
+        <a href="/#">
+          <div class="team1">
+            <h4><span>13</span></h4>
+            <h3>team</h3>
+          </div>
+
+          <div class="info">
+            <p> <b><%= new Date().toLocaleDateString() %></b></p>
+            <p> <b><%= new Date().toString().substr(15,6) %></b></p> <!-- TODO -> substr() needs testing! -->
+            <p>location</p>
+          </div>
+
+          <div class="team2">
+            <h4><span>2</span></h4>
+            <h3>team</h3>
+          </div>
+        </a>
+      </li>
+    </ul>
   </div>
 
   <div class="background">
