@@ -19,7 +19,6 @@ router.get('/test', function (req, res) {
 });
 
 // Teams
-router.get('/teams', getTeams);
 router.get('/teams/:id', getTeamDetail);
 
 // games + score
@@ -58,20 +57,6 @@ function callback (req, res) {
     })
     .catch(function (err) {
       console.log('CALLBACK error', err);
-    });
-}
-
-function getTeams (req, res) {
-  rp(`http://api.playwithlv.com/v1/tournament_teams/?tournament_ids=%5B20059%5D&access_token=${acccessToken}`)
-    .then(function (body) {
-      var data = JSON.parse(body);
-
-      res.render('teams', {
-        teams: data.objects
-      });
-    })
-    .catch(function (err) {
-      console.log('error getting TEAMS');
     });
 }
 
@@ -126,20 +111,19 @@ function getGames (req, res) {
       return rp(`http://api.playwithlv.com/v1/swiss_rounds/?swiss_round_ids=%5B${filterSwissRounds}%5D&limit=15&access_token=${acccessToken}`)
         .then( function (body) {
           var data = JSON.parse(body);
-          console.log(data)
+
           swissStandings = data.objects[0];
 
           return swissStandings
         })
         .then(function (swissStandings) {
-          var swissStandingsSort = swissStandings.standings.sort((a , b) => parseInt(b.swiss_score) > parseInt(a.swiss_score) ? 1 : -1);
-
-          // console.log(swissStandingsSort)
-          const swissTop12 = swissStandingsSort.filter(team => (team.ranking >= 1 && team.ranking <= 15));
+          var swissStandingsSort = swissStandings.standings.sort((a , b) =>
+            parseInt(b.ranking) > parseInt(a.ranking) ? -1 : 1)
+          .filter(team => (team.ranking >= 1 && team.ranking <= 15));
 
           res.render('games', {
             games: data.objects,
-            swiss: swissTop12
+            swiss: swissStandingsSort
           });
         })
         .catch(function (err) {
@@ -202,7 +186,7 @@ function getSwissStandings (req, res) {
     .then( function (body) {
       var data = JSON.parse(body);
       var swissStandings = data.objects[0];
-      var swissStandingsSort = swissStandings.standings.sort((a , b) => parseInt(b.swiss_score) > parseInt(a.swiss_score) ? 1 : -1);
+      var swissStandingsSort = swissStandings.standings.sort((a , b) => parseInt(b.ranking) > parseInt(a.ranking) ? -1 : 1);
 
       // console.log(swissStandings);
 

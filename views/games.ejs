@@ -11,9 +11,6 @@
     <a href="/teams">All participating teams</a>
     <a href="/login">log in to leaguevine</a>
     <li>
-      <a href="#">Yesterday</a>
-    </li>
-    <li>
       <a href="#">Swiss Standings</a>
     </li>
   </nav>
@@ -21,8 +18,8 @@
 
 <section>
   <div class="background">
-    <h2>Top 12 teams</h2>
-    <a href="/swiss-standings/<%= games[0].swiss_round_id %>"><%= games[0].swiss_round_id %></a>
+    <h2>Top <%= Object.keys(swiss).length %> teams</h2>
+    <a href="/swiss-standings/<%= games[0].swiss_round_id %>">full standings - swiss id:<%= games[0].swiss_round_id %></a>
     <!--<ul class="gameslist">-->
       <!--<% games.forEach(function (obj) { %>-->
       <!--<a href="/swiss-standings/<%= obj.swiss_round_id %>">-->
@@ -31,7 +28,7 @@
     <!--</ul>-->
     <table>
       <tr>
-        <th>Ranking</th>
+        <th>#</th>
         <th>TEAM</th>
         <th>Swiss Points</th>
       </tr>
