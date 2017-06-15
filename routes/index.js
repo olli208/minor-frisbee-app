@@ -102,25 +102,44 @@ function getGames (req, res) {
   // console.log(nowISOString , tillISOString);
 
   var limit = '20'
+  var swissStandings
 
   // example request: `https://api.leaguevine.com/v1/games/?tournament_id=20059&starts_before=2016-06-03T13%3A00%3A00.427144%2B00%3A00&starts_after=2016-06-03T06%3A00%3A00.427144%2B00%3A00&order_by=%5Bstart_time%5D&access_token=${acccessToken}`
   rp(`http://api.playwithlv.com/v1/games/?tournament_id=20059&starts_before=${tillISOString}&starts_after=${nowISOString}&order_by=%5Bstart_time%5D&limit=${limit}&access_token=${acccessToken}`)
     .then(function (body) {
       var data = JSON.parse(body);
 
-      console.log(data)
-
-      var filter = data.objects.map(function (obj) {
+      var swissRounds = data.objects.map(function (obj) {
         return obj.swiss_round_id
       })
 
-      res.render('games', {
-        games: data.objects
-      });
+      // res.render('games', {
+      //   games: data.objects
+      // });
+
+      return rp(`http://api.playwithlv.com/v1/swiss_rounds/?swiss_round_ids=%5B${swissRounds}%5D&access_token=${acccessToken}`)
+        .then( function (body) {
+          var data = JSON.parse(body);
+          swissStandings = data.objects[0];
+          
+          return swissStandings
+        })
+        .then(function (swissStandings) {
+          console.log(swissStandings)
+          res.render('games', {
+            games: data.objects,
+            swiss: swissStandings
+          });
+        })
+        .catch(function (err) {
+          console.log('error getting SWISS STANDINGS on GAMES page', err);
+        });
+
     })
     .catch(function (err) {
       console.log('error getting GAMES', err);
     });
+
 }
 
 function gameUpdate (req, res) {
