@@ -123,19 +123,23 @@ function getGames (req, res) {
 
       console.log(filterSwissRounds)
 
-      return rp(`http://api.playwithlv.com/v1/swiss_rounds/?swiss_round_ids=%5B${filterSwissRounds}%5D&access_token=${acccessToken}`)
+      return rp(`http://api.playwithlv.com/v1/swiss_rounds/?swiss_round_ids=%5B${filterSwissRounds}%5D&limit=15&access_token=${acccessToken}`)
         .then( function (body) {
           var data = JSON.parse(body);
+          console.log(data)
           swissStandings = data.objects[0];
-          
+
           return swissStandings
         })
         .then(function (swissStandings) {
-          // console.log(swissStandings)
+          var swissStandingsSort = swissStandings.standings.sort((a , b) => parseInt(b.swiss_score) > parseInt(a.swiss_score) ? 1 : -1);
+
+          // console.log(swissStandingsSort)
+          const swissTop12 = swissStandingsSort.filter(team => (team.ranking >= 1 && team.ranking <= 15));
 
           res.render('games', {
             games: data.objects,
-            swiss: swissStandings
+            swiss: swissTop12
           });
         })
         .catch(function (err) {

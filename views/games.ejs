@@ -20,8 +20,8 @@
 </header>
 
 <section>
-  <div>
-    <h2>Highlights</h2>
+  <div class="background">
+    <h2>Top 12 teams</h2>
     <a href="/swiss-standings/<%= games[0].swiss_round_id %>"><%= games[0].swiss_round_id %></a>
     <!--<ul class="gameslist">-->
       <!--<% games.forEach(function (obj) { %>-->
@@ -29,10 +29,24 @@
         <!--<li><%= obj.swiss_round_id %></li>-->
         <!--<% }) %>-->
     <!--</ul>-->
+    <table>
+      <tr>
+        <th>Ranking</th>
+        <th>TEAM</th>
+        <th>Swiss Points</th>
+      </tr>
+      <% swiss.forEach(function (obj) { %>
+      <tr>
+        <td><%= obj.ranking %>.</td>
+        <td><a href="/teams/<%= obj.team.id %>"><%= obj.team.short_name %></a></td>
+        <td><%= obj.swiss_score %></td>
+      </tr>
+      <% }) %>
+    </table>
 
   </div>
 
-  <div>
+  <div class="background">
     <ul class="gameslist">
       <h2>Games today</h2>
       <% games.forEach(function (obj) { %>
