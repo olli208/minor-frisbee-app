@@ -15,6 +15,9 @@ router.get('/login', login);
 router.get('/callback', callback);
 router.get('/confirm', confirmOauth);
 
+router.get('/test', function (req, res) {
+});
+
 // Teams
 router.get('/teams', getTeams);
 router.get('/teams/:id', getTeamDetail);
@@ -89,7 +92,8 @@ function getGames (req, res) {
   // ! playwithlv api doesnt have 2017 games so we will have to hard code the dates from 2016
   // var now = new Date().toISOString(); // only works when tourney is on
 
-  var now = new Date('2016-06-03T09:00:00');
+  // TODO -> Fix date so its from Netherlands (not super important ATM)
+  var now = new Date('2016-06-03T09:00:00.427144+02:00');
   var till = new Date(now);
   till.setHours(till.getHours()+5)
   var nowISOString = toISO(now);
@@ -99,7 +103,7 @@ function getGames (req, res) {
     return date.toISOString()
   }
 
-  // console.log(nowISOString , tillISOString);
+  console.log(nowISOString , tillISOString);
 
   var limit = '20'
   var swissStandings
@@ -113,11 +117,13 @@ function getGames (req, res) {
         return obj.swiss_round_id
       })
 
-      // res.render('games', {
-      //   games: data.objects
-      // });
+      var filterSwissRounds = swissRounds.filter(function(elem, pos) {
+        return swissRounds.indexOf(elem) == pos;
+      });
 
-      return rp(`http://api.playwithlv.com/v1/swiss_rounds/?swiss_round_ids=%5B${swissRounds}%5D&access_token=${acccessToken}`)
+      console.log(filterSwissRounds)
+
+      return rp(`http://api.playwithlv.com/v1/swiss_rounds/?swiss_round_ids=%5B${filterSwissRounds}%5D&access_token=${acccessToken}`)
         .then( function (body) {
           var data = JSON.parse(body);
           swissStandings = data.objects[0];
@@ -125,7 +131,8 @@ function getGames (req, res) {
           return swissStandings
         })
         .then(function (swissStandings) {
-          console.log(swissStandings)
+          // console.log(swissStandings)
+
           res.render('games', {
             games: data.objects,
             swiss: swissStandings
