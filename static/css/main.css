@@ -142,7 +142,7 @@ header h1 {
     -webkit-transform: skew(-15deg, 0);
     -moz-transform: skew(-15deg, 0);
     -ms-transform: skew(-15deg, 0);
-    -o-transform skew(-15deg, 0);
+    -o-transform: skew(-15deg, 0);
     transform: skew(-15deg, 0);
 }
 

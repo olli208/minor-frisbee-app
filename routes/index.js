@@ -9,6 +9,10 @@ require('dotenv').config(); // secret stuff
 var apiResponse,
   acccessToken;
 
+var tournamentIDMixed = '19750' // Windmill 2015: MIXED
+var tournamentIDOpen = '19746' // Windmill 2015: OPEN
+var tournamentIDWomen = '19747' // Windmill 2015: WOMENS
+
 // Oauth
 router.get('/', index);
 router.get('/login', login);
@@ -49,6 +53,7 @@ function callback (req, res) {
     .then(function (body) {
       apiResponse = JSON.parse(body);
       acccessToken = apiResponse.access_token;
+      req.session.accessToken = apiResponse.access_token;
 
       res.redirect('/games')
     })
@@ -59,12 +64,12 @@ function callback (req, res) {
 
 function getGames (req, res) {
   console.log('ACCESTOKEN?:' , acccessToken)
-  // ! playwithlv api doesnt have 2017 games so we will have to hard code the dates from 2016
+  // ! playwithlv api doesnt have 2017 games so we will have to hard code the dates from 2015.
 
   // TODO -> Fix date so its from Netherlands (not super important ATM)
   // TODO -> fix when changing date to 4 or 5 june no data is returned. (Working on normal leaguevine
   // var now = new Date().toISOString(); // only works when tourney is on
-  var now = new Date('2016-06-03T11:00:00.427144+02:00');
+  var now = new Date('2015-06-13T10:00:00.427144+02:00');
   var till = new Date(now);
   till.setHours(till.getHours()+5)
   var nowISOString = toISO(now);
@@ -77,10 +82,9 @@ function getGames (req, res) {
   console.log(nowISOString , tillISOString);
 
   var limit = '20'
-  var swissStandings
 
   // example request: `https://api.leaguevine.com/v1/games/?tournament_id=20059&starts_before=2016-06-03T13%3A00%3A00.427144%2B00%3A00&starts_after=2016-06-03T06%3A00%3A00.427144%2B00%3A00&order_by=%5Bstart_time%5D&access_token=${acccessToken}`
-  rp(`http://api.playwithlv.com/v1/games/?tournament_id=20059&starts_before=${tillISOString}&starts_after=${nowISOString}&order_by=['start_time']&limit=${limit}&access_token=${acccessToken}`)
+  rp(`http://api.playwithlv.com/v1/games/?tournament_id=${tournamentIDOpen}&starts_before=${tillISOString}&starts_after=${nowISOString}&order_by=['start_time']&limit=${limit}&access_token=${acccessToken}`)
     .then(function (body) {
       var data = JSON.parse(body);
 
@@ -92,11 +96,16 @@ function getGames (req, res) {
         return swissRounds.indexOf(elem) == pos;
       });
 
+      // res.render('games', {
+      //   games: data.objects, // this or swissStandings.games is also possible
+      //   // swiss: swissStandingsSort
+      // });
+
       return rp(`http://api.playwithlv.com/v1/swiss_rounds/?swiss_round_ids=%5B${filterSwissRounds}%5D&access_token=${acccessToken}`)
         .then( function (body) {
           var data = JSON.parse(body);
 
-          swissStandings = data.objects[0];
+          var swissStandings = data.objects[0];
 
           return swissStandings
         })
