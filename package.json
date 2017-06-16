@@ -10,21 +10,21 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "compression": "^1.6.2",
     "deep-diff": "^0.3.8",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
     "express": "^4.15.2",
     "express-session": "^1.15.3",
-    "mongoose": "^4.10.5",
-    "nodemon": "^1.11.0",
+    "mongoose": "^4.10.6",
     "querystring": "~0.2.0",
     "request": "~2.34.0",
     "request-promise": "^4.2.1",
-    "socket.io": "1.7.3",
-    "compression": "^1.6.2"
+    "socket.io": "1.7.3"
   },
   "devDependencies": {
     "body-parser": "^1.17.2",
+    "nodemon": "^1.11.0",
     "standard": "^10.0.1"
   }
 }

@@ -41,8 +41,8 @@
     <ul class="gameslist">
       <h2>Games to watch</h2>
       <li>
-        <p>swiss round 2</p>
-        <p>name tourney</p>
+        <p>fake swiss round 2</p>
+        <p>name of fake tourney</p>
         <a href="/#">
           <div class="team1">
             <h4><span>13</span></h4>
@@ -69,7 +69,7 @@
       <h2>Games today</h2>
       <% games.forEach(function (obj) { %>
       <li>
-        <p>swiss round <%= obj.swiss_round.round_number %></p>
+        <p>ROUND <%= obj.swiss_round.round_number %></p>
         <p><%= obj.tournament.name %></p>
         <a href="/games/<%= obj.id %>">
           <div class="team1">

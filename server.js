@@ -13,8 +13,8 @@ app.set('view engine' , 'ejs')
   .use(express.static('static'))
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: false }))
+  .use(compression({threshold: 0, filter: () => true}))
   .use(session({ secret: 'zoGeheim', resave: false, saveUninitialized: false}))
-  .use(compression({threshold: 0, filter: () => true}));
 
 // My Routes are here
 app.use('/', require('./routes/index'));
