@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
-var rp = require('request-promise');
 var querystring = require('querystring');
 var mongoose = require('mongoose');
 

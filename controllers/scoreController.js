@@ -15,6 +15,8 @@ exports.updateScore = function (req, res) {
     'is_final': 'False'
   };
 
+  // TODO First request rurrent score for the game and check date
+  // if date is later then the date when this request post is then cancel this post and return message to user.
   request.post({
     url: 'http://api.playwithlv.com/v1/game_scores/',
     headers: {

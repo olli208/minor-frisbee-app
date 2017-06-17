@@ -14,6 +14,10 @@
       <a href="#">Swiss Standings</a>
     </li>
   </nav>
+
+  <a href="/games/womens">Womens</a>
+  <a href="/games/open">Open</a>
+  <a href="/games/mixed">Mixed</a>
 </header>
 
 <section>
@@ -78,7 +82,7 @@
           </div>
 
           <div class="info">
-            <p> <b><%= new Date(obj.start_time).toLocaleDateString() %></b></p>
+            <p> <b><%= h.moment(obj.start_time).format('dddd Do') %></b></p>
             <p> <b><%= new Date(obj.start_time).toString().substr(15,6) %></b></p> <!-- TODO -> substr() needs testing! -->
             <p><%= obj.game_site.name %></p>
           </div>
