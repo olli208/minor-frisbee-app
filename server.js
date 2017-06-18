@@ -19,7 +19,7 @@ mongoose.connection.on('error' , function (err) {
   console.log('Something went wrong with MONGODB ->' , err.message)
 })
 
-require('./models/Games');
+require('./models/Game');
 
 // Setup and middleware
 app.set('view engine' , 'ejs')

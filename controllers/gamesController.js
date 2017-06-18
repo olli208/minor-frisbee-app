@@ -1,7 +1,7 @@
 var rp = require('request-promise');
 var moment = require('moment');
 var mongoose = require('mongoose');
-var Games = mongoose.model('Games')
+var Game = mongoose.model('Game')
 
 exports.getGames = function (req, res, next) {
   var tournamentID;
@@ -42,57 +42,23 @@ exports.getGames = function (req, res, next) {
       return rp(`http://api.playwithlv.com/v1/swiss_rounds/?swiss_round_ids=%5B${filterSwissRounds}%5D&access_token=${req.session.accessToken}`)
         .then( function (body) {
           var data = JSON.parse(body);
-
           var swissStandings = data.objects[0];
 
           return swissStandings
         })
         .then(function (swissStandings) {
-          // console.log(swissStandings)
           var swissStandingsSort = swissStandings.standings.sort((a , b) =>
-              parseInt(b.ranking) > parseInt(a.ranking) ? -1 : 1
-            ).filter((team) =>
-              (team.ranking >= 1 && team.ranking <= 15)
-            );
+          parseInt(b.ranking) > parseInt(a.ranking) ? -1 : 1)
+          .filter((team) => (team.ranking >= 1 && team.ranking <= 15)
+          );
 
           res.render('games', {
-            games: data.objects, // this or swissStandings.games is also possible
-            swiss: swissStandingsSort
+            games: data.objects || {}, // this or swissStandings.games is also possible
+            swiss: swissStandingsSort || {}
           });
 
-          // console.log(data.objects[0]);
+          formatData(data.objects);
 
-          data.objects.forEach(function (obj) {
-            var formatGame = {
-              gameID: obj.id,
-                team_1: {
-                score: obj.team_1_score,
-                  name: obj.team_1.name,
-                  teamID: obj.team_1.id,
-              },
-              team_2: {
-                score: obj.team_2_score,
-                  name: obj.team_2.name,
-                  teamID: obj.team_1.id,
-              },
-              startTime: obj.start_time,
-              swissRoundId: obj.swiss_round.id,
-              gameSite: obj.game_site.name
-            }
-
-            // var game = new Games(formatGame);
-            //
-            // game.save()
-            //   .then(function (games) {
-            //     console.log(games);
-            //     console.log('SUCCESS!! NEW DATA ADDED!')
-            //   })
-            //   .catch( function (err) {
-            //     console.log(`FAILED to add to DATABSE -> ${err}`);
-            //   });
-
-            return
-          })
         })
         .catch(function (err) {
           console.log('error getting SWISS STANDINGS on GAMES page', err);
@@ -103,6 +69,52 @@ exports.getGames = function (req, res, next) {
       console.log('error getting GAMES', err);
     });
 
+}
+
+function formatData (games) {
+  games.forEach(function (obj) {
+    // var teamID = Games.findOne({})
+    var formatGame = {
+      gameID: obj.id,
+      team_1: {
+        score: obj.team_1_score,
+        name: obj.team_1.name,
+        teamID: obj.team_1.id,
+      },
+      team_2: {
+        score: obj.team_2_score,
+        name: obj.team_2.name,
+        teamID: obj.team_1.id,
+      },
+      startTime: obj.start_time,
+      swissRoundId: obj.swiss_round.id,
+      swissRoundNumber: obj.swiss_round.round_number,
+      gameSite: obj.game_site.name,
+      tournamentStyle: obj.tournament.name
+    }
+
+    // console.log(formatGame)
+
+    // var game = Games.findOneAndUpdate(formatGame);
+    var game = new Game(formatGame);
+
+    game.save()
+      .then(function (games) {
+        console.log(games);
+        console.log('SUCCESS!! NEW DATA ADDED!')
+      })
+      .catch( function (err) {
+        console.log(`FAILED to add to DATABSE -> ${err}`);
+      });
+
+    // Games.on('index' , function (err) {
+    //   assert.ifError(err);
+    //   Games.create(formatGame, function (err) {
+    //     console.log(err)
+    //   })
+    // })
+
+  })
 }
 
 exports.gameUpdate = function (req, res) {
