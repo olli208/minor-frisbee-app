@@ -15,9 +15,9 @@
     </li>
   </nav>
 
-  <a href="/games/womens">Womens</a>
-  <a href="/games/open">Open</a>
-  <a href="/games/mixed">Mixed</a>
+  <a href="/games">Mixed</a>
+  <a href="/games/19747">Womens</a>
+  <a href="/games/19746">Open</a>
 </header>
 
 <section>
@@ -75,7 +75,7 @@
       <li>
         <p>ROUND <%= obj.swiss_round.round_number %></p>
         <p><%= obj.tournament.name %></p>
-        <a href="/games/<%= obj.id %>">
+        <a href="/update/<%= obj.id %>">
           <div class="team1">
             <h4><span><%= obj.team_1_score %></span></h4>
             <h3><%= obj.team_1.short_name %></h3>

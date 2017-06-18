@@ -13,7 +13,9 @@ exports.callback = function (req, res) {
       // acccessToken = apiResponse.access_token;
       req.session.accessToken = apiResponse.access_token;
 
-      res.redirect('/games')
+
+      res.redirect(req.session.returnTo || '/games');
+      delete req.session.returnTo;
     })
     .catch(function (err) {
       console.log('CALLBACK error', err);

@@ -3,14 +3,17 @@ var moment = require('moment');
 var mongoose = require('mongoose');
 var Games = mongoose.model('Games')
 
-var tournamentIDMixed = '19750' // Windmill 2015: MIXED
-var tournamentIDOpen = '19746' // Windmill 2015: OPEN
-var tournamentIDWomen = '19747' // Windmill 2015: WOMENS
-
 exports.getGames = function (req, res, next) {
-  console.log('ACCESTOKEN?:' , req.session.accessToken);
-  // ! playwithlv api doesnt have 2017 games so we will have to hard code the dates from 2015.
+  var tournamentID;
+  if (req.params.id === undefined) {
+    tournamentID = '19750'
+  } else if (req.params.id !='undefined') {
+    tournamentID = req.params.id;
+  }
 
+  console.log('ACCESTOKEN?:' , req.session.accessToken);
+
+  // ! playwithlv api doesnt have 2017 games so we will have to hard code the dates from 2015.
   var dateFormat = 'YYYY-MM-DDTHH:mm:ss';
   var now = moment('2015-06-12T09:00:00.427144+02:00');
   var till = moment(now).add(3, 'h');
@@ -18,11 +21,12 @@ exports.getGames = function (req, res, next) {
   var nowFormat = now.format(dateFormat) + '.427Z';
   var tillFormat = till.format(dateFormat) + '.427Z';
 
-  var limit = '20';
+  var limit = '10';
 
   // example request: `https://api.leaguevine.com/v1/games/?tournament_id=20059&starts_before=2016-06-03T13%3A00%3A00.427144%2B00%3A00&starts_after=2016-06-03T06%3A00%3A00.427144%2B00%3A00&order_by=%5Bstart_time%5D&access_token=${acccessToken}`
-  rp(`http://api.playwithlv.com/v1/games/?tournament_id=${tournamentIDMixed}&starts_before=${tillFormat}&starts_after=${nowFormat}&order_by=['start_time']&limit=${limit}&access_token=${req.session.accessToken}`)
+  rp(`http://api.playwithlv.com/v1/games/?tournament_id=${tournamentID}&starts_before=${tillFormat}&starts_after=${nowFormat}&order_by=['start_time']&limit=${limit}&access_token=${req.session.accessToken}`)
     .then(function (body) {
+      req.session.returnTo = req.path;
       var data = JSON.parse(body);
 
       var swissRounds = data.objects.map(function (obj) {
@@ -33,6 +37,8 @@ exports.getGames = function (req, res, next) {
         return swissRounds.indexOf(elem) == pos;
       });
 
+      console.log('SWISS ROUNDS ->', filterSwissRounds)
+
       return rp(`http://api.playwithlv.com/v1/swiss_rounds/?swiss_round_ids=%5B${filterSwissRounds}%5D&access_token=${req.session.accessToken}`)
         .then( function (body) {
           var data = JSON.parse(body);
@@ -42,36 +48,51 @@ exports.getGames = function (req, res, next) {
           return swissStandings
         })
         .then(function (swissStandings) {
-          var swissStandingsSort = swissStandings.standings.sort(function (a , b) {
+          // console.log(swissStandings)
+          var swissStandingsSort = swissStandings.standings.sort((a , b) =>
               parseInt(b.ranking) > parseInt(a.ranking) ? -1 : 1
-            }).filter(function (team) {
+            ).filter((team) =>
               (team.ranking >= 1 && team.ranking <= 15)
-            });
-
-          // console.log(swissStandingsSort)
+            );
 
           res.render('games', {
             games: data.objects, // this or swissStandings.games is also possible
             swiss: swissStandingsSort
           });
 
-          // data.objects.forEach(function (obj) {
-          //   console.log(`${obj.team_1.name} VS. ${obj.team_1.name}`);
-          // })
+          // console.log(data.objects[0]);
 
-          console.log( data.objects[0].id)
+          data.objects.forEach(function (obj) {
+            var formatGame = {
+              gameID: obj.id,
+                team_1: {
+                score: obj.team_1_score,
+                  name: obj.team_1.name,
+                  teamID: obj.team_1.id,
+              },
+              team_2: {
+                score: obj.team_2_score,
+                  name: obj.team_2.name,
+                  teamID: obj.team_1.id,
+              },
+              startTime: obj.start_time,
+              swissRoundId: obj.swiss_round.id,
+              gameSite: obj.game_site.name
+            }
 
-          var game = new Games({gameID: data.objects[0].id});
+            // var game = new Games(formatGame);
+            //
+            // game.save()
+            //   .then(function (games) {
+            //     console.log(games);
+            //     console.log('SUCCESS!! NEW DATA ADDED!')
+            //   })
+            //   .catch( function (err) {
+            //     console.log(`FAILED to add to DATABSE -> ${err}`);
+            //   });
 
-          game.save()
-            .then(function (game) {
-              console.log(game);
-              console.log('SUCCESS!! nieuwe data is binnen!')
-            })
-            .catch( function (err) {
-              console.log(`FAIL -> ${err}`);
-            });
-
+            return
+          })
         })
         .catch(function (err) {
           console.log('error getting SWISS STANDINGS on GAMES page', err);

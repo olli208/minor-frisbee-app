@@ -25,7 +25,8 @@ router.get('/teams/:id', teamsController.getTeamDetail);
 
 // games + score
 router.get('/games', gamesController.getGames);
-router.get('/games/:id', gamesController.gameUpdate);
+router.get('/games/:id', gamesController.getGames);
+router.get('/update/:id', gamesController.gameUpdate);
 router.post('/update_score', scoreController.updateScore);
 
 // Swiss Standings + rounds etc
