@@ -4,10 +4,22 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var compression = require('compression');
 var helpers = require('./helpers');
+var mongoose = require('mongoose');
 
 var app = express();
 
+require('dotenv').config(); // secret stuff
+
 var http = require('http').createServer(app);
+
+mongoose.connect(process.env.DATABASE)
+mongoose.Promise = global.Promise;
+
+mongoose.connection.on('error' , function (err) {
+  console.log('Something went wrong with MONGODB ->' , err.message)
+})
+
+require('./models/Games');
 
 // Setup and middleware
 app.set('view engine' , 'ejs')

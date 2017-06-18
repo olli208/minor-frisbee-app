@@ -4,18 +4,20 @@ mongoose.Promise = global.Promise;
 // The models for the database will be here.
 var gamesSchema = new mongoose.Schema({
   // Schema's go here.
-  team1: {
+  gameID: String,
+  team_1: {
     score: Number,
-    teamName: String,
+    name: String,
     teamID: String
   },
-  team2: {
+  team_2: {
     score: Number,
-    teamName: String,
+    name: String,
     teamID: String
   },
   startTime: String,
-  swissRoundId: String
+  swissRoundId: String,
+  gameSite: String
 
 })
 

@@ -7,5 +7,5 @@ exports.index = function (req , res) {
 }
 
 exports.confirmOauth = function (req, res) {
-  res.render('confirm-oauth');
+  res.render('index');
 }

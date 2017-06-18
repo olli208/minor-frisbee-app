@@ -1,4 +1,5 @@
 var request = require('request');
+var moment = require('moment');
 
 exports.updateScore = function (req, res) {
   team1_score = req.body.team1_score;
@@ -6,6 +7,14 @@ exports.updateScore = function (req, res) {
   scorer = req.body.scorer;
   assist = req.body.assist;
   gameID = req.body.game_id;
+  timeOfUpdate = moment().format();
+
+  console.log(timeOfUpdate);
+  // TODO -> request score of this game first
+  // Check time of last update compare and update
+  // only if this time is more recent and if score is changed at all
+  // We post request the score to the api.
+  // If we have a mongodb database now is the time to update the score there  also
 
   var score = {
     'game_id': gameID,

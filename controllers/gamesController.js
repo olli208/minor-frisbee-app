@@ -1,5 +1,7 @@
 var rp = require('request-promise');
 var moment = require('moment');
+var mongoose = require('mongoose');
+var Games = mongoose.model('Games')
 
 var tournamentIDMixed = '19750' // Windmill 2015: MIXED
 var tournamentIDOpen = '19746' // Windmill 2015: OPEN
@@ -31,10 +33,6 @@ exports.getGames = function (req, res, next) {
         return swissRounds.indexOf(elem) == pos;
       });
 
-      // res.render('games', {
-      //   games: data.objects, // this or swissStandings.games is also possible
-      // });
-
       return rp(`http://api.playwithlv.com/v1/swiss_rounds/?swiss_round_ids=%5B${filterSwissRounds}%5D&access_token=${req.session.accessToken}`)
         .then( function (body) {
           var data = JSON.parse(body);
@@ -44,9 +42,11 @@ exports.getGames = function (req, res, next) {
           return swissStandings
         })
         .then(function (swissStandings) {
-          var swissStandingsSort = swissStandings.standings.sort((a , b) =>
-          parseInt(b.ranking) > parseInt(a.ranking) ? -1 : 1)
-          .filter(team => (team.ranking >= 1 && team.ranking <= 15));
+          var swissStandingsSort = swissStandings.standings.sort(function (a , b) {
+              parseInt(b.ranking) > parseInt(a.ranking) ? -1 : 1
+            }).filter(function (team) {
+              (team.ranking >= 1 && team.ranking <= 15)
+            });
 
           // console.log(swissStandingsSort)
 
@@ -54,6 +54,23 @@ exports.getGames = function (req, res, next) {
             games: data.objects, // this or swissStandings.games is also possible
             swiss: swissStandingsSort
           });
+
+          // data.objects.forEach(function (obj) {
+          //   console.log(`${obj.team_1.name} VS. ${obj.team_1.name}`);
+          // })
+
+          console.log( data.objects[0].id)
+
+          var game = new Games({gameID: data.objects[0].id});
+
+          game.save()
+            .then(function (game) {
+              console.log(game);
+              console.log('SUCCESS!! nieuwe data is binnen!')
+            })
+            .catch( function (err) {
+              console.log(`FAIL -> ${err}`);
+            });
 
         })
         .catch(function (err) {
