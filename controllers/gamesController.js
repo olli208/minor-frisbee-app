@@ -73,7 +73,6 @@ exports.getGames = function (req, res, next) {
 
 function formatData (games) {
   games.forEach(function (obj) {
-    // var teamID = Games.findOne({})
     var formatGame = {
       gameID: obj.id,
       team_1: {
@@ -93,9 +92,6 @@ function formatData (games) {
       tournamentStyle: obj.tournament.name
     }
 
-    // console.log(formatGame)
-
-    // var game = Games.findOneAndUpdate(formatGame);
     var game = new Game(formatGame);
 
     game.save()
@@ -107,28 +103,20 @@ function formatData (games) {
         console.log(`FAILED to add to DATABSE -> ${err}`);
       });
 
-    // Games.on('index' , function (err) {
-    //   assert.ifError(err);
-    //   Games.create(formatGame, function (err) {
-    //     console.log(err)
-    //   })
-    // })
-
   })
 }
 
 exports.gameUpdate = function (req, res) {
-  if (!req.session.accessToken) {
-    res.redirect('/confirm')
-  } else {
-    rp(`http://api.playwithlv.com/v1/games/${req.params.id}/?access_token=${req.session.accessToken}`)
-      .then(function (body) {
-        var data = JSON.parse(body);
+  req.session.gameID = req.params.id;
 
-        res.render('game-update' , {game: data});
-      })
-      .catch(function (err) {
-        console.log('error UPDATING GAME');
-      });
-  }
+  rp(`http://api.playwithlv.com/v1/game_scores/?game_id=${req.params.id}&access_token=${req.session.accessToken}`)
+    .then(function (body) {
+      var data = JSON.parse(body);
+
+      req.session.returnTo = req.path;
+      res.render('game-update' , {game: data.objects[0] || 'No game found' });
+    })
+    .catch(function (err) {
+      console.log('error UPDATING GAME');
+    });
 }

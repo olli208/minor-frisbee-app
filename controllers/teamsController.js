@@ -1,4 +1,6 @@
 var rp = require('request-promise');
+var mongoose = require('mongoose');
+var Team = mongoose.model('Team');
 
 exports.getTeamDetail = function (req, res) {
   rp(`http://api.playwithlv.com/v1/teams/${req.params.id}/?access_token=${req.session.accessToken}`)

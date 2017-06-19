@@ -4,13 +4,13 @@ mongoose.Promise = global.Promise;
 // The models for the database will be here.
 var teamsSchema = new mongoose.Schema({
   // Schema's go here.
-  team1: {
+  teamID: {type: String, unique: true},
+  swissRoundId: String,
+  swiss: {
+    swissRoundId: String,
     score: Number,
-    teamName: String,
-    teamID: String
   },
-  games: [String],
-  swissRoundId: String
+  games: [String]
 })
 
-module.exports = mongoose.model('Teams' , teamsSchema);
+module.exports = mongoose.model('Team' , teamsSchema);

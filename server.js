@@ -1,8 +1,8 @@
 var express = require('express');
-var session = require('express-session');
 var path = require('path');
 var bodyParser = require('body-parser');
 var compression = require('compression');
+var session = require('express-session');
 var helpers = require('./helpers');
 var mongoose = require('mongoose');
 
@@ -19,7 +19,9 @@ mongoose.connection.on('error' , function (err) {
   console.log('Something went wrong with MONGODB ->' , err.message)
 })
 
+// My models ( ͡° ͜ʖ ͡°)
 require('./models/Game');
+require('./models/Team');
 
 // Setup and middleware
 app.set('view engine' , 'ejs')
