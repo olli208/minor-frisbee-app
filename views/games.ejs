@@ -11,42 +11,79 @@
     <a href="/teams">All participating teams</a>
     <a href="/login">log in to leaguevine</a>
     <li>
-      <a href="#">Yesterday</a>
-    </li>
-    <li>
       <a href="#">Swiss Standings</a>
     </li>
   </nav>
+
+  <a href="/games">Mixed</a>
+  <a href="/games/19747">Womens</a>
+  <a href="/games/19746">Open</a>
 </header>
 
 <section>
-  <button> CREATE NEXT ROUND </button>
-  <div>
-    <h2>Highlights</h2>
-    <a href="/swiss-standings/<%= games[0].swiss_round_id %>"><%= games[0].swiss_round_id %></a>
-    <!--<ul class="gameslist">-->
-      <!--<% games.forEach(function (obj) { %>-->
-      <!--<a href="/swiss-standings/<%= obj.swiss_round_id %>">-->
-        <!--<li><%= obj.swiss_round_id %></li>-->
-        <!--<% }) %>-->
-    <!--</ul>-->
+  <div class="background">
+    <h2>Top <%= Object.keys(swiss).length %> - round 1</h2>
+    <a href="/swiss-standings/<%= games[0].swiss_round_id %>">full standings - swiss id:<%= games[0].swiss_round_id %></a>
+
+    <table>
+      <tr>
+        <th>#</th>
+        <th>TEAM</th>
+        <th>Strength</th>
+      </tr>
+      <% swiss.forEach(function (obj) { %>
+      <tr>
+        <td><%= obj.ranking %>.</td>
+        <td><a href="/teams/<%= obj.team.id %>"><%= obj.team.short_name %></a></td>
+        <td><%= obj.swiss_score %></td>
+      </tr>
+      <% }) %>
+    </table>
   </div>
 
-  <div>
+  <!-- TODO -> Higlight some games based on swis spoint/ power rranking -->
+  <!--<div class="background">-->
+    <!--<ul class="gameslist">-->
+      <!--<h2>Games to watch</h2>-->
+      <!--<li>-->
+        <!--<p>fake swiss round 2</p>-->
+        <!--<p>name of fake tourney</p>-->
+        <!--<a href="/#">-->
+          <!--<div class="team1">-->
+            <!--<h4><span>13</span></h4>-->
+            <!--<h3>team</h3>-->
+          <!--</div>-->
+
+          <!--<div class="info">-->
+            <!--<p> <b><%= new Date().toLocaleDateString() %></b></p>-->
+            <!--<p> <b><%= new Date().toString().substr(15,6) %></b></p> &lt;!&ndash; TODO -> substr() needs testing! &ndash;&gt;-->
+            <!--<p>location</p>-->
+          <!--</div>-->
+
+          <!--<div class="team2">-->
+            <!--<h4><span>2</span></h4>-->
+            <!--<h3>team</h3>-->
+          <!--</div>-->
+        <!--</a>-->
+      <!--</li>-->
+    <!--</ul>-->
+  <!--</div>-->
+
+  <div class="background">
     <ul class="gameslist">
       <h2>Games today</h2>
       <% games.forEach(function (obj) { %>
       <li>
-        <p>swiss round <%= obj.swiss_round.round_number %></p>
+        <p>ROUND <%= obj.swiss_round.round_number %></p>
         <p><%= obj.tournament.name %></p>
-        <a href="/games/<%= obj.id %>">
+        <a href="/update/<%= obj.id %>">
           <div class="team1">
             <h4><span><%= obj.team_1_score %></span></h4>
             <h3><%= obj.team_1.short_name %></h3>
           </div>
 
           <div class="info">
-            <p> <b><%= new Date(obj.start_time).toLocaleDateString() %></b></p>
+            <p> <b><%= h.moment(obj.start_time).format('dddd Do') %></b></p>
             <p> <b><%= new Date(obj.start_time).toString().substr(15,6) %></b></p> <!-- TODO -> substr() needs testing! -->
             <p><%= obj.game_site.name %></p>
           </div>

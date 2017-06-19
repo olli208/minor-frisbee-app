@@ -142,7 +142,7 @@ header h1 {
     -webkit-transform: skew(-15deg, 0);
     -moz-transform: skew(-15deg, 0);
     -ms-transform: skew(-15deg, 0);
-    -o-transform skew(-15deg, 0);
+    -o-transform: skew(-15deg, 0);
     transform: skew(-15deg, 0);
 }
 
@@ -193,10 +193,18 @@ nav li {
     color: #fff;
     font-size: 1.2em;
     box-shadow: 0 2px 0 0 rgba(0,0,0,0.1);
+    letter-spacing: 2px;
 }
 
 .nav-btn:active {
     background: royalblue;
+}
+
+section .background {
+    background: #fff;
+    margin-bottom: 1.5em;
+    box-shadow: 0 2px 0 0 rgba(0,0,0,0.1);
+    padding: 0.2em;
 }
 
 /*
