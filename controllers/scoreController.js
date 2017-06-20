@@ -1,6 +1,8 @@
 var request = require('request');
 var moment = require('moment');
 var rp = require('request-promise');
+var mongoose = require('mongoose');
+var Game = mongoose.model('Game');
 
 exports.updateScore = function (req, res) {
   var dateFormat = 'YYYY-MM-DDTHH:mm:ss';
@@ -15,9 +17,9 @@ exports.updateScore = function (req, res) {
 
       var lastUpdate = moment(dataObj.time_last_updated).format(dateFormat + '.427Z')
 
-      console.log('TIJD VAN API ->' , lastUpdate);
-      console.log(dataObj.team_1_score);
-      console.log(dataObj.team_2_score);
+      console.log('TIJD VAN API ->' , lastUpdate); // TODO -> better solution for the time check.
+      // console.log(dataObj.team_1_score);
+      // console.log(dataObj.team_2_score);
 
       // 1. Compare time stamps of both
       if (timeOfUpdate > lastUpdate) {
@@ -28,7 +30,7 @@ exports.updateScore = function (req, res) {
         // ... show flash message to user
         console.log('SCORE HAS ALREADY BEEN UPDATED');
         req.flash('warning' , 'SCORE HAS ALREADY BEEN UPDATED');
-        res.redirect('/games')
+        res.redirect('/games');
       }
 
   })
@@ -63,9 +65,26 @@ function postUpdate (req, res) {
       body: score
     }, function (err, response, body) {
       console.log(body);
-      // 4. TODO -> store scorer and assist on own db
-      req.flash('success', 'SCORE HAS BEEN UPDATED')
-      res.redirect('/games')
+
+      var scoreUpdate = {
+        team_1: {score: team1_score},
+        team_2: {score: team2_score}
+      }
+
+      var game = Game.findOneAndUpdate(
+        {gameID: gameID},
+        scoreUpdate,
+        {new: true}).exec();
+
+      game
+        .then(function(game){
+          console.log(`games from DB -> ${game}`);
+          req.flash('success', 'SCORE HAS BEEN UPDATED');
+          res.redirect('/games');
+        })
+        .catch(function(err) {
+          console.log(`Could not update GAMESCORE from DATABASE -> ${err}`)
+        })
     });
   }
 
