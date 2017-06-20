@@ -9,5 +9,6 @@
 
 # npm cruft
 npm-debug.log
+package-lock.json
 
 .env

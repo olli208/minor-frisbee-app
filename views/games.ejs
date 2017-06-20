@@ -21,6 +21,12 @@
 </header>
 
 <section>
+  <% if(locals.flashes) { %>
+    <% var categories =  Object.keys(locals.flashes)%>
+      <% for (category in categories) { %>
+      <% category %>
+      <% } %>
+  <% } %>
   <div class="background">
     <h2>Top <%= Object.keys(swiss).length %> - round 1</h2>
     <a href="/swiss-standings/<%= games[0].swiss_round_id %>">full standings - swiss id:<%= games[0].swiss_round_id %></a>
@@ -56,7 +62,7 @@
 
           <!--<div class="info">-->
             <!--<p> <b><%= new Date().toLocaleDateString() %></b></p>-->
-            <!--<p> <b><%= new Date().toString().substr(15,6) %></b></p> &lt;!&ndash; TODO -> substr() needs testing! &ndash;&gt;-->
+            <!--<p> <b><%= new Date().toString().substr(15,6) %></b></p> &lt;!&ndash;
             <!--<p>location</p>-->
           <!--</div>-->
 
@@ -84,7 +90,7 @@
 
           <div class="info">
             <p> <b><%= h.moment(obj.start_time).format('dddd Do') %></b></p>
-            <p> <b><%= new Date(obj.start_time).toString().substr(15,6) %></b></p> <!-- TODO -> substr() needs testing! -->
+            <p> <b><%= new Date(obj.start_time).toString().substr(15,6) %></b></p>
             <p><%= obj.game_site.name %></p>
           </div>
 

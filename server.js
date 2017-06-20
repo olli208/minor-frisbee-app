@@ -3,6 +3,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var compression = require('compression');
 var session = require('express-session');
+var flash = require('connect-flash');
 var helpers = require('./helpers');
 var mongoose = require('mongoose');
 
@@ -10,7 +11,8 @@ var app = express();
 
 require('dotenv').config(); // secret stuff
 
-var http = require('http').createServer(app);
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
 
 mongoose.connect(process.env.DATABASE)
 mongoose.Promise = global.Promise;
@@ -31,15 +33,17 @@ app.set('view engine' , 'ejs')
   .use(bodyParser.urlencoded({ extended: false }))
   .use(compression({threshold: 0, filter: () => true}))
   .use(session({ secret: 'zoGeheim', resave: false, saveUninitialized: false}))
+  .use(flash());
 
 app.use(function (req, res, next) {
   res.locals.h = helpers;
+  res.locals.flashes = req.flash();
   next();
 })
 
 // My Routes
 app.use('/', require('./routes/index'));
 
-http.listen(process.env.PORT, function (){
+server.listen(process.env.PORT, function (){
     console.log('server is running on: ' + process.env.PORT);
 });

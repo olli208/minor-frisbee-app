@@ -19,6 +19,7 @@ var gamesSchema = new mongoose.Schema({
   swissRoundId: String,
   swissRoundNumber: String,
   gameSite: String,
+  tournamentID: String,
   tournamentStyle: String
 })
 

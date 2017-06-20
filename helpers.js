@@ -2,4 +2,4 @@
 exports.moment = require('moment');
 
 // console logging from template
-exports.dump = function (obj) {JSON.stringify(obj, null, 2);};
+exports.dump = (obj) => JSON.stringify(obj, null, 2);

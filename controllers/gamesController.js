@@ -53,11 +53,11 @@ exports.getGames = function (req, res, next) {
           );
 
           res.render('games', {
-            games: data.objects || {}, // this or swissStandings.games is also possible
+            games: data.objects || {},
             swiss: swissStandingsSort || {}
           });
 
-          formatData(data.objects);
+          formatData(data.objects , tournamentID);
 
         })
         .catch(function (err) {
@@ -71,7 +71,7 @@ exports.getGames = function (req, res, next) {
 
 }
 
-function formatData (games) {
+function formatData (games, tournamentID) {
   games.forEach(function (obj) {
     var formatGame = {
       gameID: obj.id,
@@ -89,6 +89,7 @@ function formatData (games) {
       swissRoundId: obj.swiss_round.id,
       swissRoundNumber: obj.swiss_round.round_number,
       gameSite: obj.game_site.name,
+      tournamentID: tournamentID,
       tournamentStyle: obj.tournament.name
     }
 
@@ -96,7 +97,7 @@ function formatData (games) {
 
     game.save()
       .then(function (games) {
-        console.log(games);
+        // console.log(games);
         console.log('SUCCESS!! NEW DATA ADDED!')
       })
       .catch( function (err) {

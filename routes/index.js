@@ -3,6 +3,7 @@ var router = express.Router();
 var request = require('request');
 var querystring = require('querystring');
 var mongoose = require('mongoose');
+var Game = mongoose.model('Game')
 
 require('dotenv').config(); // secret stuff
 
@@ -13,6 +14,7 @@ var gamesController = require('../controllers/gamesController');
 var teamsController = require('../controllers/teamsController');
 var scoreController = require('../controllers/scoreController');
 var swissRankController = require('../controllers/swissRankController');
+
 
 // Oauth
 router.get('/', indexController.index);
@@ -28,6 +30,13 @@ router.get('/games', gamesController.getGames);
 router.get('/games/:id', gamesController.getGames);
 router.get('/update/:id', gamesController.gameUpdate);
 router.post('/update_score', scoreController.updateScore);
+router.get('/test', function(req, res ){
+  // var games = Game.find()
+  // games.then(function(games){
+  //   console.log(games);
+  //   // res.render('test' , {data: data})
+  // })
+});
 
 // Swiss Standings + rounds etc
 router.get('/swiss-standings/:id', swissRankController.getSwissStandings)
