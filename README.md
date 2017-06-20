@@ -14,6 +14,25 @@ With the app you can see who, where, which round, the teams are playing. You can
 
 Besides updating the score of a game, user can see the power rankings from within the app. When a user visits the page, all games are loaded based on the current time. There are alot of games during the tournament, so each tournament division has their own page with power rankings. So you have the page for Womens, Open, and Mixed. 
 
+### Tools
+This is a nodejs app using express. MongoDB is used for storing games and teams. The app is using data from Leaguevine API. Below are the packages I use:
+```
+    "body-parser": "^1.17.2",
+    "compression": "^1.6.2",
+    "connect-flash": "^0.1.1",
+    "deep-diff": "^0.3.8",
+    "dotenv": "^4.0.0",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "express-session": "^1.15.3",
+    "moment": "^2.18.1",
+    "mongoose": "^4.10.6",
+    "querystring": "~0.2.0",
+    "request": "~2.34.0",
+    "request-promise": "^4.2.1",
+    "socket.io": "1.7.3"
+```
+
 ## Install the app
 To see it live and go trough the Oauth flow your self clone this repo, run the following command in the terminal
 ```
