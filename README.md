@@ -20,7 +20,6 @@ This is a nodejs app using express. MongoDB is used for storing games and teams.
     "body-parser": "^1.17.2",
     "compression": "^1.6.2",
     "connect-flash": "^0.1.1",
-    "deep-diff": "^0.3.8",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
     "express": "^4.15.2",
@@ -30,7 +29,8 @@ This is a nodejs app using express. MongoDB is used for storing games and teams.
     "querystring": "~0.2.0",
     "request": "~2.34.0",
     "request-promise": "^4.2.1",
-    "socket.io": "1.7.3"
+    "socket.io": "1.7.3",
+    "body-parser": "^1.17.2",
 ```
 
 ## Install the app
