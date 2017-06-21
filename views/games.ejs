@@ -4,7 +4,7 @@
   <div class="background"></div>
   <div class="header-section">
     <!--<button class="nav-btn"><span>menu</span></button>-->
-    <h1>Welcome to <span>Windmill</span></h1>
+    <h1>Welcome to <span> <%= tournamentName%></span></h1>
   </div>
 
   <!--<nav>-->
@@ -25,12 +25,12 @@
 
 <section>
   <div class="division-tabs">
-    <button><a href="/games">Mixed</a></button>
-    <button><a href="/games/19747">Womens</a></button>
-    <button><a href="/games/19746">Open</a></button>
+    <button class=""><a href="/games">Mixed</a></button>
+    <button class=""><a href="/games/19747">Women</a></button>
+    <button class=""><a href="/games/19746">Open</a></button>
   </div>
 
-  <div class="background">
+  <div class="background team-games">
     <h2>Top <%= Object.keys(swiss).length %></h2>
     <table>
       <tr>

@@ -54,9 +54,18 @@ exports.getGames = function (req, res, next) {
 
           gamesToDB(data.objects , tournamentID);
 
+          var tournamentName = data.objects.map(function(obj) {
+            return obj.tournament.name
+          }).filter(function(elem, pos , arr) {
+            return arr.indexOf(elem) == pos;
+          });
+
+          console.log(tournamentName)
+
           res.render('games', {
             games: data.objects || {},
-            swiss: swissStandingsSort || {}
+            swiss: swissStandingsSort || {},
+            tournamentName
           });
 
         })
