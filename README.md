@@ -15,7 +15,7 @@ With the app you can see who, where, which round, the teams are playing. You can
 Besides updating the score of a game, user can see the power rankings from within the app. When a user visits the page, all games are loaded based on the current time. There are alot of games during the tournament, so each tournament division has their own page with power rankings. So you have the page for Womens, Open, and Mixed. 
 
 ### Tools
-This is a nodejs app using express. MongoDB is used for storing games and teams. The app is using data from Leaguevine API. Below are the packages I use:
+This is a nodejs app using express. MongoDB is used for storing games. When a user visits a page of a team, the games that the team already played will be shown there. The app is using data from Leaguevine API. Below are the packages I use:
 ```
     "body-parser": "^1.17.2",
     "compression": "^1.6.2",
@@ -32,6 +32,13 @@ This is a nodejs app using express. MongoDB is used for storing games and teams.
     "socket.io": "1.7.3",
     "body-parser": "^1.17.2",
 ```
+
+### Other Stuff
+Since I'm using a test environment for the API (playwithlv) I have to get data from Windmill 2015, since that is the most updated one. This is a prototype and alot of things can and will be worked on as I learn new techniques. All the request you would make with leaguevine can be done if you change the url. For example:
+`https://api.leaguevine.com/v1/games/?team_ids=(TEAMIDS)&access_token=(ACCESSTOKEN)`
+becomes:
+`http://api.playwithlv.com/v1/games/?team_ids=(TEAMIDS)&access_token=(ACCESSTOKEN)`
+
 
 ## Install the app
 To see it live and go trough the Oauth flow your self clone this repo, run the following command in the terminal
@@ -67,3 +74,4 @@ Now you can see the app for your self and test it out. This app uses a different
 - [Swiss Pairing](http://senseis.xmp.net/?SwissPairing)
 - [Windmill Tournament Rules & Format](http://windmilltournament.com/tournament-info/rules-and-format/)
 - [Power Rankings](https://www.leaguevine.com/blog/134/power-rankings-in-ultimate/)
+- [Learn Node by Wes Bos](http://wesbos.com/learn-node/)
