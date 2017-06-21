@@ -51,7 +51,7 @@ From the root of the directory run
 npm install
 ```
 
-Then add these to the server.js file in the root of the project. You can get them [here](https://www.leaguevine.com/docs/api/)
+Then add these to the server.js file in the root of the project. You can get them [here (leaguevine)](https://www.leaguevine.com/docs/api/) for regular leaguevine or [here (playwithlv)[(http://www.playwithlv.com/docs/api/) for developement. The latter one is recommended for this app for now.
 ```
 var client_id = (your client id)
 var client_secret = (your client secret)
