@@ -33,52 +33,55 @@ exports.getGames = function (req, res, next) {
 
       var swissRounds = data.objects.map(function (obj) {
         return obj.swiss_round_id
-      }).filter(function(elem, pos , arr) {
+      }).filter(function (elem, pos, arr) {
         return arr.indexOf(elem) == pos;
       });
 
       console.log('SWISS ROUNDS ->', swissRounds)
 
-      return rp(`http://api.playwithlv.com/v1/swiss_rounds/?swiss_round_ids=%5B${swissRounds}%5D&access_token=`)
-        .then( function (body) {
-          var data = JSON.parse(body);
-          var swissStandings = data.objects[0];
+      var getSwissStandings = requestSwissStandings(swissRounds , data , tournamentID , res)
 
-          return swissStandings
-        })
-        .then(function (swissStandings) {
-          var swissStandingsSort = swissStandings.standings.sort((a , b) =>
-          parseInt(b.ranking) > parseInt(a.ranking) ? -1 : 1)
-          .filter((team) => (team.ranking >= 1 && team.ranking <= 15)
-          );
-
-          gamesToDB(data.objects , tournamentID);
-
-          var tournamentName = data.objects.map(function(obj) {
-            return obj.tournament.name
-          }).filter(function(elem, pos , arr) {
-            return arr.indexOf(elem) == pos;
-          });
-
-          console.log(tournamentName)
-
-          res.render('games', {
-            games: data.objects || {},
-            swiss: swissStandingsSort || {},
-            tournamentName
-          });
-
-        })
-        .catch(function (err) {
-          console.log('error getting SWISS STANDINGS on GAMES page', err);
-        });
-
+      return getSwissStandings
     })
     .catch(function (err) {
       console.log('error getting GAMES', err);
     });
-
 }
+
+function requestSwissStandings (swissRounds , data , tournamentID , res) {
+  rp(`http://api.playwithlv.com/v1/swiss_rounds/?swiss_round_ids=%5B${swissRounds}%5D&access_token=`)
+    .then( function (body) {
+      var data = JSON.parse(body);
+      var swissStandings = data.objects[0];
+
+      return swissStandings
+    })
+    .then(function (swissStandings) {
+      var swissStandingsSort = swissStandings.standings.sort((a , b) =>
+      parseInt(b.ranking) > parseInt(a.ranking) ? -1 : 1)
+      .filter((team) => (team.ranking >= 1 && team.ranking <= 15)
+      );
+
+      gamesToDB(data.objects , tournamentID);
+
+      var tournamentName = data.objects.map(function(obj) {
+        return obj.tournament.name
+      }).filter(function(elem, pos , arr) {
+        return arr.indexOf(elem) == pos;
+      });
+
+      res.render('games', {
+        games: data.objects || {},
+        swiss: swissStandingsSort || {},
+        tournamentName
+      });
+
+    })
+    .catch(function (err) {
+      console.log('error getting SWISS STANDINGS on GAMES page', err);
+    });
+}
+
 
 function gamesToDB (games, tournamentID) {
   games.forEach(function (obj) {
@@ -114,7 +117,7 @@ function gamesToDB (games, tournamentID) {
   })
 }
 
-function getGamesDB(tournamentID) {
+function getGamesDB (tournamentID) {
   var games = Game.find({
     'tournamentID': tournamentID,
     'startTime': {$gt: moment('2015-06-12T09:00:00.427144+02:00')} // ! playwithlv api doesnt have 2017 games so we will have to hard code the dates from 2015.
