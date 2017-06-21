@@ -51,6 +51,11 @@ input {
     border: 1px solid rgba(0,0,0,0.3);
 }
 
+.boxshadow {
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 2px 0 0 rgba(0,0,0,0.1);
+}
+
 @media (min-width: 40em) {
     section {
         margin: 0 auto;
@@ -106,8 +111,9 @@ body {
     min-height: 100vh;
 }
 
-.intro button {
+.action-button {
     padding: 1em 1.5em;
+    margin: 1em 0;
     background: dodgerblue;
     border: 0;
     border-radius: 500px;
@@ -115,10 +121,14 @@ body {
     text-transform: uppercase;
 }
 
-.intro button a {
+.action-button a {
     padding: 1em 1.5em;
     text-decoration: none;
     color: #fff;
+}
+
+header {
+    margin-bottom: 4em;
 }
 
 header section{
@@ -126,11 +136,11 @@ header section{
 }
 
 header .background {
-    background: dodgerblue;
+    background: url("/img/winmill-action.jpg") no-repeat center top;
     margin: 0;
     width: 100%;
-    clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
-    height: 25vh;
+    /*clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);*/
+    height: 30vh;
     z-index: -1;
     position: absolute;
     top: 0;
@@ -139,15 +149,18 @@ header .background {
 
 header h1 {
     color: #fff;
-    -webkit-transform: skew(-15deg, 0);
-    -moz-transform: skew(-15deg, 0);
-    -ms-transform: skew(-15deg, 0);
-    -o-transform: skew(-15deg, 0);
-    transform: skew(-15deg, 0);
+    -webkit-transform: skew(-12deg, 0);
+    -moz-transform: skew(-12deg, 0);
+    -ms-transform: skew(-12deg, 0);
+    -o-transform: skew(-12deg, 0);
+    transform: skew(-12deg, 0);
+    margin-left: 0.5em;
 }
 
-h1 span {
+header h1 span {
+    background: #fff;
     color: coral;
+    padding: 0 0.25em;
 }
 
 nav {
@@ -207,31 +220,75 @@ section .background {
     padding: 0.2em;
 }
 
+.division-tabs {
+    background: dodgerblue;
+    display: flex;
+    justify-content: space-around;
+}
+
+.division-tabs button {
+    padding: 1em 1.5em;
+    border: 0;
+    margin: 0.3em 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 500px;
+    background: #fff;
+    border: 0;
+}
+
+.division-tabs button a {
+    text-decoration: none;
+    color: dodgerblue;
+}
+
 /*
     TEAM DETAIL PAGE
 */
+.team-header {
+    background: dodgerblue;
+    margin-bottom: 4em;
+}
+.team-header div > h2 {
+    color: #fff;
+}
+
 .team-quick-info {
     display: flex;
     justify-content: space-around;
     width: 100%;
+    background: #12A6FF;
 }
 
 .team-quick-info div img {
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
 	display: block;
+    background: #fff;
+    border-radius: 50%;
+    border: .2em solid #12A6FF;
+    width: 6em;
+    position: absolute;
+    bottom: -3em;
+    box-shadow: 0 2px 0 0 rgba(0,0,0,0.1);
 }
 
 .team-quick-info div {
-    width: 6em;
-    padding: 0.25em;
-    border: 1px solid hotpink;
+    width: 7em;
+    padding: 1em 0.5em;
+    position: relative;
+}
+
+.team-quick-info div p {
+    color: #fff;
+    padding: 0;
+    margin: 0;
 }
 
 .team-desc {
-    xbox-sizing: border-box;
-    xwidth: 100%;
-    xpadding: 0.5em;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.5em 1em;
+    background: #fff;
 }
 
 /*
@@ -319,6 +376,7 @@ input[type="submit"] {
 .gameslist {
     box-sizing: border-box;
     margin:0;
+    margin-bottom: 2em;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
@@ -327,13 +385,26 @@ input[type="submit"] {
 
 .gameslist li {
     list-style: none;
-    min-height: 6em;
+    min-height: 14em;
     margin-bottom: 1em;
     width: 98%;
     padding: 0 0.25em;
     background: #fff;
     border: 1px solid rgba(0,0,0,0.1);
     box-shadow: 0 2px 0 0 rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.tournament-info {
+    background: dodgerblue;
+    color: #fff;
+    padding: 0.5em;
+    margin-top:0;
+    width:100%;
+}
+
+.team-games h2:first-of-type {
+    padding: 0.5em;
 }
 
 .gameslist a {
@@ -351,6 +422,15 @@ input[type="submit"] {
 
 .gameslist a * {
     padding: 0;
+}
+
+.gameslist h4 {
+    margin: 1em 0;
+}
+
+gameslist p {
+    padding: 0.5em;
+    margin: 0;
 }
 
 .gameslist .info {
@@ -381,10 +461,6 @@ input[type="submit"] {
     text-align: right;
 }
 
-.gameslist .team1 p, .team2 p {
-
-}
-
 /*
     Swiss score section
 */
@@ -395,4 +471,14 @@ table {
 
 table th {
     text-align: left;
+    padding: 0.5em 0;
+    border: 0;
+}
+
+td {
+    padding: 0.25em 0;
+}
+
+td * {
+    color: #666;
 }

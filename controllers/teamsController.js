@@ -12,16 +12,17 @@ exports.getTeamDetail = function (req, res) {
 
       games
         .then(function(games){
-          console.log(`games from DB -> ${games}`);
+          // console.log(`games from DB -> ${games}`);
           res.render('teams-detail', {
-                    data: teamData,
-                    games: games
+                    data: teamData || {},
+                    games: games || {}
                   });
         })
         .catch(function(err) {
           console.log(`Could not find GAMES from DATABASE -> ${err}`)
         })
 
+    //  TODO -> For upcomming games request API
     //   return rp(`http://api.playwithlv.com/v1/games/?%5B${teamData.id}%5D&access_token=${req.session.accessToken}`)
     //     .then(function (body) {
     //       var teamGames = JSON.parse(body);
