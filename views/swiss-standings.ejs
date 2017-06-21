@@ -10,8 +10,8 @@
 </header>
 
 <section class="swiss-standings">
-  <p>Last updated: [DATE HERE]</p>
   <h2>SWISS ROUND <%= round_number %></h2>
+  <p>Last updated: <%= h.moment(lastUpdate) %></p>
   <table>
     <tr>
       <th>Ranking</th>
@@ -26,7 +26,6 @@
     </tr>
     <% }) %>
   </table>
-
 </section>
 
 <% include partials/footer.ejs %>

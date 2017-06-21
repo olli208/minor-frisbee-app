@@ -7,11 +7,10 @@ exports.getSwissStandings = function (req, res) {
       var swissStandings = data.objects[0];
       var swissStandingsSort = swissStandings.standings.sort((a , b) => parseInt(b.ranking) > parseInt(a.ranking) ? -1 : 1);
 
-      // console.log(swissStandings);
-
       res.render('swiss-standings', {
         round_number: swissStandings.round_number,
-        data: swissStandingsSort
+        data: swissStandingsSort,
+        lastUpdate: swissStandings.time_last_updated
       })
     })
 }
