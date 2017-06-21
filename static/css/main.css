@@ -373,6 +373,8 @@ input[type="submit"] {
 
 .gameslist .team1 h3, .team2 h3 {
     height: 3.5em;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .gameslist .team1 {

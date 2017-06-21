@@ -22,7 +22,7 @@ exports.getGames = function (req, res, next) {
   var nowFormat = now.format(dateFormat) + '.427Z';
   var tillFormat = till.format(dateFormat) + '.427Z';
 
-  var limit = '10';
+  var limit = '12  ';
 
   // TODO -> FIX scores on games page not the same as score update page
   // example request: `https://api.leaguevine.com/v1/games/?tournament_id=20059&starts_before=2016-06-03T13%3A00%3A00.427144%2B00%3A00&starts_after=2016-06-03T06%3A00%3A00.427144%2B00%3A00&order_by=%5Bstart_time%5D&access_token=${acccessToken}`
