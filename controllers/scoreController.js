@@ -66,26 +66,29 @@ function postUpdate (req, res) {
     }, function (err, response, body) {
       console.log(body);
 
-      var scoreUpdate = {
-        team_1: {score: team1_score},
-        team_2: {score: team2_score}
-      }
-
-      var game = Game.findOneAndUpdate(
-        {gameID: gameID},
-        scoreUpdate,
-        {new: true}).exec();
-
-      game
-        .then(function(game){
-          console.log(`games from DB -> ${game}`);
-          req.flash('success', 'SCORE HAS BEEN UPDATED');
-          res.redirect('/games');
-        })
-        .catch(function(err) {
-          console.log(`Could not update GAMESCORE from DATABASE -> ${err}`)
-        })
+      storeToDB(team1_score, team2_score, gameID , req, res)
     });
   }
+}
 
+function storeToDB (team1_score, team2_score, gameID, req, res ) {
+  var scoreUpdate = {
+    team_1: {score: team1_score},
+    team_2: {score: team2_score}
+  }
+
+  var game = Game.findOneAndUpdate(
+    {gameID: gameID},
+    scoreUpdate,
+    {new: true}).exec();
+
+  game
+    .then(function(game){
+      console.log(`games from DB -> ${game}`);
+      req.flash('success', 'SCORE HAS BEEN UPDATED');
+      res.redirect('/games');
+    })
+    .catch(function(err) {
+      console.log(`Could not update GAMESCORE from DATABASE -> ${err}`)
+    })
 }

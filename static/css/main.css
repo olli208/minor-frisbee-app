@@ -340,6 +340,7 @@ label[for="team1_score"], label[for="team2_score"] {
 .form-scoreboard fieldset:last-child {
     border: 0;
     box-shadow: none;
+    margin-bottom: 5em;
 }
 
 .score-info input {

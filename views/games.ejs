@@ -16,19 +16,19 @@
   <!--</nav>-->
 </header>
 
+<% if(locals.flashes) { %>
+<% var categories =  Object.keys(locals.flashes)%>
+<% for (category in categories) { %>
+<%= category %>
+<% } %>
+<% } %>
+
 <section>
   <div class="division-tabs">
     <button><a href="/games">Mixed</a></button>
     <button><a href="/games/19747">Womens</a></button>
     <button><a href="/games/19746">Open</a></button>
   </div>
-
-  <% if(locals.flashes) { %>
-    <% var categories =  Object.keys(locals.flashes)%>
-      <% for (category in categories) { %>
-      <%= category %>
-      <% } %>
-  <% } %>
 
   <div class="background">
     <h2>Top <%= Object.keys(swiss).length %></h2>
