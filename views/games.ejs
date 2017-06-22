@@ -1,20 +1,24 @@
 <% include partials/head.ejs %>
 
-<header class="">
-  <div class="background"></div>
+<header class="boxshadow">
   <div class="header-section">
     <!--<button class="nav-btn"><span>menu</span></button>-->
-    <h1>Welcome to <span> <%= tournamentName%></span></h1>
+    <h2><%= tournamentName%></h2>
   </div>
 
-  <!--<nav>-->
-    <!--<a href="/teams">All participating teams</a>-->
-    <!--<a href="/login">log in to leaguevine</a>-->
-    <!--<li>-->
-      <!--<a href="#">Swiss Standings</a>-->
-    <!--</li>-->
-  <!--</nav>-->
+  <div class="section-select boxshadow">
+    <ul>
+      <li class="active">TOP 15</li>
+      <li>GAMES</li>
+    </ul>
+  </div>
 </header>
+
+<div class="division-tabs">
+  <a href="/games"><button class="">Mixed</button></a>
+  <a href="/games/19747"><button class="">Women</button></a>
+  <a href="/games/19746"><button class="">Open</button></a>
+</div>
 
 <% if(locals.flashes) { %>
 <% var categories =  Object.keys(locals.flashes)%>
@@ -24,11 +28,6 @@
 <% } %>
 
 <section>
-  <div class="division-tabs">
-    <button class=""><a href="/games">Mixed</a></button>
-    <button class=""><a href="/games/19747">Women</a></button>
-    <button class=""><a href="/games/19746">Open</a></button>
-  </div>
 
   <div class="background team-games">
     <h2>Top <%= Object.keys(swiss).length %></h2>
@@ -79,7 +78,7 @@
   <!--</div>-->
 
   <div class="background team-games">
-    <h2>Current Games</h2>
+    <h2>Games</h2>
     <ul class="gameslist">
       <% games.forEach(function (obj) { %>
       <li>

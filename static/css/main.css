@@ -52,8 +52,7 @@ input {
 }
 
 .boxshadow {
-    border: 1px solid rgba(0,0,0,0.1);
-    box-shadow: 0 2px 0 0 rgba(0,0,0,0.1);
+    box-shadow: 0 1px 0 0 rgba(0,0,0,0.3);
 }
 
 @media (min-width: 40em) {
@@ -127,38 +126,21 @@ body {
     color: #fff;
 }
 
-.active {
-    background: pink;
-    color: dodgerblue;
-}
-
 header section{
     padding: 0.25rem;
 }
 
 header {
-    background: url("/img/winmill-action.jpg") no-repeat center top;
+    /*background: url("/img/winmill-action.jpg") no-repeat center top;*/
+    background: dodgerblue;
     margin: 0;
-    margin-bottom: 4em;
     width: 100%;
     z-index: -1;
     box-shadow: 0 2px 0 0 rgba(0,0,0,0.1);
 }
 
-header h1 {
+header h2 {
     color: #fff;
-    -webkit-transform: skew(-10deg, 0);
-    -moz-transform: skew(-10deg, 0);
-    -ms-transform: skew(-10deg, 0);
-    -o-transform: skew(-10deg, 0);
-    transform: skew(-10deg, 0);
-    margin-left: 0.5em;
-}
-
-header h1 span {
-    background: #fff;
-    color: coral;
-    padding: 0 0.25em;
 }
 
 nav {
@@ -186,31 +168,6 @@ nav li {
     align-items: center;
 }
 
-.nav-btn {
-    -webkit-transform: rotate(-70deg) skew(-15deg, 0); /* Chrome, Safari, Opera */
-    transform: rotate(-70deg) skew(-15deg, 0);
-    align-self: flex-start;
-    border: 0;
-    background: 0;
-    margin-top: 4em;
-    transition: .1s ease-in;
-}
-
-.nav-btn span {
-    font-weight: 700;
-    border-bottom: 0.3rem solid royalblue;
-    border-top: 4rem solid royalblue;
-    padding: 0.25em;
-    color: #fff;
-    font-size: 1.2em;
-    box-shadow: 0 2px 0 0 rgba(0,0,0,0.1);
-    letter-spacing: 2px;
-}
-
-.nav-btn:active {
-    background: royalblue;
-}
-
 section .background {
     background: #fff;
     margin-bottom: 1.5em;
@@ -218,26 +175,51 @@ section .background {
     padding: 0.2em;
 }
 
+.section-select {
+    background: #12A6FF;
+}
+
+.section-select ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
+
+.section-select li {
+    width: 50%;
+    text-align: center;
+    color: #fff;
+    padding: 1em;
+
+}
+
+.section-select li.active {
+    border-bottom: .3em solid #fff;
+}
+
 .division-tabs {
-    background: dodgerblue;
+    background: #fff;
     display: flex;
     justify-content: space-around;
+    padding: 0.5em 0;
 }
 
 .division-tabs button {
-    padding: 1em 1.5em;
+    padding: 0.65em 1.25em;
     border: 0;
     margin: 0.3em 0;
     letter-spacing: 2px;
     text-transform: uppercase;
     border-radius: 500px;
-    background: #fff;
+    background: dodgerblue;
     border: 0;
 }
 
-.division-tabs button a {
+.division-tabs a button {
     text-decoration: none;
-    color: dodgerblue;
+    color: #fff;
 }
 
 /*
@@ -387,11 +369,15 @@ input[type="submit"] {
     min-height: 14em;
     margin-bottom: 1em;
     width: 98%;
-    padding: 0 0.25em;
     background: #fff;
     border: 1px solid rgba(0,0,0,0.1);
     box-shadow: 0 2px 0 0 rgba(0,0,0,0.1);
     position: relative;
+    border-radius: 5px;
+}
+
+gamelist li a {
+    padding: 0 0.25em;
 }
 
 .tournament-info {
@@ -466,6 +452,7 @@ gameslist p {
 
 table {
     width: 100%;
+    padding: 0.25em;
 }
 
 table th {
