@@ -22,7 +22,7 @@ exports.getGames = function (req, res, next) {
   var nowFormat = now.format(dateFormat) + '.427Z';
   var tillFormat = till.format(dateFormat) + '.427Z';
 
-  var limit = '12  ';
+  var limit = '12';
 
   // TODO -> FIX scores on games page not the same as score update page
   // example request: `https://api.leaguevine.com/v1/games/?tournament_id=20059&starts_before=2016-06-03T13%3A00%3A00.427144%2B00%3A00&starts_after=2016-06-03T06%3A00%3A00.427144%2B00%3A00&order_by=%5Bstart_time%5D&access_token=${acccessToken}`
@@ -46,6 +46,36 @@ exports.getGames = function (req, res, next) {
     .catch(function (err) {
       console.log('error getting GAMES', err);
     });
+}
+
+function requestSwissStandings (swissRounds , data , tournamentID , res) {
+  rp(`http://api.playwithlv.com/v1/swiss_rounds/?swiss_round_ids=%5B${swissRounds}%5D&access_token=`)
+    .then( function (body) {
+      var data = JSON.parse(body);
+      var swissStandings = data.objects[0];
+
+      return swissStandings
+    })
+    .then(function (swissStandings) {
+      var swissStandingsSort = swissStandings.standings.sort((a , b) =>
+      parseInt(b.ranking) > parseInt(a.ranking) ? -1 : 1)
+      .filter((team) => (team.ranking >= 1 && team.ranking <= 15)
+      );
+
+      gamesToDB(data.objects , tournamentID);
+
+      var tournamentName = data.objects.map(function(obj) {
+        return obj.tournament.name
+      }).filter(function(elem, pos , arr) {
+        return arr.indexOf(elem) == pos;
+      });
+
+      res.render('games', {
+        games: data.objects || {},
+        swiss: swissStandingsSort || {},
+        tournamentName
+      })
+    })
 }
 
 function requestSwissStandings (swissRounds , data , tournamentID , res) {
