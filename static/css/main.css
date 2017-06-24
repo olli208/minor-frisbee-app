@@ -168,6 +168,10 @@ nav li {
     align-items: center;
 }
 
+.header-section h1 {
+    color: #fff;
+}
+
 section .background {
     background: #fff;
     margin-bottom: 1.5em;
@@ -192,7 +196,11 @@ section .background {
     text-align: center;
     color: #fff;
     padding: 1em;
+}
 
+.section-select li a {
+    color: #fff;
+    text-decoration: none;
 }
 
 .section-select li.active {
@@ -449,10 +457,14 @@ gameslist p {
 /*
     Swiss score section
 */
+.swiss-standings {
+    padding: 0.5em;
+}
 
-table {
+.swiss-standings table {
     width: 100%;
     padding: 0.25em;
+    margin-bottom: 2em;
 }
 
 table th {
