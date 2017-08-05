@@ -6,30 +6,31 @@
     <h2><%= tournamentName%></h2>
   </div>
 
-  <div class="section-select boxshadow">
+  <div class="header-tabs">
     <ul>
-      <li><a href="#">GAMES</a></li>
-      <li class="active"><a href="#">RANKINGS</a></li>
+      <li class=""><a href="#">Games</a></li>
+      <li class="active"><a href="#">Rankings</a></li>
     </ul>
   </div>
 </header>
 
-<div class="division-tabs">
+<div class="division-select">
   <a href="/games"><button class="">Mixed</button></a>
   <a href="/games/19747"><button class="">Women</button></a>
   <a href="/games/19746"><button class="">Open</button></a>
 </div>
 
+<!-- Show pop up message after user updates game -->
 <% if(locals.flashes) { %>
-<% var categories =  Object.keys(locals.flashes)%>
-<% for (category in categories) { %>
-<%= category %>
-<% } %>
+  <% var categories =  Object.keys(locals.flashes)%>
+  <% for (category in categories) { %>
+    <%= category %>
+  <% } %>
 <% } %>
 
 <section>
 
-  <div class="swiss-standings">
+  <div class="swiss-standings boxshadow">
     <h2>Top <%= Object.keys(swiss).length %></h2>
     <table>
       <tr>

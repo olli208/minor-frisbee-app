@@ -179,11 +179,11 @@ section .background {
     padding: 0.2em;
 }
 
-.section-select {
+.header-menu {
     background: #12A6FF;
 }
 
-.section-select ul {
+.header-tabs ul {
     list-style: none;
     display: flex;
     justify-content: space-between;
@@ -191,30 +191,30 @@ section .background {
     padding: 0;
 }
 
-.section-select li {
+.header-tabs li {
     width: 50%;
     text-align: center;
     color: #fff;
     padding: 1em;
 }
 
-.section-select li a {
+.header-tabs li a {
     color: #fff;
     text-decoration: none;
+    text-transform: uppercase;
 }
 
-.section-select li.active {
+.header-tabs li.active {
     border-bottom: .3em solid #fff;
 }
 
-.division-tabs {
-    background: #fff;
+.division-select{
     display: flex;
     justify-content: space-around;
     padding: 0.5em 0;
 }
 
-.division-tabs button {
+.division-select button {
     padding: 0.65em 1.25em;
     border: 0;
     margin: 0.3em 0;
@@ -225,7 +225,7 @@ section .background {
     border: 0;
 }
 
-.division-tabs a button {
+.division-select a button {
     text-decoration: none;
     color: #fff;
 }
@@ -459,6 +459,8 @@ gameslist p {
 */
 .swiss-standings {
     padding: 0.5em;
+    background: white;
+    margin: 2em 0;
 }
 
 .swiss-standings table {
