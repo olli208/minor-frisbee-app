@@ -230,9 +230,15 @@ section .background {
     color: #fff;
 }
 
-/*
-    TEAM DETAIL PAGE
-*/
+.division-select a button.active {
+    background: #fff;
+    color: dodgerblue;
+    border: 1px solid dodgerblue;
+}
+
+    /*
+        TEAM DETAIL PAGE
+    */
 .team-header {
     background: dodgerblue;
     margin-bottom: 4em;

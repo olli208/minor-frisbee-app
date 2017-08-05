@@ -3,7 +3,7 @@
 <header class="boxshadow">
   <div class="header-section">
     <!--<button class="nav-btn"><span>menu</span></button>-->
-    <h2><%= tournamentName%></h2>
+    <h2><%= tournamentLong %></h2>
   </div>
 
   <div class="header-tabs">
@@ -15,10 +15,11 @@
 </header>
 
 <div class="division-select">
-  <a href="/games"><button class="">Mixed</button></a>
-  <a href="/games/19747"><button class="">Women</button></a>
-  <a href="/games/19746"><button class="">Open</button></a>
+  <a href="/games"><button <% if(tournamentShort === 'Mixed') { %> class="active" <% } %>>Mixed</button></a>
+  <a href="/games/19747"><button <% if(tournamentShort === 'Women') { %> class="active" <% } %>>Women</button></a>
+  <a href="/games/19746"><button  <% if(tournamentShort === 'Open') { %> class="active" <% } %>>Open</button></a>
 </div>
+
 
 <!-- Show pop up message after user updates game -->
 <% if(locals.flashes) { %>

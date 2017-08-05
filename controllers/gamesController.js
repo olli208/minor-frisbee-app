@@ -70,10 +70,17 @@ function requestSwissStandings (swissRounds , data , tournamentID , res) {
         return arr.indexOf(elem) == pos;
       });
 
+      function tournamentNameShort(name) {
+        console.log(name[0])
+        var n = name[0].split(" ");
+        return n[n.length - 1];
+      }
+
       res.render('games', {
         games: data.objects || {},
         swiss: swissStandingsSort || {},
-        tournamentName
+        tournamentLong: tournamentName,
+        tournamentShort: tournamentNameShort(tournamentName)
       })
     })
     .catch(function (err) {
