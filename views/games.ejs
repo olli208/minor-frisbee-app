@@ -21,10 +21,12 @@
 
 <!-- Show pop up message after user updates game -->
 <% if(locals.flashes) { %>
-  <% var categories =  Object.keys(locals.flashes)%>
-  <% for (category in categories) { %>
-    <%= category %>
-  <% } %>
+  <% var categories =  Object.keys(flashes); %>
+  <% categories.forEach( function (cat) { %>
+    <% flashes[cat].forEach(message => { %>
+      <h1> <%= message %> </h1>
+    <% }) %>
+  <% }) %>
 <% } %>
 
 <section class="team-games">
@@ -34,8 +36,11 @@
       <li class="boxshadow">
         <p class="tournament-info">ROUND <%= obj.swiss_round.round_number %> - @<%= obj.tournament.name %></p>
         <a href="/update/<%= obj.id %>">
+
           <div class="team1">
-            <h3><%= obj.team_1.short_name %></h3>
+            <h3 <% winners.forEach( function(winner) { if (winner.short_name === obj.team_1.short_name) { %> class="game-winner" <% }}) %>>
+              <%= obj.team_1.short_name %>
+            </h3>
             <h4><span><%= obj.team_1_score %></span></h4>
           </div>
 
@@ -45,14 +50,18 @@
           </div>
 
           <div class="team2">
-            <h3><%= obj.team_2.short_name %></h3>
+            <h3 <% winners.forEach( function(winner) { if (winner.short_name === obj.team_2.short_name) { %> class="game-winner" <% }}) %>>
+              <%= obj.team_2.short_name %>
+            </h3>
             <h4><span><%= obj.team_2_score %></span></h4>
           </div>
+
         </a>
         <p class="game-location"><%= obj.game_site.name %></p>
       </li>
       <% }) %>
     </ul>
+
 </section>
 
 <% include partials/footer.ejs %>

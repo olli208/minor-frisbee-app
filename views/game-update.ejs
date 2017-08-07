@@ -1,11 +1,8 @@
 <% include partials/head.ejs %>
 
-<header class="">
-  <div class="background"></div>
+<header class="boxshadow">
   <div class="header-section">
-    <!--<button class="nav-btn"><span>menu</span></button>-->
-    <button class=""><a href="/games"><</a></button>
-    <h1>update game</h1>
+    <h2>update game score</h2>
   </div>
 </header>
 
@@ -28,12 +25,12 @@
     <fieldset class="score-info">
       <label for="scorer">
         scorer:
-        <input type="text" name="scorer">
+        <input type="text" name="scorer" placeholder="Who scored?">
       </label>
 
       <label for="assist">
         assist by:
-        <input type="text" name="assist">
+        <input type="text" name="assist" placeholder="Who gave the pass?">
       </label>
 
       <label for="final-score">
@@ -43,7 +40,8 @@
 
       <input type="hidden" name="game_id" value="<%= game.game.id %>">
 
-      <input type="submit" value="update score">
+      <input type="submit" value="update score" class="action-button">
+      <button class="action-button cancel-update"><a href="/games">CANCEL</a></button>
     </fieldset>
 
   </form>

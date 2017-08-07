@@ -5,11 +5,11 @@ var Game = mongoose.model('Game');
 
 var dateFormat = 'YYYY-MM-DDTHH:mm:ss';
 
-exports.getGames = function (req, res, next) {
+exports.getGames = function (req, res) {
   var tournamentID;
   if (req.params.id === undefined) {
     tournamentID = '19750';
-  } else if (req.params.id !='undefined') {
+  } else if (req.params.id != 'undefined') {
     tournamentID = req.params.id;
   }
 
@@ -17,12 +17,12 @@ exports.getGames = function (req, res, next) {
 
   // ! playwithlv api doesnt have 2017 games so we will have to hard code the dates from 2015.
   var now = moment('2015-06-12T09:00:00.427144+02:00');
-  var till = moment(now).add(3, 'h');
+  var till = moment(now).add(2, 'h');
 
   var nowFormat = now.format(dateFormat) + '.427Z';
   var tillFormat = till.format(dateFormat) + '.427Z';
 
-  var limit = '12';
+  var limit = '15';
 
   // TODO -> FIX scores on games page not the same as score update page
   // example request: `https://api.leaguevine.com/v1/games/?tournament_id=20059&starts_before=2016-06-03T13%3A00%3A00.427144%2B00%3A00&starts_after=2016-06-03T06%3A00%3A00.427144%2B00%3A00&order_by=%5Bstart_time%5D&access_token=${acccessToken}`
@@ -45,13 +45,23 @@ exports.getGames = function (req, res, next) {
         return arr.indexOf(elem) == pos;
       });
 
+      var winners = []
+
+      data.objects.forEach(function(obj) {
+        winners.push(obj.winner)
+      })
+
+      console.log(data.objects)
+
       gamesToDB(data.objects , tournamentID);
 
       res.render('games', {
         games: data.objects || {},
         tournamentLong: tournamentName,
-        tournamentShort: tournamentNameShort(tournamentName)
+        tournamentShort: tournamentNameShort(tournamentName),
+        winners
       })
+
     })
     .catch(function (err) {
       console.log('error getting GAMES', err);

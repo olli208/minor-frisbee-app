@@ -51,8 +51,37 @@ input {
     border: 1px solid rgba(0,0,0,0.3);
 }
 
+/* Standard styling of basic stuff*/
 .boxshadow {
     box-shadow: 0 1px 0 0 rgba(0,0,0,0.3);
+}
+
+.submit-button {
+    display: block;
+    padding: 1em 1.5em;
+    background: #42A5F5;
+    border: 0;
+    border-radius: 500px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 1em 0;
+}
+
+.action-button {
+    padding: 1em 1.5em;
+    margin: 1em 0;
+    background: #2196F3;
+    border: 0;
+    border-radius: 500px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.action-button a {
+    padding: 1em 1.5em;
+    text-decoration: none;
+    color: #fff;
 }
 
 @media (min-width: 40em) {
@@ -108,22 +137,6 @@ body {
 
 .intro {
     min-height: 100vh;
-}
-
-.action-button {
-    padding: 1em 1.5em;
-    margin: 1em 0;
-    background: #2196F3;
-    border: 0;
-    border-radius: 500px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-.action-button a {
-    padding: 1em 1.5em;
-    text-decoration: none;
-    color: #fff;
 }
 
 header section{
@@ -263,16 +276,12 @@ header h2 {
 /*
     Update game page (Score)
 */
-.scoreboard {
-
-}
-
 .scoreboard input[type="button"] {
     width: 100%;
     border: 0;
     margin: 0;
     background: coral;
-    height: 2em;
+    height: 2.75em;
     color: #fff;
     font-weight: 700;
     box-shadow: 0 2px 0 0 rgba(0,0,0,0.1);
@@ -296,20 +305,8 @@ label[for="team1_score"], label[for="team2_score"] {
     display: inline-block;
 }
 
-.form-scoreboard {
-    background: #fff;
-    width: 95%;
-    margin: 0 auto;
-}
-
-.form-scoreboard fieldset {
-    box-shadow: 0 2px 0 0 rgba(0,0,0,0.1);
-}
-
 .form-scoreboard fieldset:last-child {
-    border: 0;
-    box-shadow: none;
-    margin-bottom: 5em;
+    background: #fff;
 }
 
 .score-info input {
@@ -317,7 +314,8 @@ label[for="team1_score"], label[for="team2_score"] {
 }
 
 fieldset {
-    border: 1px solid rgba(0,0,0,0.1);
+    border: none;
+    padding: 0.5em;
 }
 
 .score-info {
@@ -328,16 +326,27 @@ fieldset {
     margin: 0.5em 0;
 }
 
+.score-info input:not([type="checkbox"]) {
+    margin: 0.5em 0;
+    width: 100%;
+}
+
+.score-info input[type="text"], input[type="checkbox"]{
+    margin-bottom: 1.5em;
+    padding: 0.5em;
+}
+
 input[type="submit"] {
-    display: block;
-    padding: 1em 1.5em;
-    background: #42A5F5;
-    border: 0;
-    border-radius: 500px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
     color: #fff;
-    margin: 1em 0;
+}
+
+.cancel-update {
+    background: #fff;
+    border:1px solid #12A6FF;
+}
+
+.cancel-update a {
+    color: #12A6FF;
 }
 
 /*
@@ -439,10 +448,15 @@ gameslist p {
     height: 3em;
     overflow-wrap: break-word;
     word-wrap: break-word;
+    font-weight: 400;
 }
 
 .gameslist .team1 {
     text-align: right;
+}
+
+.game-winner {
+    font-weight: 700!important;
 }
 
 /*
