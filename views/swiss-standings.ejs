@@ -1,16 +1,29 @@
 <% include partials/head.ejs %>
 
-<header class="">
-  <div class="background"></div>
+<header class="boxshadow">
   <div class="header-section">
-      <!--<button class="nav-btn"><span>menu</span></button>-->
-    <!--<button class="action-button"><a href="/games"><</a></button>-->
-    <h1>Power Rankings</h1>
+    <!--<button class="nav-btn"><span>menu</span></button>-->
+    <h2><%= tournamentLong %></h2>
+  </div>
+
+  <div class="header-tabs">
+    <ul>
+      <li class=""><a href="/games">Games</a></li>
+      <li class="active"><a href="/swiss-standings/<%= games[0].swiss_round_id %>">Rankings</a></li>
+    </ul>
   </div>
 </header>
 
+ <!--TODO get round id from other divisions-->
+ <!-- or else remove this part-->
+<!--<div class="division-select">-->
+  <!--<a href="/swiss-standings/<%= round_id %>"><button <% if(tournamentShort === 'Mixed') { %> class="active" <% } %>>Mixed</button></a>-->
+  <!--<a href="#"><button <% if(tournamentShort === 'Women') { %> class="active" <% } %>>Women</button></a>-->
+  <!--<a href="#"><button  <% if(tournamentShort === 'Open') { %> class="active" <% } %>>Open</button></a>-->
+<!--</div>-->
+
 <section class="swiss-standings">
-  <h2>SWISS ROUND <%= round_number %></h2>
+  <h2>SWISS ROUND <%= round_number %> - <%= tournamentShort %></h2>
   <p>Last updated: <%= h.moment(lastUpdate) %></p>
   <table>
     <tr>

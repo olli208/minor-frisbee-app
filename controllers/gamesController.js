@@ -37,90 +37,31 @@ exports.getGames = function (req, res, next) {
         return arr.indexOf(elem) == pos;
       });
 
-      console.log('SWISS ROUNDS ->', swissRounds)
+      console.log('SWISS ROUNDS ->', swissRounds) // check to see which round are included in this request
 
-      var getSwissStandings = requestSwissStandings(swissRounds , data , tournamentID , res)
+      var tournamentName = data.objects.map(function(obj) {
+        return obj.tournament.name
+      }).filter(function(elem, pos, arr) {
+        return arr.indexOf(elem) == pos;
+      });
 
-      return getSwissStandings
+      gamesToDB(data.objects , tournamentID);
+
+      res.render('games', {
+        games: data.objects || {},
+        tournamentLong: tournamentName,
+        tournamentShort: tournamentNameShort(tournamentName)
+      })
     })
     .catch(function (err) {
       console.log('error getting GAMES', err);
     });
 }
 
-function requestSwissStandings (swissRounds , data , tournamentID , res) {
-  rp(`http://api.playwithlv.com/v1/swiss_rounds/?swiss_round_ids=%5B${swissRounds}%5D&access_token=`)
-    .then( function (body) {
-      var data = JSON.parse(body);
-      var swissStandings = data.objects[0];
-
-      return swissStandings
-    })
-    .then(function (swissStandings) {
-      var swissStandingsSort = swissStandings.standings.sort((a , b) =>
-      parseInt(b.ranking) > parseInt(a.ranking) ? -1 : 1)
-      .filter((team) => (team.ranking >= 1 && team.ranking <= 15)
-      );
-
-      gamesToDB(data.objects , tournamentID);
-
-      var tournamentName = data.objects.map(function(obj) {
-        return obj.tournament.name
-      }).filter(function(elem, pos , arr) {
-        return arr.indexOf(elem) == pos;
-      });
-
-      function tournamentNameShort(name) {
-        console.log(name[0])
-        var n = name[0].split(" ");
-        return n[n.length - 1];
-      }
-
-      res.render('games', {
-        games: data.objects || {},
-        swiss: swissStandingsSort || {},
-        tournamentLong: tournamentName,
-        tournamentShort: tournamentNameShort(tournamentName)
-      })
-    })
-    .catch(function (err) {
-      console.log('error getting SWISS STANDINGS on GAMES page', err);
-    });
+function tournamentNameShort(name) {
+  var n = name[0].split(" ");
+  return n[n.length - 1];
 }
-
-// function requestSwissStandings (swissRounds , data , tournamentID , res) {
-//   rp(`http://api.playwithlv.com/v1/swiss_rounds/?swiss_round_ids=%5B${swissRounds}%5D&access_token=`)
-//     .then( function (body) {
-//       var data = JSON.parse(body);
-//       var swissStandings = data.objects[0];
-//
-//       return swissStandings
-//     })
-//     .then(function (swissStandings) {
-//       var swissStandingsSort = swissStandings.standings.sort((a , b) =>
-//       parseInt(b.ranking) > parseInt(a.ranking) ? -1 : 1)
-//       .filter((team) => (team.ranking >= 1 && team.ranking <= 15)
-//       );
-//
-//       gamesToDB(data.objects , tournamentID);
-//
-//       var tournamentName = data.objects.map(function(obj) {
-//         return obj.tournament.name
-//       }).filter(function(elem, pos , arr) {
-//         return arr.indexOf(elem) == pos;
-//       });
-//
-//       res.render('games', {
-//         games: data.objects || {},
-//         swiss: swissStandingsSort || {},
-//         tournamentName
-//       });
-//
-//     })
-//     .catch(function (err) {
-//       console.log('error getting SWISS STANDINGS on GAMES page', err);
-//     });
-// }
 
 function gamesToDB (games, tournamentID) {
   games.forEach(function (obj) {
