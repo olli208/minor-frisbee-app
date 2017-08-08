@@ -57,7 +57,9 @@
           </div>
 
         </a>
+        <% if (obj.obj.game_site.name) { %>
         <p class="game-location"><%= obj.game_site.name %></p>
+        <% } %>
       </li>
       <% }) %>
     </ul>

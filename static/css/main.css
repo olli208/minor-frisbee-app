@@ -451,6 +451,10 @@ gameslist p {
     font-weight: 400;
 }
 
+.gamelist__teampage .team1 h3 , .team2 h3 {
+    min-height: 4.5em;
+}
+
 .gameslist .team1 {
     text-align: right;
 }

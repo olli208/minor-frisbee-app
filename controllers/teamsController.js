@@ -12,7 +12,6 @@ exports.getTeamDetail = function (req, res) {
 
       games
         .then(function(games){
-          // console.log(`games from DB -> ${games}`);
           res.render('teams-detail', {
                     data: teamData || {},
                     games: games || {}

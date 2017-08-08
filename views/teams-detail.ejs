@@ -32,27 +32,24 @@
 <section>
   <div class="background team-games">
     <h2>Games Played</h2>
-    <ul class="gameslist">
+    <ul class="gameslist gamelist__teampage">
       <% games.forEach(function (obj) { %>
       <li>
         <p class="tournament-info">ROUND <%= obj.swissRoundNumber %> - @<%= obj.tournamentStyle %></p>
         <a href="#">
           <div class="team1">
-            <h4><span><%= obj.team_1.score %></span></h4>
             <h3><%= obj.team_1.name %></h3>
+            <h4><span><%= obj.team_1.score %></span></h4>
           </div>
 
           <div class="info">
             <p> <b><%= h.moment(obj.startTime).format('dddd Do') %></b></p>
             <p> <b><%= new Date(obj.startTime).toString().substr(15,6) %></b></p>
-            <% if (obj.gameSite) { %>
-            <p><%= obj.gameSite %></p>
-            <% } %>
           </div>
 
           <div class="team2">
-            <h4><span><%= obj.team_2.score %></span></h4>
             <h3><%= obj.team_2.name %></h3>
+            <h4><span><%= obj.team_2.score %></span></h4>
           </div>
         </a>
       </li>
@@ -60,6 +57,5 @@
     </ul>
   </div>
 </section>
-
 
 <% include partials/footer.ejs %>
