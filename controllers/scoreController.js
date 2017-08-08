@@ -47,12 +47,14 @@ function postUpdate (req, res) {
     var scorer = req.body.scorer;
     var assist = req.body.assist;
     var gameID = req.body.game_id;
+    var team1 = req.body.team_1;
+    var team2 = req.body.team_2;
 
     var score = {
       'game_id': gameID,
       'team_1_score': team1_score,
       'team_2_score': team2_score,
-      // 'what_happened': `scorer: ${scorer} , assist: ${assist}`,
+      'what_happened': `scorer: ${scorer} , assist: ${assist}`,
       'is_final': 'False'
     };
 
@@ -66,12 +68,12 @@ function postUpdate (req, res) {
     }, function (err, response, body) {
       console.log(body);
 
-      storeToDB(team1_score, team2_score, gameID , req, res)
+      storeToDB(team1, team1_score, team2, team2_score, gameID , req, res)
     });
   }
 }
 
-function storeToDB (team1_score, team2_score, gameID, req, res ) {
+function storeToDB (team1, team1_score, team2, team2_score, gameID, req, res ) {
   var scoreUpdate = {
     team_1: {score: team1_score},
     team_2: {score: team2_score}
@@ -85,7 +87,7 @@ function storeToDB (team1_score, team2_score, gameID, req, res ) {
   game
     .then(function(game){
       console.log(`games from DB -> ${game}`);
-      req.flash('success', 'SCORE HAS BEEN UPDATED');
+      req.flash('success', `Score updated ${team1} (${team1_score}) - (${team2_score}) ${team2} `);
       res.redirect('/games');
     })
     .catch(function(err) {

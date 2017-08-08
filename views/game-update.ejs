@@ -39,6 +39,8 @@
       </label>
 
       <input type="hidden" name="game_id" value="<%= game.game.id %>">
+      <input type="hidden" name="team_1" value="<%= game.team_1.short_name %>">
+      <input type="hidden" name="team_2" value="<%= game.team_2.short_name %>">
 
       <input type="submit" value="update score" class="action-button">
       <button class="action-button cancel-update"><a href="/games">CANCEL</a></button>
