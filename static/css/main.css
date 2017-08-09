@@ -377,12 +377,12 @@ gamelist li a {
 }
 
 .tournament-info {
-    background: #42A5F5;
-    color: #fff;
     padding: 0.5em;
     margin-top:0;
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
+    color: #42A5F5;
+    font-weight: 700;
 }
 
 .game-location {
@@ -444,14 +444,16 @@ gameslist p {
     width: 7em;
 }
 
-.gameslist .team1 h3, .team2 h3 {
+.gameslist .team1 h3 , .team2 h3 {
+    margin: 0 0;
     height: 3em;
     overflow-wrap: break-word;
     word-wrap: break-word;
     font-weight: 400;
 }
 
-.gamelist__teampage .team1 h3 , .team2 h3 {
+.gamelist__teampage .team1 h3 ,
+.gamelist__teampage .team2 h3 {
     min-height: 4.5em;
 }
 
