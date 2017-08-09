@@ -9,13 +9,17 @@ The core of the app is updating the score of games. Right now at Windmill tourna
 
 After beeing there myself as a complete "Ultimate Frisbee Noob", I had ideas on how to improve the experience for people who don't know the teams, but want to see exiting games. Luckily Leaguevine gives people the option to keep track of Swiss Points. What are Swiss Points? [HERE](https://www.leaguevine.com/blog/134/power-rankings-in-ultimate/) is a link that explains what is exactly. The TL:DR is that you can realy see what teams are performing the best at a tournament, thanks to handy algorithms that gives and removes Swiss Points depending on performance against each other.
 
+Within the app you are able to see the current rankings. From there you will be able to click on a team and see their games played and games they are playing next.
+
 ### Features
-With the app you can see who, where, which round, the teams are playing. You can see the current score and see the Swiss Standings from within the app. You can see each team page to learn a bit more about them, like where they are from, their form, etc.
+With the app you can see who, where, which round, the teams are playing. You can see the current score and see the Swiss Standings from within the app. You can see each team page to learn a bit more about them, like where they are from, their form, games etc.
 
 Besides updating the score of a game, user can see the power rankings from within the app. When a user visits the page, all games are loaded based on the current time. There are alot of games during the tournament, so each tournament division has their own page with power rankings. So you have the page for Womens, Open, and Mixed. 
 
+When the tournament is live and you use the app, it loads the games based on the time and date, so users are getting the most current games. These games are send to my own database, so when a user visits a team page, the games that they already played can be loaded from the database. Therefore the user doesn't have to make a new request for data that we already have loaded.
+
 ### Tools
-This is a nodejs app using express. MongoDB is used for storing games. When a user visits a page of a team, the games that the team already played will be shown there. The app is using data from Leaguevine API. Below are the packages I use:
+This is a nodejs app using express. MongoDB is used for storing games. The app is using data from Leaguevine API. Below are the packages I use:
 ```
     "body-parser": "^1.17.2",
     "compression": "^1.6.2",
