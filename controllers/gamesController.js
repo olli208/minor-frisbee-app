@@ -13,8 +13,6 @@ exports.getGames = function (req, res) {
     tournamentID = req.params.id;
   }
 
-  console.log('ACCESTOKEN?:' , req.session.accessToken);
-
   // ! playwithlv api doesnt have 2017 games so we will have to hard code the dates from 2015.
   var now = moment('2015-06-12T08:00:00.427144+02:00');
   var till = moment(now).add(2, 'h');

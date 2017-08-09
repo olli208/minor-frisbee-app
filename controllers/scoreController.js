@@ -18,8 +18,6 @@ exports.updateScore = function (req, res) {
       var lastUpdate = moment(dataObj.time_last_updated).format(dateFormat + '.427Z')
 
       console.log('TIJD VAN API ->' , lastUpdate); // TODO -> better solution for the time check.
-      // console.log(dataObj.team_1_score);
-      // console.log(dataObj.team_2_score);
 
       // 1. Compare time stamps of both
       if (timeOfUpdate > lastUpdate) {
@@ -32,7 +30,6 @@ exports.updateScore = function (req, res) {
         req.flash('warning' , 'SCORE HAS ALREADY BEEN UPDATED');
         res.redirect('/games');
       }
-
   })
 
   delete req.session.gameID;
@@ -87,6 +84,7 @@ function storeToDB (team1, team1_score, team2, team2_score, gameID, req, res ) {
   game
     .then(function(game){
       console.log(`games from DB -> ${game}`);
+
       req.flash('success', `Score updated ${team1} (${team1_score}) - (${team2_score}) ${team2} `);
       res.redirect('/games');
     })

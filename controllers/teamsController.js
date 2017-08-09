@@ -1,9 +1,6 @@
 var rp = require('request-promise');
 var mongoose = require('mongoose');
-var moment = require('moment');
 var Game = mongoose.model('Game');
-
-var dateFormat = 'YYYY-MM-DDTHH:mm:ss';
 
 exports.getTeamDetail = function (req, res) {
   rp(`http://api.playwithlv.com/v1/teams/${req.params.id}/?access_token=${req.session.accessToken}`)
@@ -22,17 +19,9 @@ exports.getTeamDetail = function (req, res) {
             return obj.tournamentID
           })
 
-          console.log(typeof parseInt(tournamentIDS[0]))
-          console.log(typeof teamData.id)
-
-          //add in rp : tournament_id=${tournamentIDS}
-          // v1/games/?tournament_id=19750&team_ids=%5B27744%5D&access_token=5195402a59
-
           rp(`http://api.playwithlv.com/v1/games/?tournament_id=${parseInt(tournamentIDS[0])}&team_ids=%5B${teamData.id}%5D&starts_after=${lastGame.toISOString()}&access_token=${req.session.accessToken}`)
             .then(function (body) {
               var nextGames = JSON.parse(body);
-
-              console.log(nextGames.objects)
 
               res.render('teams-detail', {
                 data: teamData || {},
