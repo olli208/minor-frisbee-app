@@ -18,7 +18,17 @@ exports.getTeamDetail = function (req, res) {
             return e.startTime
           })));
 
-          rp(`http://api.playwithlv.com/v1/games/?%5B${teamData.id}%5D&starts_after=${lastGame.toISOString()}&access_token=${req.session.accessToken}`)
+          var tournamentIDS = games.map(function (obj) {
+            return obj.tournamentID
+          })
+
+          console.log(typeof parseInt(tournamentIDS[0]))
+          console.log(typeof teamData.id)
+
+          //add in rp : tournament_id=${tournamentIDS}
+          // v1/games/?tournament_id=19750&team_ids=%5B27744%5D&access_token=5195402a59
+
+          rp(`http://api.playwithlv.com/v1/games/?tournament_id=${parseInt(tournamentIDS[0])}&team_ids=%5B${teamData.id}%5D&starts_after=${lastGame.toISOString()}&access_token=${req.session.accessToken}`)
             .then(function (body) {
               var nextGames = JSON.parse(body);
 
