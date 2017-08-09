@@ -1,19 +1,23 @@
 (function () {
   "use strict"
 
-  function addScore () {
-    if (document.getElementById('score-team1')) {
-      document.querySelectorAll('.scoreboard input').forEach(function (el) {
-        el.addEventListener('click', update);
-      });
-    }
-  }
+  var score = {
+    add: function () {
+      var local = score;
 
-  function update (e) {
-    var scoreBoard1 = document.getElementById('score-team1');
-    var scoreBoard2 = document.getElementById('score-team2');
-    var scoreTeam1 = parseInt(scoreBoard1.value);
-    var scoreTeam2 = parseInt(scoreBoard2.value);
+      if (document.getElementById('score-team1')) {
+        var elem = document.querySelectorAll('.scoreboard input')
+        
+        for (var i = 0; i < elem.length; i++) {
+          elem[i].addEventListener('click', local.update);
+        };
+      }
+    },
+    update: function (e) {
+      var scoreBoard1 = document.getElementById('score-team1');
+      var scoreBoard2 = document.getElementById('score-team2');
+      var scoreTeam1 = parseInt(scoreBoard1.value);
+      var scoreTeam2 = parseInt(scoreBoard2.value);
 
     if (e.target.type === 'button') {
       if (e.target.name === 'team1') {
@@ -28,7 +32,8 @@
       }
     }
   }
+}
 
-  addScore()
+score.add();
 
 })();
