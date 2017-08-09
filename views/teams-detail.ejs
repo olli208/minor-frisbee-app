@@ -62,32 +62,30 @@
   <div class="background team-games">
     <h2>Next game</h2>
     <ul class="gameslist">
-      <% next.forEach(function (obj) { %>
       <li class="boxshadow">
-        <p class="tournament-info">ROUND <%= obj.pool_round_id %> - @<%= obj.tournament.name %></p>
-        <a href="/update/<%= obj.id %>">
+        <p class="tournament-info">ROUND <%= next.pool_round_ID  %> - @<%= next.tournament.name %></p>
+        <a href="/update/<%= next.id %>">
 
           <div class="team1">
-            <h3> <%= obj.team_1.short_name %> </h3>
-            <h4><span><%= obj.team_1_score %></span></h4>
+            <h3> <%= next.team_1.short_name %> </h3>
+            <h4><span><%= next.team_1_score %></span></h4>
           </div>
 
           <div class="info">
-            <p> <b><%= h.moment(obj.start_time).format('dddd Do') %></b></p>
-            <p> <b><%= new Date(obj.start_time).toString().substr(15,6) %></b></p>
+            <p> <b><%= h.moment(next.start_time).format('dddd Do') %></b></p>
+            <p> <b><%= new Date(next.start_time).toString().substr(15,6) %></b></p>
           </div>
 
           <div class="team2">
-            <h3> <%= obj.team_2.short_name %></h3>
-            <h4><span><%= obj.team_2_score %></span></h4>
+            <h3> <%= next.team_2.short_name %></h3>
+            <h4><span><%= next.team_2_score %></span></h4>
           </div>
 
         </a>
-        <% if (obj.game_site) { %>
-        <p class="game-location"><%= obj.game_site.name %></p>
+        <% if (next.game_site) { %>
+        <p class="game-location"><%= next.game_site.name %></p>
         <% } %>
       </li>
-      <% }) %>
     </ul>
   </div>
 </section>
