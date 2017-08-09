@@ -23,8 +23,6 @@ exports.getTeamDetail = function (req, res) {
             .then(function (body) {
               var nextGames = JSON.parse(body);
 
-              console.log(nextGames.objects[0])
-
               res.render('teams-detail', {
                 data: teamData || {},
                 games: games || {},
