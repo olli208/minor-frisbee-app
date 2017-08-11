@@ -352,6 +352,34 @@ input[type="submit"] {
 /*
     Games Page
 */
+.flash-message {
+    position: relative;
+    border: 1px solid #fff;
+    background: #FF8A65;
+    padding: 0.5em;
+}
+
+.flash-message > p {
+    color: #fff;
+    margin-bottom: 2em;
+}
+
+.flash-message .close {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border: 0;
+    background: #FF8A65;
+    padding: 1em 0.5em;
+    color: #fff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.closed {
+    display: none
+}
+
 .gameslist {
     box-sizing: border-box;
     margin-bottom: 2em;

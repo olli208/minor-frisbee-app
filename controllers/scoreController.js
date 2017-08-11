@@ -85,7 +85,7 @@ function storeToDB (team1, team1_score, team2, team2_score, gameID, req, res ) {
     .then(function(game){
       console.log(`games from DB -> ${game}`);
 
-      req.flash('success', `Score updated ${team1} (${team1_score}) - (${team2_score}) ${team2} `);
+      req.flash('success', `${team1} (${team1_score}) - (${team2_score}) ${team2} `);
       res.redirect('/games');
     })
     .catch(function(err) {

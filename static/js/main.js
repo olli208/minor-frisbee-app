@@ -1,15 +1,22 @@
 (function () {
   "use strict"
 
+  var app = {
+    init: function() {
+      score.add();
+      flashMessage.close();
+    }
+  }
+
   var score = {
     add: function () {
-      var local = score;
+      var self = this;
 
       if (document.getElementById('score-team1')) {
         var elem = document.querySelectorAll('.scoreboard input')
         
         for (var i = 0; i < elem.length; i++) {
-          elem[i].addEventListener('click', local.update);
+          elem[i].addEventListener('click', self.update);
         };
       }
     },
@@ -34,6 +41,21 @@
   }
 }
 
-score.add();
+var flashMessage = {
+  close: function() {
+    var self = this;
+
+    var elem = document.getElementsByClassName('close');
+    
+    for (var i = 0; i < elem.length; i++) {
+      elem[i].addEventListener('click', function(e){
+        e.target.parentNode.className += " closed";
+      });
+    };
+
+  }
+} 
+
+app.init();
 
 })();

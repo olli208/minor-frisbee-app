@@ -22,9 +22,13 @@
 <!-- Show pop up message after user updates game -->
 <% if(locals.flashes) { %>
   <% var categories =  Object.keys(flashes); %>
-  <% categories.forEach( function (cat) { %>
+  <% categories.forEach(function (cat) { %>
     <% flashes[cat].forEach(message => { %>
-      <h1> <%= message %> </h1>
+      <div class="flash-message boxshadow"> 
+        <button class="close">close</button>
+        <h2>Score Updated!</h2>
+        <p><%= message %></p> 
+      </div>
     <% }) %>
   <% }) %>
 <% } %>
