@@ -76,9 +76,7 @@ input {
     border-radius: 500px;
     letter-spacing: 2px;
     text-transform: uppercase;
-}
 
-.action-button a {
     padding: 1em 1.5em;
     text-decoration: none;
     color: #fff;
@@ -343,9 +341,6 @@ input[type="submit"] {
 .cancel-update {
     background: #fff;
     border:1px solid #12A6FF;
-}
-
-.cancel-update a {
     color: #12A6FF;
 }
 
@@ -364,7 +359,7 @@ input[type="submit"] {
     margin-bottom: 2em;
 }
 
-.flash-message .close {
+.flash-message #close-message {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -498,7 +493,6 @@ gameslist p {
 */
 .swiss-standings {
     padding: 0.5em;
-    margin: 2em 0;
 }
 
 .swiss-standings table {

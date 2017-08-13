@@ -14,7 +14,7 @@ exports.getGames = function (req, res) {
   }
 
   // ! playwithlv api doesnt have 2017 games so we will have to hard code the dates from 2015.
-  var now = moment('2015-06-12T08:00:00.427144+02:00');
+  var now = moment('2015-06-12T08:30:00.427144+02:00');
   var till = moment(now).add(2, 'h');
 
   var nowFormat = now.format(dateFormat) + '.427Z';
@@ -29,7 +29,7 @@ exports.getGames = function (req, res) {
       req.session.returnTo = req.path;
       var data = JSON.parse(body);
 
-      var swissRounds = data.objects.map(function (obj) {
+      var swissRounds = data.objects.map(function(obj) {
         return obj.swiss_round_id
       }).filter(function (elem, pos, arr) {
         return arr.indexOf(elem) == pos;
@@ -98,7 +98,7 @@ function gamesToDB (games, tournamentID) {
         console.log('SUCCESS!! NEW DATA ADDED!')
       })
       .catch(function (err) {
-        console.log(`ADDING TO DB ERROR -> ${err}`)
+        // console.log(`ADDING TO DB ERROR -> ${err}`)
       })
   })
 }

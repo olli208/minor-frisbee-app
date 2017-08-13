@@ -25,7 +25,7 @@
   <% categories.forEach(function (cat) { %>
     <% flashes[cat].forEach(message => { %>
       <div class="flash-message boxshadow"> 
-        <button class="close">close</button>
+        <button id="close-message">close</button>
         <h2>Score Updated!</h2>
         <p><%= message %></p> 
       </div>
@@ -39,10 +39,10 @@
       <% games.forEach(function (obj) { %>
       <li class="boxshadow">
         <p class="tournament-info">ROUND <%= obj.swiss_round.round_number %> - @<%= obj.tournament.name %></p>
-        <a href="/update/<%= obj.id %>">
+        <a href="/update/<%= obj.id %>" class="game" id="<%= obj.id %>">
 
           <div class="team1">
-            <h3 <% winners.forEach( function(winner) { if (winner.short_name === obj.team_1.short_name) { %> class="game-winner" <% }}) %>>
+            <h3 <% winners.forEach( function(winner) { if (winner.short_name === obj.team_1.short_name) { %> class="game-winner" <% }}) %> >
               <%= obj.team_1.short_name %>
             </h3>
             <h4><span><%= obj.team_1_score %></span></h4>
