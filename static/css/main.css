@@ -316,10 +316,6 @@ fieldset {
     padding: 0.5em;
 }
 
-.score-info {
-    margin: 0.5em 0;
-}
-
 .score-info input {
     margin: 0.5em 0;
 }
@@ -338,10 +334,17 @@ input[type="submit"] {
     color: #fff;
 }
 
+.cancel {
+    margin: 0;
+    background: #fff;
+    padding: 0.5em;
+}
+
 .cancel-update {
     background: #fff;
     border:1px solid #12A6FF;
     color: #12A6FF;
+    margin: 0;
 }
 
 /*

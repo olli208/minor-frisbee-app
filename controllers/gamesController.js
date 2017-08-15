@@ -126,7 +126,10 @@ exports.gameUpdate = function (req, res) {
       var data = JSON.parse(body);
 
       req.session.returnTo = req.path;
-      res.render('game-update' , {game: data.objects[0] || 'No game found' });
+      res.render('game-update' , {
+        game: data.objects[0] || 'No game found' 
+      });
+      
     })
     .catch(function (err) {
       console.log('error UPDATING GAME');
