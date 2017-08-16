@@ -1,6 +1,6 @@
 # ultimate frisbee app
 
-## (LINK(Work In Progress))[https://shielded-fortress-32511.herokuapp.com/]
+## [LINK (Work In Progress)](https://shielded-fortress-32511.herokuapp.com/)
 
 ## About
 This is an app for keeping the score in Windmill, an ultimate frisbee tournament in Amsterdam. Teams can use this app to update their scores, see their matches, and publish the end results of their match. People can see an overview of games during the [Windmill Tournament](http://windmilltournament.com). Using this app users can log in to Leaguevine to update scores directly from within the app.
@@ -60,12 +60,15 @@ From the root of the directory run
 npm install
 ```
 
-Then add these to the server.js file in the root of the project. You can get them [here (leaguevine)](https://www.leaguevine.com/docs/api/) for regular leaguevine or [here (playwithlv)[(http://www.playwithlv.com/docs/api/) for developement. The latter one is recommended for this app for now.
+Then add these to the server.js file in the root of the project. You can get them [here (leaguevine)](https://www.leaguevine.com/docs/api/) for regular leaguevine or [here (playwithlv)[(http://www.playwithlv.com/docs/api/) for developement. The latter one is recommended for this app for now. If you want to use the database contact me so I can give you my username and password (It's not neccesary for the core of the app to work, so dont worry if you don't have it).
 ```
 var client_id = (your client id)
 var client_secret = (your client secret)
 REDIRECT_URI = "http://localhost:8000/callback"
-PORT = 8000
+PORT=8000
+FAKE_DATE=2015-06-12T08:00:00.427144+02:00
+DATABASE=mongodb://(USERNAME):(PASSWORD)@ds129342.mlab.com:29342/windmill-frisbee
+
 ```
 
 Then
