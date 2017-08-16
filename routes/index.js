@@ -31,4 +31,5 @@ router.post('/update_score', scoreController.updateScore);
 // Swiss Standings + rounds etc
 router.get('/swiss-standings/:id', swissRankController.getSwissStandings)
 
+
 module.exports = router;
