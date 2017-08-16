@@ -23,6 +23,9 @@ There is a real time aspect to the app when users updates a score, users don't n
 
 The app is made with node.js, with a few clientside javascript enhancements.
 
+## Flow of the app
+![flowchart](readme/ultimate-frisbee-flowchart.png)
+
 ### Tools
 This is a nodejs app using express. MongoDB is used for storing games. The app is using data from Leaguevine API. Below are the packages I use:
 ```
