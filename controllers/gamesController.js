@@ -14,7 +14,7 @@ exports.getGames = function (req, res) {
   }
 
   // ! playwithlv api doesnt have 2017 games so we will have to hard code the dates from 2015.
-  var now = moment('2015-06-12T10:30:00.427144+02:00');
+  var now = moment(process.env.FAKE_DATE);
   var till = moment(now).add(2, 'h');
 
   var nowFormat = now.format(dateFormat) + '.427Z';
