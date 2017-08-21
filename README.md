@@ -1,6 +1,7 @@
 # ultimate frisbee app
 
 ## [LINK (Work In Progress)](https://shielded-fortress-32511.herokuapp.com/)
+* The scores on the overview page and the update page are different. The tournament is already over so technically you can't update them anymore.
 
 ## About
 This is an app for keeping the score in Windmill, an ultimate frisbee tournament in Amsterdam. Teams can use this app to update their scores, see their matches, and publish the end results of their match. People can see an overview of games during the [Windmill Tournament](http://windmilltournament.com). Using this app users can log in to Leaguevine to update scores directly from within the app.
