@@ -35,10 +35,10 @@
     <ul class="gameslist gamelist__teampage">
       <% games.forEach(function (obj) { %>
       <li>
-        <p class="tournament-info">ROUND <%= obj.swissRoundNumber %> - @<%= obj.tournamentStyle %></p>
+        <h3 class="tournament-info">ROUND <%= obj.swissRoundNumber %> - @<%= obj.tournamentStyle %></h3>
         <a href="#">
           <div class="team1">
-            <h3><%= obj.team_1.name %></h3>
+            <h4><%= obj.team_1.name %></h4>
             <h4><span><%= obj.team_1.score %></span></h4>
           </div>
 
@@ -48,7 +48,7 @@
           </div>
 
           <div class="team2">
-            <h3><%= obj.team_2.name %></h3>
+            <h4><%= obj.team_2.name %></h4>
             <h4><span><%= obj.team_2.score %></span></h4>
           </div>
         </a>
@@ -63,11 +63,11 @@
     <h2>Next game</h2>
     <ul class="gameslist">
       <li class="boxshadow">
-        <p class="tournament-info">ROUND <%= next.swiss_round.round_number %> - @<%= next.tournament.name %></p>
+        <h3 class="tournament-info">ROUND <%= next.swiss_round.round_number %> - @<%= next.tournament.name %></h3>
         <a href="/update/<%= next.id %>">
 
           <div class="team1">
-            <h3> <%= next.team_1.short_name %> </h3>
+            <h4> <%= next.team_1.short_name %> </h4>
             <h4><span>-</span></h4>
           </div>
 
@@ -77,7 +77,7 @@
           </div>
 
           <div class="team2">
-            <h3> <%= next.team_2.short_name %></h3>
+            <h4> <%= next.team_2.short_name %></h4>
             <h4><span>-</span></h4>
           </div>
 

@@ -32,7 +32,7 @@ h2 {
 }
 
 h3 {
-    font-size: 1.20em;
+    font-size: 1.28em;
 }
 
 h4 {
@@ -89,41 +89,23 @@ input {
     }
 
     h1 {
-        font-size: 4em;
+        font-size: 3em;
     }
 
     h2 {
-        font-size: 2em;
-    }
-
-    h3 {
         font-size: 1.5em;
     }
 
+    h3 {
+        font-size: 1.2em;
+    }
+
     h4 {
-        font-size: 1.25em;
+        font-size: 1.10em;
     }
 
     p {
         font-size: 1em
-    }
-}
-
-@media (min-width: 60em) {
-    h1 {
-        font-size: 6em;
-    }
-
-    h2 {
-        font-size: 3em;
-    }
-
-    h3 {
-        font-size: 2em;
-    }
-
-    h4 {
-        font-size: 1.5em;
     }
 }
 
@@ -398,6 +380,13 @@ input[type="submit"] {
     border-radius: 5px;
 }
 
+@media (min-width: 66em) {
+    .gameslist li {
+        width: 49%;
+        margin: 2em 0.2em;
+    }
+}
+
 gamelist li a {
     padding: 0 0.25em;
 }
@@ -443,9 +432,9 @@ gamelist li a {
     padding: 0;
 }
 
-.gameslist h4 {
+/* .gameslist h4 {
     margin: 1em 0;
-}
+} */
 
 gameslist p {
     padding: 0.5em;
@@ -470,7 +459,7 @@ gameslist p {
     width: 7em;
 }
 
-.gameslist .team1 h3 , .team2 h3 {
+.gameslist .team1 h4 , .team2 h4 {
     margin: 0 0;
     height: 3em;
     overflow-wrap: break-word;
@@ -478,8 +467,8 @@ gameslist p {
     font-weight: 400;
 }
 
-.gamelist__teampage .team1 h3 ,
-.gamelist__teampage .team2 h3 {
+.gamelist__teampage .team1 h4 ,
+.gamelist__teampage .team2 h4 {
     min-height: 4.5em;
 }
 
@@ -494,6 +483,10 @@ gameslist p {
 /*
     Swiss score section
 */
+table {
+    border-collapse: collapse;
+}
+
 .swiss-standings {
     padding: 0.5em;
 }
@@ -514,7 +507,7 @@ gameslist p {
 }
 
 .swiss-standings td {
-    padding: 0.25em 0;
+    padding: 0.25em;
     height: 3em;
 }
 
@@ -527,3 +520,7 @@ gameslist p {
     padding: 0.5em 0;
     border: 0;
 }
+
+tr:first-of-type {
+    border-bottom: 1px solid #FF8A65;
+ }
