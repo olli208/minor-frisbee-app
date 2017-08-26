@@ -1,6 +1,7 @@
 # ultimate frisbee app
 
-## [LINK (Work In Progress)](https://shielded-fortress-32511.herokuapp.com/)
+## [LINK (WIP)*](https://shielded-fortress-32511.herokuapp.com/)
+###### \* The scores on the overview page and the update page are different. The tournament is already over so technically you can't update them anymore.
 
 ## About
 This is an app for keeping the score in Windmill, an ultimate frisbee tournament in Amsterdam. Teams can use this app to update their scores, see their matches, and publish the end results of their match. People can see an overview of games during the [Windmill Tournament](http://windmilltournament.com). Using this app users can log in to Leaguevine to update scores directly from within the app.
@@ -22,6 +23,9 @@ When the tournament is live and you use the app, it loads the games based on the
 There is a real time aspect to the app when users updates a score, users don't need to refresh the games overview page. Using [websockets](https://socket.io/) we are able to update in realtime the scores in the app. 
 
 The app is made with node.js, with a few clientside javascript enhancements.
+
+## Flow of the app
+![flowchart](readme/ultimate-frisbee-flowchart.png)
 
 ### Tools
 This is a nodejs app using express. MongoDB is used for storing games. The app is using data from Leaguevine API. Below are the packages I use:
