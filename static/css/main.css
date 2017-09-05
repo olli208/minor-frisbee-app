@@ -85,7 +85,7 @@ input {
 @media (min-width: 40em) {
     section {
         margin: 0 auto;
-        width: 55vw;
+        width: 55vw!important;
     }
 
     h1 {
@@ -382,7 +382,7 @@ input[type="submit"] {
 
 @media (min-width: 66em) {
     .gameslist li {
-        width: 49%;
+        width: 48%;
         margin: 2em 0.2em;
     }
 }

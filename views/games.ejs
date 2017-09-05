@@ -24,11 +24,11 @@
   <% var categories =  Object.keys(flashes); %>
   <% categories.forEach(function (cat) { %>
     <% flashes[cat].forEach(message => { %>
-      <div class="flash-message boxshadow"> 
+      <section class="flash-message boxshadow"> 
         <button id="close-message">close</button>
         <h2>Score Updated!</h2>
         <p><%= message %></p> 
-      </div>
+      </section>
     <% }) %>
   <% }) %>
 <% } %>
