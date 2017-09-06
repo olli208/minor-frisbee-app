@@ -119,10 +119,6 @@ body {
     min-height: 100vh;
 }
 
-header section{
-    padding: 0.25rem;
-}
-
 header {
     margin: 0;
     width: 100%;
@@ -131,11 +127,11 @@ header {
 }
 
 header h2 {
+    padding: 0 1rem;
     color: #fff;
 }
 
 .header-section {
-    padding: 0 1rem;
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
@@ -381,6 +377,10 @@ input[type="submit"] {
 }
 
 @media (min-width: 66em) {
+    .header-section section h2 {
+        padding: 0;
+    }
+
     .gameslist li {
         width: 48%;
         margin: 2em 0.2em;
