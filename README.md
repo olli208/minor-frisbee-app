@@ -61,7 +61,6 @@ becomes:
 - CSS To The Resque
 Using some new CSS features like flexbox. Trieed to do some experimental stuff like CSS snap points but that seems to be only supported in Frefox and partly by Safari.
 - Performance matters
-
 Built 90% with nod.js and added offline message, when there is no connection.
 
 - Web App From Scratch
