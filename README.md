@@ -57,6 +57,18 @@ Since I'm using a test environment for the API (playwithlv) I have to get data f
 becomes:
 `http://api.playwithlv.com/v1/games/?team_ids=(TEAMIDS)&access_token=(ACCESSTOKEN)`
 
+### Courses implemented from the minor
+- CSS To The Resque
+Using some new CSS features like flexbox. Trieed to do some experimental stuff like CSS snap points but that seems to be only supported in Frefox and partly by Safari.
+- Performance matters
+
+Built 90% with nod.js and added offline message, when there is no connection.
+
+- Web App From Scratch
+Although it's 90% node.js the client side JavaScript is writen in the way we learned it, object oriented.
+
+- Real-Tim Web
+The app utilises websockets to give the user realtime updates when a team scores.
 
 ## Install the app
 To see it live and go trough the Oauth flow your self clone this repo, run the following command in the terminal
