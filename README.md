@@ -6,6 +6,11 @@
 ## About
 This is an app for keeping the score in Windmill, an ultimate frisbee tournament in Amsterdam. Teams can use this app to update their scores, see their matches, and publish the end results of their match. People can see an overview of games during the [Windmill Tournament](http://windmilltournament.com). Using this app users can log in to Leaguevine to update scores directly from within the app.
 
+## User Stories 
+- As as user I want to see an overview of the games that are going on.
+- As a user I want to be able to update the score of a game.
+- As a user I want to see more information about a team.
+
 ### Concept
 The core of the app is updating the score of games. Right now at Windmill tournaments, it's done by volunteers that are keeping track of each game. After the game, they have to travel (sometimes by bike!) to the one person who will update the scores on the site to Leaguevine.
 
