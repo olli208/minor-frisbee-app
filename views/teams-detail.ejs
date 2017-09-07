@@ -1,25 +1,27 @@
 <% include partials/head.ejs %>
 
-<header class="team-header boxshadow">
-  <div class="header-section">
-    <h2> <%= data.name %> </h2>
-  </div>
+<header class="header-section">
+  <section>
+    <div class="header-section">
+      <h2> <%= data.name %> </h2>
+    </div>
 
-  <div class="team-quick-info">
-    <div>
-      <img src="<%= data.profile_image_50 %>" alt="">
+    <div class="team-quick-info">
+      <div>
+        <img src="<%= data.profile_image_50 %>" alt="">
+      </div>
+      <div>
+        <p>
+          From: <% if (data.city) { %> <%= data.city  %> <% } else { %> - <% } %>, <%= data.country %>
+        </p>
+      </div>
+      <div>
+        <p>
+          Record: <%= data.wins %>-<%= data.losses %>-<%= data.ties %>
+        </p>
+      </div>
     </div>
-    <div>
-      <p>
-        From: <% if (data.city) { %> <%= data.city  %> <% } else { %> - <% } %>, <%= data.country %>
-      </p>
-    </div>
-    <div>
-      <p>
-        Record: <%= data.wins %>-<%= data.losses %>-<%= data.ties %>
-      </p>
-    </div>
-  </div>
+  </section>
 </header>
 
 <section class="team-desc">
