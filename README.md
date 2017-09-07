@@ -75,10 +75,11 @@ var client_id = (your client id)
 var client_secret = (your client secret)
 REDIRECT_URI = "http://localhost:8000/callback"
 PORT=8000
-FAKE_DATE=2015-06-12T08:00:00.427144+02:00
+FAKE_DATE=2015-06-12T08:00:00.427144+02:00 
 DATABASE=mongodb://(USERNAME):(PASSWORD)@ds129342.mlab.com:29342/windmill-frisbee
 
 ```
+###### \* You can change the 'FAKE_DATE' to experiment with the time to see which games you get.
 
 Then
 ```
