@@ -10,7 +10,8 @@ var mongoose = require('mongoose');
 
 var app = express();
 var server = require('http').createServer(app);
-var io = require('socket.io').listen(server);
+// var io = require('socket.io').listen(server);
+global.io = require('socket.io')(server);  
 
 require('dotenv').config(); // secret stuff
 

@@ -1,55 +1,90 @@
 <% include partials/head.ejs %>
 
-<header class="header-section">
-  <section>
-    <div class="header-section">
-      <h2>update game score</h2>
+<header class="header-section header-section-score">
+  <section class="header-section--score">
+    <div class="team team-1">
+      <h3><%= game.team_1.name %></h3>
     </div>
+
+    <div class="game-score">
+      <h3><%= team1Score %> - <%= team2Score %></h3>
+    </div>
+
+    <div class="team team-2">
+      <h3><%= game.team_2.name %></h3>
+    </div>
+
+    <div class="update-login-btn">
+    <% if (accessToken) { %>
+      <a href="#lightbox">Update Score</a>
+    <% } else { %>
+      <a href="/login">Log in</a>
+    <% } %> 
+    </div>
+  </section>
+
+  <section class="header-section--info">
+      <div>
+        <p> <%= h.moment(game.start_time).format('MMMM Do YYYY') %> at <%= new Date(game.start_time).toString().substr(15,6) %> </p>
+      </div>
+
+      <div>
+        <p> <%= game.game_site.name %> </p>
+      </div>
   </section>
 </header>
 
-<section>
+<section class="game-updates">
+  <h2><%= game.tournament.name %> - Round <%= game.swiss_round.round_number %></h2>  
+  <p><b>Last update:</b> <%= h.moment(game.time_last_updated).format('MMMM Do YYYY') %> at <%= new Date(game.time_last_updated).toString().substr(15,6) %> </p>
+
+  <ul class="">
+    <li>
+      <h3> Team 1 scored ! </h3>  
+      <p><%= h.moment(game.time_last_updated).format('MMMM Do YYYY') %> at <%= new Date(game.time_last_updated).toString().substr(15,6) %></p>  
+    </li>
+
+    <li>
+      <h3> Team 2 scored !</h3>    
+      <p><%= h.moment(game.time_last_updated).format('MMMM Do YYYY') %> at <%= new Date(game.time_last_updated).toString().substr(15,6) %></p>
+    </li>
+  </ul>
+
+</section>
+
+<section class="score-update" id="lightbox">
+  <div>
+    <a href="/update/<%= game.id %>"><img class="close-btn" src="/img/close.svg"></a>      <h2>Update Score</h2>
+  </div>
+  
   <form action="/update_score" method="post" class="form-scoreboard">
     <fieldset class="scoreboard">
       <label for="team1_score">
         <%= game.team_1.short_name %>:
-        <input type="number" name="team1_score" value="<%= game.team_1_score %>" max="30" id="score-team1" class="scoreboard-team">
+        <input type="number" name="team1_score" value="<%= team1Score %>" max="30" id="score-team1" class="scoreboard-team">
         <input type="button" name="team1" value="+"/>
       </label>
 
       <label for="team2_score">
         <%= game.team_2.short_name %>:
-        <input type="number" name="team2_score" value="<%= game.team_2_score %>" max="30" id="score-team2" class="scoreboard-team">
+        <input type="number" name="team2_score" value="<%= team2Score %>" max="30" id="score-team2" class="scoreboard-team">
         <input type="button" name="team2" value="+"/>
       </label>
     </fieldset>
 
     <fieldset class="score-info">
-      <label for="scorer">
-        scorer:
-        <input type="text" name="scorer" placeholder="Who scored?">
-      </label>
-
-      <label for="assist">
-        assist by:
-        <input type="text" name="assist" placeholder="Who gave the pass?">
-      </label>
-
       <label for="final-score">
         final score?
-        <input type="checkbox" checked>
+        <input type="checkbox">
       </label>
 
-      <input type="hidden" name="game_id" value="<%= game.game.id %>">
+      <input type="hidden" name="game_id" value="<%= game.id %>">
       <input type="hidden" name="team_1" value="<%= game.team_1.short_name %>">
       <input type="hidden" name="team_2" value="<%= game.team_2.short_name %>">
 
       <input type="submit" value="update score" class="action-button">
     </fieldset>
-  </form>
-  <div class="cancel">
-    <a href="/games"><button class="action-button cancel-update">CANCEL</button></a>
-  </div>
+  </form> 
 </section>
 
 <% include partials/footer.ejs %>

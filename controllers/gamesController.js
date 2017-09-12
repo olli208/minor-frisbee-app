@@ -122,14 +122,29 @@ function getGamesDB (tournamentID) {
 exports.gameUpdate = function (req, res) {
   req.session.gameID = req.params.id;
 
-  rp(`http://api.playwithlv.com/v1/game_scores/?game_id=${req.params.id}&access_token=${req.session.accessToken}`)
+  rp(`http://api.playwithlv.com/v1/games/${req.params.id}/?access_token=${req.session.accessToken}`)
     .then(function (body) {
       var data = JSON.parse(body);
 
-      req.session.returnTo = req.path;
-      res.render('game-update' , {
-        game: data.objects[0] || 'No game found' 
-      });
+      var score = mongoose.model('Game').find({'gameID': { $in: data.id }});
+
+      score
+      .then(function (score) {
+
+        console.log(score[0].team_1.score)
+
+        req.session.returnTo = req.path;
+        res.render('game-update' , {
+          game: data || 'No game found',
+          accessToken: req.session.accessToken,
+          team1Score: score[0].team_1.score,
+          team2Score: score[0].team_2.score
+        });
+
+      })
+      .catch(function (err) {
+        console.log(`Could not find GAMES from DATABASE -> ${err}`)
+      })
       
     })
     .catch(function (err) {

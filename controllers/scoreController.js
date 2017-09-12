@@ -86,7 +86,9 @@ function storeToDB (team1, team1_score, team2, team2_score, gameID, req, res ) {
       console.log(`games from DB -> ${game}`);
 
       req.flash('success', `${team1} (${team1_score}) - (${team2_score}) ${team2} `);
-      res.redirect('/games');
+      // Instead of a redirect reload the page ?
+      res.redirect('back');
+      // res.redirect('/games');
     })
     .catch(function(err) {
       console.log(`Could not update GAMESCORE from DATABASE -> ${err}`)

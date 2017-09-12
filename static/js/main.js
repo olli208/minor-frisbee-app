@@ -83,10 +83,10 @@
         // skip loop if the property is from prototype
         if (!games.hasOwnProperty(key)) continue;
 
-        var test = document.getElementById(games[key].gameID);
+        var gamesList = document.getElementById(games[key].gameID);
                 
-        test.querySelector('.team1 h4 span').innerHTML = games[key].team_1.score;          
-        test.querySelector('.team2 h4 span').innerHTML = games[key].team_2.score;        
+        gamesList.querySelector('.team1 h4 span').innerHTML = games[key].team_1.score;          
+        gamesList.querySelector('.team2 h4 span').innerHTML = games[key].team_2.score;        
 
       }
     }
