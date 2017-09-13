@@ -130,10 +130,8 @@ exports.gameUpdate = function (req, res) {
 
       score
       .then(function (score) {
-
-        console.log(score[0].team_1.score)
-
         req.session.returnTo = req.path;
+
         res.render('game-update' , {
           game: data || 'No game found',
           accessToken: req.session.accessToken,

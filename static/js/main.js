@@ -7,7 +7,7 @@
     init: function() {
       score.add();
       flashMessage.close();
-      realTime.IDCheck();
+      realTime.io();
     }
   }
 
@@ -15,12 +15,11 @@
     add: function() {
       var self = this;
 
-      if (document.getElementById('score-team1')) {
-        var elem = document.querySelectorAll('.scoreboard input')
-        
-        elem.forEach( function (e) {
-            e.addEventListener('click', self.update);
-        });
+      if (document.getElementById('score-team1')) {                
+        document.querySelectorAll('.add-score').forEach(function (el){
+          el.addEventListener('click', self.update);
+        })
+
       }
     },
     update: function(e) {
@@ -29,17 +28,14 @@
       var scoreTeam1 = parseInt(scoreBoard1.value);
       var scoreTeam2 = parseInt(scoreBoard2.value);
 
-      if (e.target.type === 'button') {
-        if (e.target.name === 'team1') {
+      if (e.target.className === 'add-score1') {
           var newScore = ++scoreTeam1;
           scoreTeam1 = newScore;
           scoreBoard1.value = newScore;
-        }
-        else if (e.target.name === 'team2') {
+      } else if (e.target.className === 'add-score2') {
           var newScore = ++scoreTeam2;
           scoreTeam2 = newScore;
           scoreBoard2.value = newScore;
-        }
       }
 
     }
@@ -59,7 +55,7 @@
   } 
 
   var realTime = {
-    IDCheck: function() {
+    io: function() {
       var self = this;
       var elem = document.querySelectorAll('.game');
       var gameIDs = [];
@@ -73,6 +69,10 @@
       socket.on('games DB' , function (data) {
         self.scoreUpdate(data , gameIDs);
       });
+
+      socket.on('score update' , function (data) {
+        self.gameUpdates(data)
+      })
       
     },
     scoreUpdate: function (data, clientIDs) {
@@ -89,6 +89,9 @@
         gamesList.querySelector('.team2 h4 span').innerHTML = games[key].team_2.score;        
 
       }
+    },
+    gameUpdates: function (data) {
+      console.log(data);
     }
 
   }

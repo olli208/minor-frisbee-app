@@ -10,7 +10,6 @@ var mongoose = require('mongoose');
 
 var app = express();
 var server = require('http').createServer(app);
-// var io = require('socket.io').listen(server);
 global.io = require('socket.io')(server);  
 
 require('dotenv').config(); // secret stuff
@@ -53,8 +52,6 @@ io.on('connect', function (socket) {
     games
       .then(function (games) {
         io.emit('games DB', { games });
-
-        // var compare = diff(playlistsArray, body);
 
       })
       .catch(function (err) {
