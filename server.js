@@ -29,9 +29,17 @@ app.set('view engine' , 'ejs')
   .set('views' , path.join(__dirname, 'views'))
   .use(express.static('static'))
   .use(bodyParser.json())
-  .use(bodyParser.urlencoded({ extended: false }))
-  .use(compression({threshold: 0, filter: () => true}))
-  .use(session({ secret: 'zoGeheim', resave: false, saveUninitialized: false}))
+  .use(bodyParser.urlencoded({ 
+    extended: false 
+  }))
+  .use(compression({
+    threshold: 0, 
+    filter: () => true}))
+  .use(session({ 
+    secret: 'zoGeheim', 
+    resave: false, 
+    saveUninitialized: true
+  }))
   .use(flash());
 
 app.use(function (req, res, next) {

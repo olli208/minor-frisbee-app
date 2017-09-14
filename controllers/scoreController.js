@@ -8,7 +8,9 @@ exports.updateScore = function (req, res) {
   var dateFormat = 'YYYY-MM-DDTHH:mm:ss';
   var timeOfUpdate = moment().format(dateFormat + '.427Z');
 
-  console.log('TIJD BIJ KNOP ->' , timeOfUpdate);
+  // console.log('TIJD BIJ KNOP ->' , timeOfUpdate);
+  console.log(`REQ.SESH.GAMEID -> ${req.session.gameID}`);
+
 
   rp(`http://api.playwithlv.com/v1/game_scores/?game_id=${req.session.gameID}&access_token=${req.session.accessToken}`)
   .then(function (body) {
@@ -17,7 +19,7 @@ exports.updateScore = function (req, res) {
 
       var lastUpdate = moment(dataObj.time_last_updated).format(dateFormat + '.427Z')
 
-      console.log('TIJD VAN API ->' , lastUpdate); // TODO -> better solution for the time check.
+      // console.log('TIJD VAN API ->' , lastUpdate); // TODO -> better solution for the time check.
 
       // 1. Compare time stamps of both
       if (timeOfUpdate > lastUpdate) {
@@ -26,7 +28,6 @@ exports.updateScore = function (req, res) {
       } else if (lastUpdate > timeOfUpdate) {
         // 3. If the score has already been recently updated ...
         // ... show flash message to user
-        console.log('SCORE HAS ALREADY BEEN UPDATED');
         req.flash('warning' , 'SCORE HAS ALREADY BEEN UPDATED');
         res.redirect('/games');
       }
@@ -87,11 +88,14 @@ function storeToDB (team1, team1_score, team2, team2_score, gameID, req, res ) {
 
       req.flash('success', `${team1} (${team1_score}) - (${team2_score}) ${team2} `);
       
-      io.emit('score update', { 
+      var ns = io.of(`/${gameID}`);
+      console.log(gameID , ns);
+
+      ns.emit('score update', { 
         team1: team1,
         team2: team2,
         team1Score: team1_score,
-        team2Score: team2_score
+        team2Score: team2_score,
       });
 
       res.redirect('back');

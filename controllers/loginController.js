@@ -9,10 +9,8 @@ exports.callback = function (req, res) {
 
   rp(`http://www.playwithlv.com/oauth2/token/?client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&code=${code}&grant_type=authorization_code&redirect_uri=${process.env.REDIRECT_URI}`)
     .then(function (body) {
-      apiResponse = JSON.parse(body);
-      // acccessToken = apiResponse.access_token;
-      req.session.accessToken = apiResponse.access_token;
-
+      data = JSON.parse(body);
+      req.session.accessToken = data.access_token;
 
       res.redirect(req.session.returnTo || '/games');
       delete req.session.returnTo;

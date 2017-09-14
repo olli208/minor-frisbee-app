@@ -27,7 +27,6 @@ exports.getGames = function (req, res) {
   // example request: `https://api.leaguevine.com/v1/games/?tournament_id=20059&starts_before=2016-06-03T13%3A00%3A00.427144%2B00%3A00&starts_after=2016-06-03T06%3A00%3A00.427144%2B00%3A00&order_by=%5Bstart_time%5D&access_token=${acccessToken}`
   rp(`http://api.playwithlv.com/v1/games/?tournament_id=${tournamentID}&starts_before=${tillFormat}&starts_after=${nowFormat}&order_by=['start_time']&limit=${limit}`)
     .then(function (body) {
-      req.session.returnTo = req.path;
       var data = JSON.parse(body);
 
       var swissRounds = data.objects.map(function(obj) {

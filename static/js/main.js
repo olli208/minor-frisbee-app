@@ -16,8 +16,8 @@
       var self = this;
 
       if (document.getElementById('score-team1')) {                
-        document.querySelectorAll('.add-score').forEach(function (el){
-          el.addEventListener('click', self.update);
+        document.querySelectorAll('.add-score').forEach(function (elem){
+          elem.addEventListener('click', self.update);
         })
 
       }
@@ -56,6 +56,9 @@
 
   var realTime = {
     io: function() {
+      var el = document.querySelector('.score-info');
+      var gameID = el.querySelector('input[name="game_id"]').value;
+
       var self = this;
       var elem = document.querySelectorAll('.game');
       var gameIDs = [];
@@ -70,8 +73,8 @@
         self.scoreUpdate(data , gameIDs);
       });
 
-      socket.on('score update' , function (data) {
-        self.gameUpdates(data)
+      io('/' + gameID).on('score update' , function (data) {
+        self.gameUpdates(data , gameID);
       })
       
     },
