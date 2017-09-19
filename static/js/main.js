@@ -7,7 +7,7 @@
     init: function() {
       score.add();
       flashMessage.close();
-      realTime.io();
+      realTime.innit();
     }
   }
 
@@ -55,30 +55,36 @@
   } 
 
   var realTime = {
-    io: function() {
-      var el = document.querySelector('.score-info');
-      var gameID = el.querySelector('input[name="game_id"]').value;
-
+    innit: function() {  
       var self = this;
-      var elem = document.querySelectorAll('.game');
-      var gameIDs = [];
 
-      elem.forEach(function (el) {
-        gameIDs.push(el.id)
-      });
+      if (document.querySelector('.game')) {
+        var elem = document.querySelectorAll('.game');
+        var gameIDs = [];
+  
+        elem.forEach(function (el) {
+          gameIDs.push(el.id)
+        });
+  
+        socket.emit('check ID', { gameIDs });
+  
+        socket.on('games DB' , function (data) {
+          self.scoreUpdate(data , gameIDs);
+        });
+      }
+      
+      if (document.querySelector('.score-info')) {
+        var el = document.querySelector('.score-info');
+        var gameID = el.querySelector('input[name="game_id"]').value;
 
-      socket.emit('check ID', { gameIDs });
-
-      socket.on('games DB' , function (data) {
-        self.scoreUpdate(data , gameIDs);
-      });
-
-      io('/' + gameID).on('score update' , function (data) {
-        self.gameUpdates(data , gameID);
-      })
+        io('/' + gameID).on('score update' , function (data) {
+          self.gameUpdates(data , gameID);
+        })
+      }
       
     },
     scoreUpdate: function (data, clientIDs) {
+      console.log(data.games)
       var games = data.games;
       var elem = document.querySelectorAll('.gameslist li a');
 
@@ -95,6 +101,8 @@
     },
     gameUpdates: function (data) {
       console.log(data);
+      
+
     }
 
   }

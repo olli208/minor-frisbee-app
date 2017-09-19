@@ -89,7 +89,6 @@ function storeToDB (team1, team1_score, team2, team2_score, gameID, req, res ) {
       req.flash('success', `${team1} (${team1_score}) - (${team2_score}) ${team2} `);
       
       var ns = io.of(`/${gameID}`);
-      console.log(gameID , ns);
 
       ns.emit('score update', { 
         team1: team1,
@@ -99,6 +98,21 @@ function storeToDB (team1, team1_score, team2, team2_score, gameID, req, res ) {
       });
 
       res.redirect('back');
+      
+      return gameID;
+    })
+    .then(function(gameID) {
+      console.log('GAMEIDDDDDD' , gameID)
+      var games = Game.find({'gameID': { $in: gameID }});
+      
+      games
+        .then(function (games) {
+          io.emit('games DB', { games });
+  
+        })
+        .catch(function (err) {
+          console.log(`Could not find GAMES from DATABASE -> ${err}`)
+        })
     })
     .catch(function(err) {
       console.log(`Could not update GAMESCORE from DATABASE -> ${err}`)
