@@ -84,7 +84,6 @@
       
     },
     scoreUpdate: function (data, clientIDs) {
-      console.log(data.games)
       var games = data.games;
       var elem = document.querySelectorAll('.gameslist li a');
 

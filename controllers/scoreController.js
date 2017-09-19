@@ -102,7 +102,6 @@ function storeToDB (team1, team1_score, team2, team2_score, gameID, req, res ) {
       return gameID;
     })
     .then(function(gameID) {
-      console.log('GAMEIDDDDDD' , gameID)
       var games = Game.find({'gameID': { $in: gameID }});
       
       games

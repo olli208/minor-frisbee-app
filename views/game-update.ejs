@@ -73,39 +73,40 @@
 </section>
 
 <section class="score-update" id="lightbox">
-  <div>
+  <section>
+  <div class="score">
     <a href="/update/<%= game.id %>"><img class="close-btn" src="/img/close.svg"></a>      
     <h3>Update Score</h3>
   </div>
   
   <form action="/update_score" method="post" class="form-scoreboard">
-    <fieldset class="scoreboard">
+    <div class="scoreboard">
       <label for="team1_score">
-        <%= game.team_1.name %>:
+        <div class="box team-name1"><h2><%= game.team_1.name %></h2></div>
         <input type="number" name="team1_score" value="<%= team1Score %>" max="30" id="score-team1" class="scoreboard-team">
         <button class="add-score add-score1" type="button"><img class="add-score1" src="/img/plus.svg"></button>
       </label>
 
       <label for="team2_score">
-        <%= game.team_2.name %>:
+        <div class="box team-name2"><h2><%= game.team_2.name %></h2></div>
         <input type="number" name="team2_score" value="<%= team2Score %>" max="30" id="score-team2" class="scoreboard-team">
         <button class="add-score add-score2" type="button"><img class="add-score2" src="/img/plus.svg"></button>
       </label>
-    </fieldset>
+    </div>
 
-    <fieldset class="score-info">
-      <label for="final-score">
-        final score?
-        <input type="checkbox">
-      </label>
+    <div class="score-info">
+      <input type="checkbox" id="final-score" name="final-score" value="">
+      <label for="final-score">Final score?</label>
 
       <input type="hidden" name="game_id" value="<%= game.id %>">
       <input type="hidden" name="team_1" value="<%= game.team_1.name %>">
       <input type="hidden" name="team_2" value="<%= game.team_2.name %>">
 
       <input type="submit" value="update score" class="action-button">
-    </fieldset>
+    </div>
   </form> 
+  </section>
+  
 </section>
 
 <% include partials/footer.ejs %>
