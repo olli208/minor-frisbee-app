@@ -39,37 +39,28 @@
   </section>
 </header>
 
-<section class="game-updates">
+<section class="game-updates" id="x<%= game.id %>">
   <h2><%= game.tournament.name %> - Round <%= game.swiss_round.round_number %></h2>  
   <p><b>Last update:</b> <%= h.moment(game.time_last_updated).format('MMMM Do YYYY') %> at <%= new Date(game.time_last_updated).toString().substr(15,6) %> </p>
 
-  <ul class="">
-    <li>
-    <!-- Show pop up message after user updates game -->
-    <% if(locals.flashes) { %>
-      <% var categories =  Object.keys(flashes); %>
-      <% categories.forEach(function (cat) { %>
-        <% flashes[cat].forEach(message => { %>
-          <section class="flash-message boxshadow"> 
-            <button id="close-message">close</button>
-            <h2>Score Updated!</h2>
-            <p><%= message %></p> 
-          </section>
-        <% }) %>
+  <!-- Show pop up message after user updates game -->
+  <% if(locals.flashes) { %>
+    <% var categories =  Object.keys(flashes); %>
+    <% categories.forEach(function (cat) { %>
+      <% flashes[cat].forEach(message => { %>
+        <section class="flash-message boxshadow"> 
+          <button id="close-message">close</button>
+          <h2>Score Update!</h2>
+          <p><%= message %></p> 
+        </section>
       <% }) %>
-    <% } %>
-    </li>
-    <li>
-      <h3> Team 1 scored ! </h3>  
-      <p><%= h.moment(game.time_last_updated).format('MMMM Do YYYY') %> at <%= new Date(game.time_last_updated).toString().substr(15,6) %></p>  
-    </li>
+    <% }) %>
+  <% } %>
+</section>
 
-    <li>
-      <h3> Team 2 scored !</h3>    
-      <p><%= h.moment(game.time_last_updated).format('MMMM Do YYYY') %> at <%= new Date(game.time_last_updated).toString().substr(15,6) %></p>
-    </li>
-  </ul>
-
+<section class="game-chat">
+  <h2>Gamechat</h2>
+  
 </section>
 
 <section class="score-update" id="lightbox">

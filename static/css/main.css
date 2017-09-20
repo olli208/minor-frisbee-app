@@ -333,7 +333,7 @@ header h2 {
     padding: 0.5em;
 }
 
-.game-updates {
+.game-updates, .game-chat {
     background: pink;
     padding: 0 0.25em;
 }

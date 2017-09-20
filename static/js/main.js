@@ -5,9 +5,21 @@
 
   var app = {
     init: function() {
+      preventFormSubmit.innit();
       score.add();
       flashMessage.close();
       realTime.innit();
+    }
+  }
+
+  var preventFormSubmit = {
+    innit: function () {
+      if (document.querySelector('input[type="submit"]')) {
+        // document.querySelector('input[type="submit"]').addEventListener('click' , function (e) {
+        //   console.log(e)
+        //   e.preventDefault();
+        // })
+      }      
     }
   }
 
@@ -71,17 +83,8 @@
         socket.on('games DB' , function (data) {
           self.scoreUpdate(data , gameIDs);
         });
-      }
-      
-      if (document.querySelector('.score-info')) {
-        var el = document.querySelector('.score-info');
-        var gameID = el.querySelector('input[name="game_id"]').value;
 
-        io('/' + gameID).on('score update' , function (data) {
-          self.gameUpdates(data , gameID);
-        })
-      }
-      
+      }      
     },
     scoreUpdate: function (data, clientIDs) {
       var games = data.games;
@@ -98,12 +101,10 @@
 
       }
     },
-    gameUpdates: function (data) {
-      console.log(data);
+    gameChat: function (data) {
       
 
     }
-
   }
 
 app.init()

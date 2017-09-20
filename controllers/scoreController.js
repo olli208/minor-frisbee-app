@@ -52,7 +52,6 @@ function postUpdate (req, res) {
       'game_id': gameID,
       'team_1_score': team1_score,
       'team_2_score': team2_score,
-      'what_happened': `scorer: ${scorer} , assist: ${assist}`,
       'is_final': 'False'
     };
 
@@ -64,8 +63,7 @@ function postUpdate (req, res) {
       json: true,
       body: score
     }, function (err, response, body) {
-      console.log(body);
-
+      // console.log(body);
       storeToDB(team1, team1_score, team2, team2_score, gameID , req, res)
     });
   }
@@ -83,19 +81,8 @@ function storeToDB (team1, team1_score, team2, team2_score, gameID, req, res ) {
     {new: true}).exec();
 
   game
-    .then(function(game){
-      console.log(`games from DB -> ${game}`);
-
+    .then(function(game) {
       req.flash('success', `${team1} (${team1_score}) - (${team2_score}) ${team2} `);
-      
-      var ns = io.of(`/${gameID}`);
-
-      ns.emit('score update', { 
-        team1: team1,
-        team2: team2,
-        team1Score: team1_score,
-        team2Score: team2_score,
-      });
 
       res.redirect('back');
       
@@ -107,7 +94,6 @@ function storeToDB (team1, team1_score, team2, team2_score, gameID, req, res ) {
       games
         .then(function (games) {
           io.emit('games DB', { games });
-  
         })
         .catch(function (err) {
           console.log(`Could not find GAMES from DATABASE -> ${err}`)
