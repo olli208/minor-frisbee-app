@@ -53,6 +53,15 @@ app.use('/', require('./routes/index'));
 
 // SOCKET Things here
 io.on('connect', function (socket) {
+  console.log(socket.id);
+
+  socket.on('chat message', function(data){
+    console.log(data.message , data.gameID)
+
+    var ns = io.of(`/${data.gameID}`);
+
+    ns.emit('new message', data.message) 
+  });
   
   socket.on('check ID', function (data) {
     var games = mongoose.model('Game').find({'gameID': { $in: data.gameIDs }});

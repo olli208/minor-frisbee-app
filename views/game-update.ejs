@@ -41,7 +41,7 @@
 
 <section class="game-updates" id="x<%= game.id %>">
   <h2><%= game.tournament.name %> - Round <%= game.swiss_round.round_number %></h2>  
-  <p><b>Last update:</b> <%= h.moment(game.time_last_updated).format('MMMM Do YYYY') %> at <%= new Date(game.time_last_updated).toString().substr(15,6) %> </p>
+  <p><b>Last scoreupdate:</b> <%= h.moment(game.time_last_updated).format('MMMM Do YYYY') %> at <%= new Date(game.time_last_updated).toString().substr(15,6) %> </p>
 
   <!-- Show pop up message after user updates game -->
   <% if(locals.flashes) { %>
@@ -58,9 +58,14 @@
   <% } %>
 </section>
 
-<section class="game-chat">
+<section class="game-chat" id="game-chat<%= game.id %>">
   <h2>Gamechat</h2>
-  
+
+  <ul id="chat<%= game.id %>"></ul>
+  <form>
+    <input type="text" autocomplete="off" />
+    <input type="submit" class="action-button">
+  </form>
 </section>
 
 <section class="score-update" id="lightbox">

@@ -83,8 +83,11 @@
         socket.on('games DB' , function (data) {
           self.scoreUpdate(data , gameIDs);
         });
-
-      }      
+      }  
+      
+      if (document.querySelector('.game-chat')) {
+        self.gameChat(document.querySelector('input[name="game_id"]').value)
+      }
     },
     scoreUpdate: function (data, clientIDs) {
       var games = data.games;
@@ -101,8 +104,33 @@
 
       }
     },
-    gameChat: function (data) {
-      
+    gameChat: function (gameID) {
+      var chatID = document.querySelector('#game-chat' + gameID);
+      var chatForm = chatID.querySelector('form');
+
+      chatForm.addEventListener('submit' , function(e) {
+        var messageBox = document.querySelector('input[type="text"]');
+
+        socket.emit('chat message' , {
+          message: messageBox.value,
+          gameID
+        });
+
+        messageBox.value = "";  
+        e.preventDefault();
+      })
+
+      io('/' + gameID).on('new message' , function (msg) {
+        console.log(msg);
+
+        var messages = chatID.querySelector('ul');
+        var message = document.createElement('li');
+
+        message.className = 'chat-message';
+        message.innerHTML = '<p>'+ msg +'</p>';
+
+        messages.appendChild(message);
+      })
 
     }
   }

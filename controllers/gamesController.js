@@ -119,6 +119,7 @@ function getGamesDB (tournamentID) {
 }
 
 exports.gameUpdate = function (req, res) {
+  chatRoom();
   req.session.gameID = req.params.id;
 
   rp(`http://api.playwithlv.com/v1/games/${req.params.id}/?access_token=${req.session.accessToken}`)
@@ -147,4 +148,10 @@ exports.gameUpdate = function (req, res) {
     .catch(function (err) {
       console.log('error UPDATING GAME');
     });
+}
+
+function chatRoom() {
+  io.on('chat message', function(msg){
+    console.log(msg)
+  });
 }
