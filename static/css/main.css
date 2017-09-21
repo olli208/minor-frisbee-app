@@ -349,6 +349,15 @@ header h2 {
     margin-bottom: 1em;
 }
 
+.game-chat ul {
+    padding: 0;
+}
+
+.chat-message {
+    background: #fff;
+    list-style: none;
+}
+
 .score-update {
     z-index: 999;
     display: none;

@@ -23,6 +23,7 @@ mongoose.connection.on('error' , function (err) {
 
 // My models ( ͡° ͜ʖ ͡°)
 require('./models/Game');
+require('./models/Chat');
 
 // Setup and middleware
 app.set('view engine' , 'ejs')
@@ -56,11 +57,48 @@ io.on('connect', function (socket) {
   console.log(socket.id);
 
   socket.on('chat message', function(data){
-    console.log(data.message , data.gameID)
+    var date = new Date()
+    var Chat = mongoose.model('Chat');
 
-    var ns = io.of(`/${data.gameID}`);
+    var formatChat = {
+      gameID: data.gameID,
+      message: 
+        {
+          content: data.message,
+          date:  date.toLocaleDateString(),
+          time: date.toLocaleTimeString()
+        }
+    }
 
-    ns.emit('new message', data.message) 
+    new Chat(formatChat)
+      .save()
+      .then(function () {
+        console.log('SUCCESS!! NEW CHAT MESSAGES ADDED!');
+
+        var chatRoom = Chat.find({'gameID': data.gameID });
+        
+        chatRoom
+          .then(function (chat) {
+            var messages = [];
+            chat.forEach(function (e) {
+              messages.push(e);
+            })
+
+            console.log(messages)
+
+            var ns = io.of(`/${data.gameID}`);
+            ns.emit('new message', {messages});
+
+          })
+          .catch(function (err) {
+            console.log(`FINDING MESSAGES FROM DB ERROR -> ${err}`)
+          })
+
+      })
+      .catch(function (err) {
+        console.log(`ADDING MESSAGES TO DB ERROR -> ${err}`)
+      })
+
   });
   
   socket.on('check ID', function (data) {

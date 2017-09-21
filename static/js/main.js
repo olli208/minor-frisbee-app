@@ -113,25 +113,42 @@
 
         socket.emit('chat message' , {
           message: messageBox.value,
-          gameID
+          gameID,
         });
 
         messageBox.value = "";  
         e.preventDefault();
-      })
+      });
 
-      io('/' + gameID).on('new message' , function (msg) {
-        console.log(msg);
+      io('/' + gameID).on('new message' , function (data) {        
+        messagesFromDB.render(data , chatID , chatForm);
+      });
 
+    }
+  }
+
+  var messagesFromDB = {
+    render: function (data , chatID , chatForm) {
+      var msg = data.messages
+      for (var key in msg) {
+        // skip loop if the property is from prototype
+        if (!msg.hasOwnProperty(key)) continue;
+
+        console.log(msg[key].message);
+        var obj = msg[key].message
+        
         var messages = chatID.querySelector('ul');
         var message = document.createElement('li');
 
         message.className = 'chat-message';
-        message.innerHTML = '<p>'+ msg +'</p>';
+        message.innerHTML = 
+          '<h4> Message: </h4>' +
+          '<p>'+ obj.content +'</p>' +
+          '<span>'+ obj.date + ', ' + obj.time +'</span>'
 
         messages.appendChild(message);
-      })
 
+      }
     }
   }
 
