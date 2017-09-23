@@ -86,7 +86,11 @@
       }  
       
       if (document.querySelector('.game-chat')) {
-        self.gameChat(document.querySelector('input[name="game_id"]').value)
+        var gameID = document.querySelector('input[name="game_id"]').value;
+        var chatID = document.querySelector('#game-chat' + gameID);
+        var chatForm = chatID.querySelector('form');
+
+        self.gameChat(gameID, chatID, chatForm);
       }
     },
     scoreUpdate: function (data, clientIDs) {
@@ -104,51 +108,44 @@
 
       }
     },
-    gameChat: function (gameID) {
-      var chatID = document.querySelector('#game-chat' + gameID);
-      var chatForm = chatID.querySelector('form');
-
+    gameChat: function (gameID, chatID, chatForm) {
       chatForm.addEventListener('submit' , function(e) {
+        e.preventDefault();        
+        var date = new Date();
         var messageBox = document.querySelector('input[type="text"]');
+        var message = messageBox.value;
 
-        socket.emit('chat message' , {
-          message: messageBox.value,
+        var messageContent = {
+          message,
+          date: date.toLocaleDateString(),
+          time: date.toLocaleTimeString(),
           gameID,
-        });
+        }
+
+        socket.emit('chat message' , messageContent );  
+        chatRoom.newMessage(gameID , chatID)      
 
         messageBox.value = "";  
-        e.preventDefault();
-      });
-
-      io('/' + gameID).on('new message' , function (data) {        
-        messagesFromDB.render(data , chatID , chatForm);
       });
 
     }
   }
 
-  var messagesFromDB = {
-    render: function (data , chatID , chatForm) {
-      var msg = data.messages
-      for (var key in msg) {
-        // skip loop if the property is from prototype
-        if (!msg.hasOwnProperty(key)) continue;
-
-        console.log(msg[key].message);
-        var obj = msg[key].message
-        
-        var messages = chatID.querySelector('ul');
-        var message = document.createElement('li');
-
-        message.className = 'chat-message';
-        message.innerHTML = 
-          '<h4> Message: </h4>' +
-          '<p>'+ obj.content +'</p>' +
-          '<span>'+ obj.date + ', ' + obj.time +'</span>'
-
-        messages.appendChild(message);
-
-      }
+  var chatRoom = {
+    newMessage: function (gameID , chatID) {
+      io('/' + gameID).on('new message' , function (data) {  
+        console.log(data);
+        var oldMessages = chatID.querySelector('ul')
+        var newMessage = document.createElement('li');
+        newMessage.className = 'chat-message';
+        newMessage.innerHTML = 
+          '<p><b>Message:</b></p>' +
+          '<p>'+ data.message +'</p>' +
+          '<span>'+ data.date + ', ' + data.time +'</span>';
+  
+        // oldMessages.appendChild(newMessage);
+        oldMessages.insertBefore(newMessage, oldMessages.childNodes[0]);
+      });
     }
   }
 

@@ -54,55 +54,30 @@ app.use('/', require('./routes/index'));
 
 // SOCKET Things here
 io.on('connect', function (socket) {
-  console.log(socket.id);
+  var Chat = mongoose.model('Chat');
+  var Game = mongoose.model('Game');
 
-  socket.on('chat message', function(data){
-    var date = new Date()
-    var Chat = mongoose.model('Chat');
-
+  socket.on('chat message', function (data){
     var formatChat = {
       gameID: data.gameID,
       message: 
         {
           content: data.message,
-          date:  date.toLocaleDateString(),
-          time: date.toLocaleTimeString()
+          date:  data.date,
+          time: data.time
         }
     }
 
     new Chat(formatChat)
       .save()
-      .then(function () {
+      .then(function (chat) {
         console.log('SUCCESS!! NEW CHAT MESSAGES ADDED!');
-
-        var chatRoom = Chat.find({'gameID': data.gameID });
-        
-        chatRoom
-          .then(function (chat) {
-            var messages = [];
-            chat.forEach(function (e) {
-              messages.push(e);
-            })
-
-            console.log(messages)
-
-            var ns = io.of(`/${data.gameID}`);
-            ns.emit('new message', {messages});
-
-          })
-          .catch(function (err) {
-            console.log(`FINDING MESSAGES FROM DB ERROR -> ${err}`)
-          })
-
-      })
-      .catch(function (err) {
-        console.log(`ADDING MESSAGES TO DB ERROR -> ${err}`)
-      })
-
+        updateChat(data , data.gameID);
+      });
   });
   
   socket.on('check ID', function (data) {
-    var games = mongoose.model('Game').find({'gameID': { $in: data.gameIDs }});
+    var games = Game.find({'gameID': { $in: data.gameIDs }});
     
     games
       .then(function (games) {
@@ -116,6 +91,11 @@ io.on('connect', function (socket) {
 
 });
 
+function updateChat (messageContent, gameID) {
+  var ns = io.of(`/${gameID}`);
+  ns.emit('new message', messageContent);
+}
+
 server.listen(process.env.PORT, function (){
     console.log('server is running on: ' + process.env.PORT);
-});
+})

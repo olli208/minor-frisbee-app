@@ -27,28 +27,22 @@
     <% } %> 
     </div>
   </section>
-
-  <section class="header-section--info">
-      <div>
-        <p> <%= h.moment(game.start_time).format('MMMM Do YYYY') %> at <%= new Date(game.start_time).toString().substr(15,6) %> </p>
-      </div>
-
-      <div>
-        <p> <%= game.game_site.name %> </p>
-      </div>
-  </section>
 </header>
+
+<section class="header-section--info">
+  <div>
+    <p> <%= h.moment(game.start_time).format('MMMM Do YYYY') %> at <%= new Date(game.start_time).toString().substr(15,6) %> </p>
+  </div>
+
+  <div>
+    <p> <%= game.game_site.name %> </p>
+  </div>
+</section>
 
 <section class="game-updates" id="x<%= game.id %>">
   <h2><%= game.tournament.name %> - Round <%= game.swiss_round.round_number %></h2>  
   <p><b>Last scoreupdate:</b> <%= h.moment(game.time_last_updated).format('MMMM Do YYYY') %> at <%= new Date(game.time_last_updated).toString().substr(15,6) %> </p>
-</section>
 
-<section class="game-chat" id="game-chat<%= game.id %>">
-  <h2>Gamechat</h2>
-
-  <ul id="chat<%= game.id %>">
-  <!-- Show pop up message after user updates game -->
   <% if(locals.flashes) { %>
     <% var categories =  Object.keys(flashes); %>
     <% categories.forEach(function (cat) { %>
@@ -61,10 +55,24 @@
       <% }) %>
     <% }) %>
   <% } %>
+</section>
+
+<section class="game-chat" id="game-chat<%= game.id %>">
+  <h2>Gamechat</h2>
+
+  <ul id="chat<%= game.id %>">
+    <% messages.forEach(function (obj) { %>
+    <li class="chat-message"> 
+      <p><b>Message:</b></p>
+      <p> <%= obj.message.content %> </p>
+      <span> <%= obj.message.date %> , <%= obj.message.time %> </span>
+    </li>
+    <% }) %>
   </ul>
+
   <form>
-    <input type="text" autocomplete="off" />
-    <input type="submit" class="action-button">
+    <input type="text" autocomplete="off"  placeholder="Comment here!"/>
+    <input type="submit" class="" value="SEND">
   </form>
 </section>
 

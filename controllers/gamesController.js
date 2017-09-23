@@ -2,6 +2,7 @@ var rp = require('request-promise');
 var moment = require('moment');
 var mongoose = require('mongoose');
 var Game = mongoose.model('Game');
+var Chat = mongoose.model('Chat');
 
 var dateFormat = 'YYYY-MM-DDTHH:mm:ss';
 
@@ -119,25 +120,19 @@ function getGamesDB (tournamentID) {
 }
 
 exports.gameUpdate = function (req, res) {
-  chatRoom();
   req.session.gameID = req.params.id;
 
   rp(`http://api.playwithlv.com/v1/games/${req.params.id}/?access_token=${req.session.accessToken}`)
     .then(function (body) {
       var data = JSON.parse(body);
 
-      var score = mongoose.model('Game').find({'gameID': { $in: data.id }});
+      var score = Game.find({'gameID': { $in: data.id }});
 
       score
       .then(function (score) {
         req.session.returnTo = req.path;
 
-        res.render('game-update' , {
-          game: data || 'No game found',
-          accessToken: req.session.accessToken,
-          team1Score: score[0].team_1.score,
-          team2Score: score[0].team_2.score
-        });
+        chat(data , score , req , res)
 
       })
       .catch(function (err) {
@@ -150,8 +145,27 @@ exports.gameUpdate = function (req, res) {
     });
 }
 
-function chatRoom() {
-  io.on('chat message', function(msg){
-    console.log(msg)
-  });
+function chat(data , score , req, res ) {
+    var chatRoom = Chat.find({'gameID': data.id });
+    
+    chatRoom
+      .then(function (chat) {
+        var messages = [];
+  
+        chat.forEach(function (e) {
+          messages.push(e);
+        })
+  
+        res.render('game-update' , {
+          game: data || 'No game found',
+          accessToken: req.session.accessToken,
+          team1Score: score[0].team_1.score,
+          team2Score: score[0].team_2.score,
+          messages: messages.reverse() || ''
+        });
+
+      })
+      .catch(function (err) {
+        console.log(`FINDING MESSAGES FROM DB ERROR -> ${err}`)
+      })
 }

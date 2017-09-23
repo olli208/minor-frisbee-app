@@ -32,7 +32,7 @@ h2 {
 }
 
 h3 {
-    font-size: 1.28em;
+    font-size: 1.2em;
 }
 
 h4 {
@@ -40,7 +40,7 @@ h4 {
 }
 
 p {
-    font-size: 0.95em
+    /* font-size: 0.99em */
 }
 
 section {
@@ -116,7 +116,7 @@ input {
 body {
     font: 1em 'roboto', Arial;
     background: #f9f9f9;
-    min-height: 100vh;
+    /* min-height: 100vh; */
 }
 
 .intro {
@@ -258,6 +258,9 @@ header h2 {
 */
 .header-section-score {
     display: block;
+    position: fixed;
+    top: 0;
+    z-index: 1;
 }
 
 .header-nav {
@@ -301,12 +304,12 @@ header h2 {
     background: #fff;
     border-radius: 5px;  
     text-align: center; 
-    padding: 0.5em;
-    width: 100%;
+    padding: 0.4em;
     margin: 0;
 }
 
 .header-section--info {
+    margin-top: 11em;
     display: flex;
     justify-content: space-around;
     background: #42A5F5;
@@ -334,23 +337,79 @@ header h2 {
 }
 
 .game-updates, .game-chat {
-    background: pink;
     padding: 0 0.25em;
 }
 
-.game-updates ul {
-    padding: 0;
-}
-
-.game-updates li {
+.game-chat li {
     list-style: none;
     background: #fff;
-    padding: 0.25em;
     margin-bottom: 1em;
 }
 
-.game-chat ul {
+.game-chat li p {
+    margin: 0;
     padding: 0;
+}
+
+.game-chat {
+    height: 50vh;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.game-chat h2 {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.game-chat ul {
+    /* EXPERIMENT: ____________________*/
+    -webkit-mask-image: -webkit-gradient(linear, left top, left bottom,  
+        from(rgba(0,0,0,1)), 
+        to(rgba(0,0,0,0)), 
+        color-stop(0.5, #eee));
+    /* _________________ */
+    width: 100%;
+    padding: 0;
+    overflow: auto;
+    height: 80%;
+    /* flex-direction: column-reverse; */
+}
+
+.game-chat form {
+    position: fixed;
+    bottom: 0; 
+    width: 100%;
+    padding: 0.5em;
+    margin: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.game-chat form input {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    height: 3em;
+}
+
+.game-chat form input[type="text"] {
+    width: 80%;
+    padding: 1.5em 1em;
+    font-family: 'roboto';
+    border: 1px solid #FF8A65;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+
+.game-chat form input[type="submit"] {
+    width: 20%;
+    background: #FF8A65;
+    color: #fff;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
 }
 
 .chat-message {
@@ -423,6 +482,10 @@ header h2 {
     height: 100vh;
 }
 
+.scoreboard {
+    padding-top: 2em!important;
+}
+
 .scoreboard .add-score {
     width: 100%;
     border: 0;
@@ -487,7 +550,7 @@ fieldset {
     padding: 1em;
 }
 
-input[type="submit"] {
+.score-update input[type="submit"] {
     color: #fff;
     width: 100%;
     margin-top: 3em;
