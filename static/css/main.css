@@ -415,7 +415,6 @@ header h2 {
 
 .game-chat form input[type="text"] {
     width: 80%;
-    padding: 1.5em 1em;
     font-family: 'roboto';
     border: 1px solid #FF8A65;
     border-top-left-radius: 50px;
