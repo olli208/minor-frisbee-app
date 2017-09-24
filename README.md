@@ -57,6 +57,18 @@ Since I'm using a test environment for the API (playwithlv) I have to get data f
 becomes:
 `http://api.playwithlv.com/v1/games/?team_ids=(TEAMIDS)&access_token=(ACCESSTOKEN)`
 
+### Courses implemented from the minor
+- CSS To The Resque.
+Using some new CSS features like flexbox. Trieed to do some experimental stuff like CSS snap points but that seems to be only supported in Frefox and partly by Safari.
+
+- Performance matters.
+Built 90% with node.js and added offline message, when there is no connection. Implemented mongoDB to reduce stress to API.
+
+- Web App From Scratch.
+Although it's 90% node.js the client side JavaScript is writen in the way we learned it, object oriented.
+
+- Real-Tim Web.
+The app utilises websockets to give the user realtime updates when a team scores.
 
 ## Install the app
 To see it live and go trough the Oauth flow your self clone this repo, run the following command in the terminal
@@ -75,10 +87,11 @@ var client_id = (your client id)
 var client_secret = (your client secret)
 REDIRECT_URI = "http://localhost:8000/callback"
 PORT=8000
-FAKE_DATE=2015-06-12T08:00:00.427144+02:00
+FAKE_DATE=2015-06-12T08:00:00.427144+02:00 
 DATABASE=mongodb://(USERNAME):(PASSWORD)@ds129342.mlab.com:29342/windmill-frisbee
 
 ```
+###### \* You can change the 'FAKE_DATE' to experiment with the time to see which games you get.
 
 Then
 ```
