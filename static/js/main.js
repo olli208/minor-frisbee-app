@@ -143,7 +143,6 @@
           '<p>'+ data.message +'</p>' +
           '<span>'+ data.date + ', ' + data.time +'</span>';
   
-        // oldMessages.appendChild(newMessage);
         oldMessages.insertBefore(newMessage, oldMessages.childNodes[0]);
       });
     }
