@@ -220,6 +220,7 @@ header h2 {
     justify-content: space-around;
     width: 100%;
     background: #12A6FF;
+    min-height: 5em;
 }
 
 .team-quick-info div img {
@@ -230,7 +231,7 @@ header h2 {
     border: .2em solid #12A6FF;
     width: 6em;
     position: absolute;
-    bottom: -3em;
+    bottom: -1.5em;
     box-shadow: 0 2px 0 0 rgba(0,0,0,0.1);
 }
 
@@ -253,6 +254,19 @@ header h2 {
     background: #fff;
 }
 
+.next-game {
+    background: #FF8A65;
+    padding: 1em;
+}
+
+.next-game h2 ,.next-game h3,.next-game p ,.next-game a {
+    color: #fff;
+}
+
+.next-game h4 {
+    display: inline;
+}
+
 /*
     Update game page (Score)
 */
@@ -273,7 +287,7 @@ header h2 {
     margin: 0.25em;
 }
 
-.header-section--score{
+.header-section--score {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -286,6 +300,10 @@ header h2 {
 .header-section--score .team {
     justify-content: center;
     width: 33%;
+}
+
+.header-section--score .team a {
+    text-decoration: none;
 }
 
 .header-section--score .team h3 {
@@ -455,8 +473,18 @@ header h2 {
 }
 
 .nav {
-    padding: 1em 1em 0 1em;
+    padding: 1em;
     background: #2196F3;
+}
+
+.nav h3 {
+    padding: 0;
+    margin: 0;
+    color: #fff;
+}
+
+.nav-update {
+    padding: 1em 1em 0 1em;
 }
 
 .score-update div:first-of-type h3, .nav h3 {

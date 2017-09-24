@@ -5,21 +5,9 @@
 
   var app = {
     init: function() {
-      preventFormSubmit.innit();
       score.add();
       flashMessage.close();
       realTime.innit();
-    }
-  }
-
-  var preventFormSubmit = {
-    innit: function () {
-      if (document.querySelector('input[type="submit"]')) {
-        // document.querySelector('input[type="submit"]').addEventListener('click' , function (e) {
-        //   console.log(e)
-        //   e.preventDefault();
-        // })
-      }      
     }
   }
 

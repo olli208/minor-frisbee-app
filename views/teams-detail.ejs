@@ -2,8 +2,13 @@
 
 <header class="header-section">
   <section>
-    <div class="header-section">
-      <h2> <%= data.name %> </h2>
+    <div class="nav">
+      <a href="/games"><img class="back-btn" src="/img/arrow.svg"></a>  
+      <% if (data.name.split(" ").length > 4 ) { %>
+        <h3> <%= data.short_name %> </h3>
+        <% } else { %>
+        <h3> <%= data.name %> </h3>
+      <% } %>
     </div>
 
     <div class="team-quick-info">
@@ -24,21 +29,35 @@
   </section>
 </header>
 
+<section class="next-game">
+  <div class="">
+    <h2>Next game - ROUND <%= next.swiss_round.round_number %></h2>
+        
+    <div class="info">
+      <% if (next.team_1.short_name === data.short_name ) { %>
+        <h3> vs. <a href="/teams/<%= next.team_2_id %>"><%= next.team_2.short_name %></a></h3>
+      <% } else if (next.team_2.short_name === data.short_name) { %> 
+        <h3> vs. <a href="/teams/<%= next.team_1_id %>"><%= next.team_1.short_name %></a></h3>
+      <% } %>
+      <p> <b><%= h.moment(next.start_time).format('dddd Do') %> , <%= new Date(next.start_time).toString().substr(15,6) %> - </b> <%= next.game_site.name %></p>
+    </div>
+  </div>
+</section>
+
 <section class="team-desc">
   <h2>About</h2>
   <p>
-    <%= data.info %>
+    <%= data.info  %>
   </p>
 </section>
 
-<section>
-  <div class="background team-games">
-    <h2>Games Played</h2>
-    <ul class="gameslist gamelist__teampage">
+<section class="team-games">
+  <h2>Games Played</h2>    
+    <ul class="gameslist">
       <% games.forEach(function (obj) { %>
-      <li>
+      <li class="boxshadow">
         <h3 class="tournament-info">ROUND <%= obj.swissRoundNumber %> - @<%= obj.tournamentStyle %></h3>
-        <a href="#">
+        <a href="#" class="game">
           <div class="team1">
             <h4><%= obj.team_1.name %></h4>
             <h4><span><%= obj.team_1.score %></span></h4>
@@ -57,39 +76,6 @@
       </li>
       <% }) %>
     </ul>
-  </div>
-</section>
-
-<section>
-  <div class="background team-games">
-    <h2>Next game</h2>
-    <ul class="gameslist">
-      <li class="boxshadow">
-        <h3 class="tournament-info">ROUND <%= next.swiss_round.round_number %> - @<%= next.tournament.name %></h3>
-        <a href="/update/<%= next.id %>">
-
-          <div class="team1">
-            <h4> <%= next.team_1.short_name %> </h4>
-            <h4><span>-</span></h4>
-          </div>
-
-          <div class="info">
-            <p> <b><%= h.moment(next.start_time).format('dddd Do') %></b></p>
-            <p> <b><%= new Date(next.start_time).toString().substr(15,6) %></b></p>
-          </div>
-
-          <div class="team2">
-            <h4> <%= next.team_2.short_name %></h4>
-            <h4><span>-</span></h4>
-          </div>
-
-        </a>
-        <% if (next.game_site) { %>
-        <p class="game-location"><%= next.game_site.name %></p>
-        <% } %>
-      </li>
-    </ul>
-  </div>
 </section>
 
 <% include partials/footer.ejs %>

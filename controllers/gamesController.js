@@ -76,13 +76,13 @@ function gamesToDB (games, tournamentID) {
       gameID: obj.id,
       team_1: {
         score: obj.team_1_score,
-        name: obj.team_1.name,
+        name: obj.team_1.short_name,
         teamID: obj.team_1.id,
       },
       team_2: {
         score: obj.team_2_score,
-        name: obj.team_2.name,
-        teamID: obj.team_1.id,
+        name: obj.team_2.short_name,
+        teamID: obj.team_2.id,
       },
       startTime: moment(obj.start_time).format(dateFormat) + '.427Z',
       swissRoundId: obj.swiss_round.id,

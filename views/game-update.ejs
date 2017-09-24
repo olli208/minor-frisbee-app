@@ -1,14 +1,14 @@
 <% include partials/head.ejs %>
 
 <header class="header-section header-section-score">
-  <div class="nav">
+  <div class="nav nav-update">
     <a href="/games"><img class="back-btn" src="/img/arrow.svg"></a>   
     <h3>Game Overview</h3>
   </div>
 
   <section class="header-section--score">
     <div class="team team-1">
-      <h3><%= game.team_1.name %></h3>
+      <a href="/teams/<%= game.team_1_id %>"><h3><%= game.team_1.name %></h3></a>
     </div>
 
     <div class="game-score">
@@ -16,7 +16,7 @@
     </div>
 
     <div class="team team-2">
-      <h3><%= game.team_2.name %></h3>
+      <a href="/teams/<%= game.team_2_id %>"><h3><%= game.team_2.name %></h3></a>
     </div>
 
     <div class="update-login-btn">
