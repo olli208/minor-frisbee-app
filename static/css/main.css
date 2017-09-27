@@ -419,6 +419,7 @@ header h2 {
     border: 1px solid #FF8A65;
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
+    padding: 0 1em; 
 }
 
 .game-chat form input[type="submit"] {

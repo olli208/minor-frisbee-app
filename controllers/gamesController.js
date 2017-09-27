@@ -71,6 +71,7 @@ function tournamentNameShort(name) {
 }
 
 function gamesToDB (games, tournamentID) {
+  console.log(games)
   games.forEach(function (obj) {
     var formatGame = {
       gameID: obj.id,
