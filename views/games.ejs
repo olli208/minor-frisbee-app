@@ -35,11 +35,11 @@
 <% } %>
 
 <section class="team-games">
-    <h2>Round 1 - active games</h2>
+    <h2>ROUND 1 - active games</h2>
     <ul class="gameslist">
       <% games.forEach(function (obj) { %>
       <li class="boxshadow">
-        <h3 class="tournament-info">ROUND <%= obj.swiss_round.round_number %> - @<%= obj.tournament.name %></h3>
+        <h3 class="tournament-info"><%= obj.tournament.name %></h3>
         <a href="/update/<%= obj.id %>" class="game" id="<%= obj.id %>">
 
           <div class="team1">

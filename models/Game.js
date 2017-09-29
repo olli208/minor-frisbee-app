@@ -15,7 +15,7 @@ var gamesSchema = new mongoose.Schema({
     name: String,
     teamID: String
   },
-  startTime: String,
+  startTime: Date,
   swissRoundId: String,
   swissRoundNumber: String,
   gameSite: String,

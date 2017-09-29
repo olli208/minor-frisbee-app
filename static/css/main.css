@@ -186,7 +186,7 @@ header h2 {
     padding: 0.65em 1.25em;
     border: 0;
     margin: 0.3em 0;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     text-transform: uppercase;
     border-radius: 500px;
     background: #42A5F5;
@@ -473,7 +473,7 @@ header h2 {
 }
 
 .nav {
-    padding: 1em;
+    padding: 1em 0.5em;
     background: #2196F3;
 }
 
@@ -659,7 +659,7 @@ input[type="checkbox"]:focus + label::before {
 
 .gameslist {
     box-sizing: border-box;
-    margin-bottom: 2em;
+    margin: 0 0 2em 0;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
@@ -670,11 +670,10 @@ input[type="checkbox"]:focus + label::before {
     list-style: none;
     min-height: 12em;
     margin-bottom: 2em;
-    width: 98%;
+    width: 100%;
     background: #fff;
     border: 1px solid rgba(0,0,0,0.1);
     position: relative;
-    border-radius: 5px;
 }
 
 @media (min-width: 66em) {
@@ -706,14 +705,13 @@ gamelist li a {
     border-bottom-right-radius: inherit;
     padding: 0.5em 0.5em;
     margin: 0;
-    border: 1px solid #FF8A65;
-    /*color: #fff;*/
-    font-weight: 700;
-
+    background: #E0E0E0;
 }
 
 .team-games h2:first-of-type {
-    padding: 0.5em;
+    padding: 0.5rem;
+    background: blue;
+    margin: 0;
 }
 
 .gameslist a {
@@ -746,7 +744,7 @@ gameslist p {
     display: flex;
     flex-wrap: wrap;
     text-align: center;
-    width: 4em;
+    width: 5em;
 }
 
 .gameslist .info * {
