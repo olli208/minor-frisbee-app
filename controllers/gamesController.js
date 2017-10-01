@@ -71,8 +71,9 @@ function gamesToDB (games, tournamentID) {
   games.forEach(function (obj) {
     var formatGame = {
       gameID: obj.id,
+      team_1_score: obj.team_1_score,
+      team_2_score: obj.team_2_score,
       team_1: {
-        score: obj.team_1_score,
         name: obj.team_1.short_name,
         teamID: obj.team_1.id,
       },
@@ -156,8 +157,8 @@ function chat(data , score , req, res ) {
         res.render('game-update' , {
           game: data || 'No game found',
           accessToken: req.session.accessToken,
-          team1Score: score[0].team_1.score,
-          team2Score: score[0].team_2.score,
+          team1Score: score[0].team_1_score,
+          team2Score: score[0].team_2_score,
           messages: messages.reverse() || ''
         });
 

@@ -17,11 +17,8 @@ exports.getTeamDetail = function (req, res) {
           console.log('DATA for teamdetail page -> ', games)
           var lastGame = new Date(Math.max.apply(null, games.map(function(e) {
             var x = new Date(e.startTime)
-            console.log('HUHHHHHHH!!!!!' , x , e.startTime)
             return x
           })));
-
-          console.log('TIME FROM DB', lastGame);
 
           var tournamentIDS = games.map(function (obj) {
             return obj.tournamentID

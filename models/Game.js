@@ -5,13 +5,13 @@ mongoose.Promise = global.Promise;
 var gamesSchema = new mongoose.Schema({
   // Schema's go here.
   gameID: { type: String, unique: true },
+  team_1_score: Number,
+  team_2_score: Number,
   team_1: {
-    score: Number,
     name: String,
     teamID: String
   },
   team_2: {
-    score: Number,
     name: String,
     teamID: String
   },

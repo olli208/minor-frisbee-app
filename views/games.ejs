@@ -38,26 +38,30 @@
     <h2>ROUND 1 - active games</h2>
     <ul class="gameslist">
       <% games.forEach(function (obj) { %>
+      <p> <b><%= h.moment(obj.start_time).format('dddd Do') %></b></p>
       <li class="boxshadow">
-        <h3 class="tournament-info"><%= obj.tournament.name %></h3>
+        <div class="tournament-info">
+          <p class=""><%= obj.tournament.name %></p>
+          <p><%= new Date(obj.start_time).toString().substr(15,6) %> </p>
+        </div>
+        
         <a href="/update/<%= obj.id %>" class="game" id="<%= obj.id %>">
 
-          <div class="team1">
-            <h4 <% winners.forEach(function (winner) { if (winner.short_name === obj.team_1.short_name) { %> class="game-winner" <% }}) %> >
+          <div class="team team1">
+            <p <% winners.forEach(function (winner) { if (winner.short_name === obj.team_1.short_name) { %> class="game-winner" <% }}) %> >
               <%= obj.team_1.short_name %>
-            </h4>
+            </p>
             <h4><span><%= obj.team_1_score %></span></h4>
           </div>
 
           <div class="info">
-            <p> <b><%= h.moment(obj.start_time).format('dddd Do') %></b></p>
-            <p> <b><%= new Date(obj.start_time).toString().substr(15,6) %></b></p>
+            <p> <b>-</b></p>
           </div>
 
-          <div class="team2">
-            <h4 <% winners.forEach(function (winner) { if (winner.short_name === obj.team_2.short_name) { %> class="game-winner" <% }}) %>>
+          <div class="team team2">
+            <p <% winners.forEach(function (winner) { if (winner.short_name === obj.team_2.short_name) { %> class="game-winner" <% }}) %> >
               <%= obj.team_2.short_name %>
-            </h3>
+            </p>
             <h4><span><%= obj.team_2_score %></span></h4>
           </div>
 

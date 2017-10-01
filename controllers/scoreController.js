@@ -71,12 +71,12 @@ function postUpdate (req, res) {
 
 function storeToDB (team1, team1_score, team2, team2_score, gameID, req, res ) {
   var scoreUpdate = {
-    team_1: {score: team1_score},
-    team_2: {score: team2_score}
+    team_1_score: team1_score,
+    team_2_score: team2_score,
   }
 
   var game = Game.findOneAndUpdate(
-    {gameID: gameID},
+    {'gameID': gameID},
     scoreUpdate,
     {new: true}).exec();
 

@@ -91,8 +91,8 @@
 
         var gamesList = document.getElementById(games[key].gameID);
                 
-        gamesList.querySelector('.team1 h4 span').innerHTML = games[key].team_1.score;          
-        gamesList.querySelector('.team2 h4 span').innerHTML = games[key].team_2.score;        
+        gamesList.querySelector('.team1 h4 span').innerHTML = games[key].team_1_score;          
+        gamesList.querySelector('.team2 h4 span').innerHTML = games[key].team_2_score;        
 
       }
     },
