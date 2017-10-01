@@ -14,7 +14,7 @@ var scoreController = require('../controllers/scoreController');
 var swissRankController = require('../controllers/swissRankController');
 
 // Oauth
-router.get('/', gamesController.getGames);
+router.get('/', indexController.index);
 router.get('/confirm', indexController.confirmOauth);
 router.get('/login', loginController.login);
 router.get('/callback', loginController.callback);

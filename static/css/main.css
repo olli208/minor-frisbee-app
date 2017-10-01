@@ -114,11 +114,38 @@ input {
 body {
     font: 1em 'roboto', Arial;
     background: #f9f9f9;
-    /* min-height: 100vh; */
 }
 
 .intro {
-    min-height: 100vh;
+    padding: 5em 0.5em 0 0.5em;
+    background: #2196F3;
+    margin: 0;
+    height: 100vh;
+    margin: 0 auto;
+}
+
+.intro h1 {
+    margin: 0;
+}
+
+.intro h2 {
+    color: #fff;
+}
+
+.intro h1 > span {
+    background: #fff;
+    color: #2196F3;
+    padding: 0 0.5em 0 0;
+}
+
+.intro > .division-select  {
+    padding: 0;
+}
+
+.intro > .division-select button {
+    background: #fff;
+    color: #2196F3;
+    margin: 0;
 }
 
 header {
