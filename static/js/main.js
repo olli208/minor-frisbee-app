@@ -8,6 +8,37 @@
       score.add();
       flashMessage.close();
       realTime.innit();
+      navTabs.innit();
+    }
+  }
+
+  var navTabs = {
+    innit: function() {
+      var self = this;
+
+      var buttonPressed = document.querySelector('.header-tabs');
+      buttonPressed.addEventListener('click' , self.toggle)
+
+    },
+    toggle: function(e) {
+      var swissStandings = document.querySelector('.swiss-standings');
+      var games = document.querySelector('.team-games');
+
+      if (e.target.textContent === 'Games') {
+        swissStandings.classList.add('hide');
+        games.classList.remove('hide');
+
+        document.querySelector('.header-tabs_games').classList.add('active');
+        document.querySelector('.header-tabs_rankings').classList.remove('active');
+        document.querySelector('.division-select').classList.remove('hides');
+      } else if (e.target.textContent === 'RANKINGS') {
+        games.classList.add('hide');
+        swissStandings.classList.remove('hide');
+
+        document.querySelector('.header-tabs_games').classList.remove('active');
+        document.querySelector('.header-tabs_rankings').classList.add('active');
+        document.querySelector('.division-select').classList.add('hides');
+      }
     }
   }
 

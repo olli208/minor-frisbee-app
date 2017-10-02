@@ -5,12 +5,14 @@
     <div class="nav">
       <h3>Overview - <%= tournamentLong %></h3>
     </div>
+
     <div class="header-tabs">
       <ul>
-        <li class="active"><a href="#">Games</a></li>
-        <li class=""><a href="/swiss-standings/<%= games[0].swiss_round_id %>">Rankings</a></li>
+        <li class="active header-tabs_games"><button>Games</button></li>
+        <li class="header-tabs_rankings"><button>RANKINGS</button></li>
       </ul>
     </div>
+
   </section>
 </header>
 
@@ -34,47 +36,79 @@
   <% }) %>
 <% } %>
 
-<section class="team-games">
-    <h2>ROUND 1 - active games</h2>
-    <ul class="gameslist">
-      <% games.forEach(function (obj) { %>
-      <p> <b><%= h.moment(obj.start_time).format('dddd Do') %></b></p>
-      <li class="boxshadow">
-        <div class="tournament-info">
-          <p class=""><%= obj.tournament.name %></p>
-          <p><%= new Date(obj.start_time).toString().substr(15,6) %> </p>
-        </div>
-        
-        <a href="/update/<%= obj.id %>" class="game" id="<%= obj.id %>">
-
-          <div class="team team1">
-            <p <% winners.forEach(function (winner) { if (winner.short_name === obj.team_1.short_name) { %> class="game-winner" <% }}) %> >
-              <%= obj.team_1.short_name %>
-            </p>
-            <h4><span><%= obj.team_1_score %></span></h4>
+<div class="content">
+  <section class="team-games boxshadow">
+      <h2><span>Round 1</span></h2>
+      <p>Today, <%= h.moment(games[0].start_time).format('dddd Do') %></p>
+      <ul class="gameslist">
+        <% games.forEach(function (obj) { %>
+        <li class="boxshadow">
+          <div class="tournament-info">
+            <p class=""><%= obj.tournament.name %></p>
+            <p><%= new Date(obj.start_time).toString().substr(15,6) %> </p>
           </div>
+          
+          <a href="/update/<%= obj.id %>" class="game" id="<%= obj.id %>">
 
-          <div class="info">
-            <p> <b>-</b></p>
+            <div class="team team1">
+              <p <% winners.forEach(function (winner) { if (winner.short_name === obj.team_1.short_name) { %> class="game-winner" <% }}) %> >
+                <%= obj.team_1.short_name %>
+              </p>
+              <h4><span><%= obj.team_1_score %></span></h4>
+            </div>
+
+            <div class="info">
+              <p> <b>-</b></p>
+            </div>
+
+            <div class="team team2">
+              <p <% winners.forEach(function (winner) { if (winner.short_name === obj.team_2.short_name) { %> class="game-winner" <% }}) %> >
+                <%= obj.team_2.short_name %>
+              </p>
+              <h4><span><%= obj.team_2_score %></span></h4>
+            </div>
+
+          </a>
+          <% if (obj.game_site.name) { %>
+          <p class="game-location"><%= obj.game_site.name %></p>
+          <% } %>
+        </li>
+        <% }) %>
+      </ul>
+
+      <h2><span>Round 2</span></h2>
+      <p>Today, Friday 12th</p>
+      <ul class="gameslist">
+        <li class="boxshadow">
+          <div class="tournament-info">
+            <p class="">Windmill</p>
+            <p> 15:00 </p>
           </div>
+          
+          <a href="" class="game">
 
-          <div class="team team2">
-            <p <% winners.forEach(function (winner) { if (winner.short_name === obj.team_2.short_name) { %> class="game-winner" <% }}) %> >
-              <%= obj.team_2.short_name %>
-            </p>
-            <h4><span><%= obj.team_2_score %></span></h4>
-          </div>
+            <div class="team team1">
+              <p>Germany Mixed</p>
+              <h4><span>-</span></h4>
+            </div>
 
-        </a>
-        <% if (obj.game_site.name) { %>
-        <p class="game-location"><%= obj.game_site.name %></p>
-        <% } %>
-      </li>
-      <% }) %>
-    </ul>
+            <div class="info">
+              <p> <b>-</b></p>
+            </div>
 
-    <h2>Round 2</h2>
+            <div class="team team2">
+              <p> IA </p>
+              <h4><span>-</span></h4>
+            </div>
 
-</section>
+          </a>
+          <p class="game-location">Field 1</p>
+        </li>
+      </ul>
+  </section>
+
+  <% include swiss-standings.ejs %>
+</div>
+
 
 <% include partials/footer.ejs %>

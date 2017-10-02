@@ -1,37 +1,18 @@
-<% include partials/head.ejs %>
-
-<header class="header-section">
-  <section>
-    <div class="nav">
-      <h3><%= tournamentLong %></h3>
-    </div>
-
-    <div class="header-tabs">
-      <ul>
-        <li class=""><a href="/games">Games</a></li>
-        <li class="active"><a href="/swiss-standings/<%= games[0].swiss_round_id %>">Rankings</a></li>
-      </ul>
-    </div>
-  </section>
-</header>
-
 <section class="swiss-standings">
-  <h2>SWISS ROUND <%= round_number %> - <%= tournamentShort %></h2>
-  <p>Last updated: <%= h.moment(lastUpdate) %></p>
+  <h2>Rankings</h2>
   <table>
     <tr>
       <th></th>
-      <th>TEAM</th>
-      <th>Swiss Points</th>
+      <th><p>Team</p></th>
+      <th><p>Points</p></th>
     </tr>
     <% data.forEach(function (obj) { %>
     <tr>
-      <td><%= obj.ranking %>.</td>
-      <td><a href="/teams/<%= obj.team.id %>"><%= obj.team.short_name %></a></td>
-      <td><%= obj.swiss_score %></td>
+      <td><p><%= obj.ranking %>.</p></td>
+      <td><a href="/teams/<%= obj.team.id %>"><p><%= obj.team.short_name %></p></section></td>
+      <td><p><%= obj.swiss_score %></p></td>
     </tr>
     <% }) %>
   </table>
+  <p>Last updated: <%= h.moment(lastUpdate) %></p>
 </section>
-
-<% include partials/footer.ejs %>

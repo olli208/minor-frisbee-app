@@ -49,13 +49,49 @@ exports.getGames = function (req, res) {
 
       gamesToDB(data.objects , tournamentID);
 
-      res.render('games', {
+      var info = {
         games: data.objects || {},
         tournamentLong: tournamentName,
         tournamentShort: tournamentNameShort(tournamentName),
         winners
-      })
+      }
 
+      return info
+
+      // res.render('games', {
+      //   games: data.objects || {},
+      //   tournamentLong: tournamentName,
+      //   tournamentShort: tournamentNameShort(tournamentName),
+      //   winners
+      // })
+    })
+    .then(function (info) {
+      console.log(info.games[0].swiss_round_id);
+      rp(`http://api.playwithlv.com/v1/swiss_rounds/?swiss_round_ids=%5B${info.games[0].swiss_round_id}%5D&access_token=${req.session.accessToken}`)
+      .then( function (body) { 
+        var swissRank = JSON.parse(body);
+        var swissStandings = swissRank.objects[0];
+        var swissStandingsSort = swissStandings.standings.sort((a , b) => parseInt(b.ranking) > parseInt(a.ranking) ? -1 : 1);
+
+        var tournamentName = swissRank.objects.map(function(obj) {
+          return obj.tournament.name
+        }).filter(function(elem, pos, arr) {
+          return arr.indexOf(elem) == pos;
+        });
+
+        res.render('games', {
+          games: info.games || {},
+          tournamentLong: info.tournamentLong,
+          tournamentShort: tournamentNameShort(info.tournamentLong),
+          winners: info.winners,
+          round_number: swissStandings.round_number,
+          round_id: swissStandings.id,
+          data: swissStandingsSort,
+          lastUpdate: swissStandings.time_last_updated,
+          tournamentLong: tournamentName,
+          tournamentShort: tournamentNameShort(tournamentName)
+        })
+      })
     })
     .catch(function (err) {
       console.log('error getting GAMES', err);

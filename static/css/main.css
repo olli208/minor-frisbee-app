@@ -38,7 +38,7 @@ h4 {
 }
 
 p {
-    /* font-size: 0.99em */
+    font-size: 0.94em;
 }
 
 section {
@@ -83,7 +83,7 @@ input {
 @media (min-width: 40em) {
     section {
         margin: 0 auto;
-        width: 55vw!important;
+        width: 55vw;
     }
 
     #lightbox {
@@ -105,15 +105,15 @@ input {
     h4 {
         font-size: 1.10em;
     }
-
-    p {
-        font-size: 1em
-    }
 }
 
 body {
     font: 1em 'roboto', Arial;
     background: #f9f9f9;
+}
+
+.content {
+    margin-top: 2em;
 }
 
 .intro {
@@ -188,20 +188,23 @@ header h2 {
     width: 50%;
     text-align: center;
     color: #fff;
-    padding: 1em;
 }
 
-.header-tabs li a {
+.header-tabs li button  {
     color: #fff;
     text-decoration: none;
     text-transform: uppercase;
+    border: none;
+    background: inherit;
+    width: 100%;
+    padding: 1em;
 }
 
 .header-tabs li.active {
     border-bottom: .3em solid #fff;
 }
 
-.division-select{
+.division-select {
     display: flex;
     justify-content: space-around;
     padding: 0.5em 0;
@@ -683,12 +686,12 @@ input[type="checkbox"]:focus + label::before {
 }
 
 .gameslist {
+    padding: 0;
     box-sizing: border-box;
-    margin: 0 0 2em 0;
-    padding: 0 0.5em;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
+    margin-bottom: 2em;
 }
 
 .gameslist li {
@@ -699,6 +702,7 @@ input[type="checkbox"]:focus + label::before {
     border: 1px solid rgba(0,0,0,0.1);
     position: relative;
     border-radius: 5px;
+    margin-bottom: 3em;
 }
 
 @media (min-width: 66em) {
@@ -708,7 +712,6 @@ input[type="checkbox"]:focus + label::before {
 
     .gameslist li {
         width: 48%;
-        margin: 2em 0.2em;
     }
 }
 
@@ -742,11 +745,31 @@ gamelist li a {
     margin: 0;
 }
 
-.team-games h2:first-of-type {
-    padding: 0.5rem;
-    background: blue;
-    margin: 0;
+.team-games {
+    background: #fff;
+    padding: 0.5em;
+    display: flex;
+    flex-wrap: wrap;
 }
+
+.team-games h2:first-of-type {
+    margin: 0;
+    width: 100%;
+}
+
+.team-games p {
+    width: 100%;
+}
+
+ .gamelist-date {
+     width: 100%;
+     background: yellowgreen;
+     margin: 0;
+ }
+
+ .gameslist {
+     width: 100%;
+ }
 
 .gameslist a {
     display: flex;
@@ -763,15 +786,6 @@ gamelist li a {
 
 .gameslist a * {
     padding: 0;
-}
-
-/* .gameslist h4 {
-    margin: 1em 0;
-} */
-
-gameslist p {
-    padding: 0.5em;
-    margin: 0;
 }
 
 .gameslist .info {
@@ -810,15 +824,14 @@ gameslist p {
 /*
     Swiss score section
 */
-table {
-    border-collapse: collapse;
-}
 
 .swiss-standings {
     padding: 0.5em;
+    background: #fff;
 }
 
 .swiss-standings table {
+    border-collapse: collapse;
     width: 100%;
     background: #fff;
     padding: 0.25em;
@@ -838,6 +851,10 @@ table {
     height: 3em;
 }
 
+.swiss-standings a {
+    text-decoration: none;
+}
+
 .swiss-standings td * {
     color: #666;
 }
@@ -852,6 +869,53 @@ tr:first-of-type {
     border-bottom: 1px solid #FF8A65;
  }
 
- .hide {
-     display: none;
- }
+
+ @media (min-width: 75em) { 
+    .division-select {
+        display: flex!important;
+    }
+
+     .content {
+         display: flex;
+         justify-content: center;
+     }
+
+    .swiss-standings {
+        display: block!important;
+        width: 25%;
+        margin: 0;
+        border-left: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .swiss-standings h2 {
+        margin: 0;
+    }
+
+    .swiss-standings td {
+        padding: 0.25em;
+    }
+
+    .header-tabs {
+        display: none;
+    }
+
+    .team-games {
+        display: block!important;
+        width: 50%;
+        margin: 0;
+    }
+
+    section {
+        margin: 0 auto;
+        width: 75vw;
+    }
+}
+
+
+.hide {
+    display: none;
+}
+
+.hides {
+    opacity: 0;
+}
