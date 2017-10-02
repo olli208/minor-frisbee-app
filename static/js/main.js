@@ -9,6 +9,33 @@
       flashMessage.close();
       realTime.innit();
       navTabs.innit();
+      compactView.innit();
+    }
+  }
+
+  var compactView = {
+    innit: function () {
+      var self = this;
+      var viewToggle = document.querySelector('.switch input');
+      viewToggle.addEventListener('click' , self.toggle)
+
+    },
+    toggle: function() {  
+      var elemCompact = document.querySelector('.gamelist__compact'); 
+      var elemDetail = document.querySelector('.gamelist__detail');  
+      var toggle = document.querySelector('.switch input'); 
+
+      console.log(toggle.checked)
+      if (toggle.checked === true) {
+        elemCompact.classList.remove('hide');
+        elemDetail.classList.add('hide');
+
+      } else if (toggle.checked === false) {
+        elemCompact.classList.add('hide');
+        elemDetail.classList.remove('hide');
+
+      }
+      // document.querySelector('.switch input').checked ? this.compactView : this.detailView;
     }
   }
 
@@ -30,14 +57,12 @@
 
         document.querySelector('.header-tabs_games').classList.add('active');
         document.querySelector('.header-tabs_rankings').classList.remove('active');
-        document.querySelector('.division-select').classList.remove('hides');
       } else if (e.target.textContent === 'RANKINGS') {
         games.classList.add('hide');
         swissStandings.classList.remove('hide');
 
         document.querySelector('.header-tabs_games').classList.remove('active');
         document.querySelector('.header-tabs_rankings').classList.add('active');
-        document.querySelector('.division-select').classList.add('hides');
       }
     }
   }

@@ -729,8 +729,7 @@ gamelist li a {
 
 .tournament-info p {
     padding: 0;
-    margin: 0;
-   
+    margin: 0;   
 }
 
 .tournament-info p:first-of-type { 
@@ -743,6 +742,7 @@ gamelist li a {
     position: absolute;
     width: 100%;
     margin: 0;
+    bottom: 0;
 }
 
 .team-games {
@@ -750,6 +750,7 @@ gamelist li a {
     padding: 0.5em;
     display: flex;
     flex-wrap: wrap;
+    position: relative;
 }
 
 .team-games h2:first-of-type {
@@ -757,7 +758,7 @@ gamelist li a {
     width: 100%;
 }
 
-.team-games p {
+.team-games > p {
     width: 100%;
 }
 
@@ -777,6 +778,10 @@ gamelist li a {
     width: 100%;
     text-decoration: none;
     align-items: center;
+}
+
+.gameslist > p {
+    width: 100%;
 }
 
 .gameslist a:active {
@@ -821,6 +826,45 @@ gamelist li a {
     font-weight: 700!important;
 }
 
+/*  COMPACT MODE GAMELIST  */
+.view-mode {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0.5em;
+    display: flex;
+}
+
+.view-mode label {
+    margin: 0 0.5em;
+}
+
+.gamelist__compact li {
+    min-height: auto;
+    position: relative;
+    margin-bottom: 1.4em;
+    width: 100%;
+}
+
+.game__compact {
+    justify-content: space-between;
+    padding: 0 0.5em;
+}
+
+.score__compact {
+    display: flex;
+    width: 13%; 
+    justify-content: center; 
+}
+
+.team-name__compact {
+    width: 40%;
+}
+
+.team-name2__compact {
+    text-align: right;
+}
+
 /*
     Swiss score section
 */
@@ -861,7 +905,6 @@ gamelist li a {
 
 .swiss-standings table th {
     text-align: left;
-    padding: 0.5em 0;
     border: 0;
 }
 
@@ -871,10 +914,6 @@ tr:first-of-type {
 
 
  @media (min-width: 75em) { 
-    .division-select {
-        display: flex!important;
-    }
-
      .content {
          display: flex;
          justify-content: center;
@@ -910,6 +949,62 @@ tr:first-of-type {
         width: 75vw;
     }
 }
+
+/*  FROM  */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+
+  .switch input {display:none;}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #42A5F5;
+    transition: .2s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .2s;
+  }
+  
+  input:checked + .slider {
+    background-color: #42A5F5;;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #42A5F5;;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+
+  /* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
 
 
 .hide {
