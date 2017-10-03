@@ -11,7 +11,6 @@ exports.updateScore = function (req, res) {
   // console.log('TIJD BIJ KNOP ->' , timeOfUpdate);
   console.log(`REQ.SESH.GAMEID -> ${req.session.gameID}`);
 
-
   rp(`http://api.playwithlv.com/v1/game_scores/?game_id=${req.session.gameID}&access_token=${req.session.accessToken}`)
   .then(function (body) {
       var data = JSON.parse(body);

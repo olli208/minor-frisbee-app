@@ -82,7 +82,6 @@ io.on('connect', function (socket) {
     games
       .then(function (games) {
         io.emit('games DB', { games });
-
       })
       .catch(function (err) {
         console.log(`Could not find GAMES from DATABASE -> ${err}`)

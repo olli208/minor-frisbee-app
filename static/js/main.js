@@ -60,20 +60,19 @@
     innit: function() {  
       var self = this;
 
-      if (document.querySelector('.game')) {
-        var elem = document.querySelectorAll('.game');
-        var gameIDs = [];
-  
-        elem.forEach(function (el) {
-          gameIDs.push(el.id)
-        });
-  
-        socket.emit('check ID', { gameIDs });
-  
-        socket.on('games DB' , function (data) {
-          self.scoreUpdate(data , gameIDs);
-        });
-      }  
+      var elem = document.querySelectorAll('.game__detail');
+      var gameIDs = [];
+
+      elem.forEach(function (el) {
+        gameIDs.push(el.id)
+      });
+
+      socket.emit('check ID', { gameIDs });
+
+      socket.on('games DB' , function (data) {
+        console.log(data)
+        self.scoreUpdate(data , gameIDs);
+      });
       
       if (document.querySelector('.game-chat')) {
         loginButton.innit()
@@ -92,11 +91,27 @@
         // skip loop if the property is from prototype
         if (!games.hasOwnProperty(key)) continue;
 
-        var gamesList = document.getElementById(games[key].gameID);
-                
-        gamesList.querySelector('.team1 h4 span').innerHTML = games[key].team_1_score;          
-        gamesList.querySelector('.team2 h4 span').innerHTML = games[key].team_2_score;        
+        var scorePage = document.querySelector(`.header-section--score .sc${games[key].gameID}`);
+        var gamesList = document.querySelectorAll(`.x${games[key].gameID}`);
 
+
+        if (scorePage) {
+          // Update the score page
+          scorePage.querySelector('.team1-score').innerHTML = games[key].team_1_score;
+          scorePage.querySelector('.team2-score').innerHTML = games[key].team_2_score;
+        } else if (gamesList) {
+          gamesList.forEach(function (el) {
+            // update score games overview
+            el.querySelectorAll('.game-score .team1-score span').forEach( function(x) {
+              x.innerHTML = games[key].team_1_score; 
+            });
+  
+            el.querySelectorAll('.game-score .team2-score span').forEach( function(z) {
+              z.innerHTML = games[key].team_2_score;   
+            });          
+          })
+        }
+ 
       }
     },
     gameChat: function (gameID, chatID, chatForm) {
@@ -150,8 +165,11 @@
   var compactView = {
     innit: function () {
       var self = this;
-      var viewToggle = document.querySelector('.switch input');
-      viewToggle.addEventListener('click' , self.toggle)
+
+      if (document.querySelector('.switch input')) {
+        var viewToggle = document.querySelector('.switch input');
+        viewToggle.addEventListener('click' , self.toggle)
+      }
 
     },
     toggle: function() {  
@@ -176,8 +194,11 @@
     innit: function() {
       var self = this;
 
-      var buttonPressed = document.querySelector('.header-tabs');
-      buttonPressed.addEventListener('click' , self.toggle)
+      if (document.querySelector('.header-tabs')){
+        var buttonPressed = document.querySelector('.header-tabs');
+        buttonPressed.addEventListener('click' , self.toggle)
+      }
+      
     },
     toggle: function(e) {
       var swissStandings = document.querySelector('.swiss-standings');

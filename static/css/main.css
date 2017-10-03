@@ -333,11 +333,15 @@ header h2 {
     flex-wrap: wrap;
 } 
 
-.header-section--score .game-score h3 {
+.header-section--score .game-score {
     background: #fff;
     border-radius: 5px;  
     text-align: center; 
-    padding: 0.4em;
+    padding: 0.5em;
+    margin: 0;
+}
+
+.header-section--score .game-score h3 {
     margin: 0;
 }
 
@@ -361,7 +365,6 @@ header h2 {
 
 .login-msg {
     background: #FF8A65;
-    width: 100vw;
     left: 0;
     position: fixed;
     padding: 1em 0.5em;
@@ -374,7 +377,7 @@ header h2 {
 
 .login-msg__hide {
     transition: .3s;
-    margin: -9em auto;
+    margin: -30em auto;
     z-index: -1;
 }
 
@@ -490,7 +493,7 @@ header h2 {
 }
 
 .score-update:target {
-    z-index: 1;
+    z-index: 999;
     display: block;
 }
 
