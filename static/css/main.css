@@ -5,15 +5,10 @@
 html, body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
-h1, h2, h3, h4 {
-    color: #3f3f3f;
-}
-
-p {
-  color: #666;
+h1, h2, h3, h4, p {
+    color: #666;
 }
 
 span {
@@ -74,7 +69,6 @@ input {
     border-radius: 500px;
     letter-spacing: 2px;
     text-transform: uppercase;
-
     padding: 1em 1.5em;
     text-decoration: none;
     color: #fff;
@@ -89,22 +83,6 @@ input {
     #lightbox {
         width: 100%!important;
     }
-
-    h1 {
-        font-size: 3em;
-    }
-
-    h2 {
-        font-size: 1.5em;
-    }
-
-    h3 {
-        font-size: 1.2em;
-    }
-
-    h4 {
-        font-size: 1.10em;
-    }
 }
 
 body {
@@ -116,6 +94,7 @@ body {
     margin-top: 2em;
 }
 
+/*  ZERO STTE screen: */
 .intro {
     padding: 5em 0.5em 0 0.5em;
     background: #2196F3;
@@ -152,7 +131,6 @@ header {
     margin: 0;
     width: 100%;
     z-index: -1;
-    box-shadow: 0 2px 0 0 rgba(0,0,0,0.1);
 }
 
 header h2 {
@@ -232,9 +210,9 @@ header h2 {
     border: 1px solid #42A5F5;
 }
 
-    /*
-        TEAM DETAIL PAGE
-    */
+/*
+    TEAM DETAIL PAGE
+*/
 .team-header {
     background: #42A5F5;
     margin-bottom: 4em;
@@ -277,14 +255,21 @@ header h2 {
 
 .team-desc {
     box-sizing: border-box;
-    width: 100%;
-    padding: 0.5em 1em;
+    padding: 0.5em;
     background: #fff;
+}
+
+.team-desc h2 {
+    margin: 0;
+}
+
+.team-games__team {
+    margin: 0 auto!important;
 }
 
 .next-game {
     background: #FF8A65;
-    padding: 1em;
+    padding: 0.5em;
 }
 
 .next-game h2 ,.next-game h3,.next-game p ,.next-game a {
@@ -310,7 +295,6 @@ header h2 {
 }
 
 .back {
-    fill: #fff;
     width: 2em;
     margin: 0.25em;
 }
@@ -357,9 +341,9 @@ header h2 {
 .header-section--info {
     margin-top: 11em;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     background: #42A5F5;
-    padding: 1em 0.25em;
+    padding: 1em 0.5em;
 }
 
 .header-section--info p {
@@ -383,22 +367,33 @@ header h2 {
 }
 
 .game-updates, .game-chat {
-    padding: 0 0.25em;
+    padding: 1em 0.5em;
+    background: #fff;
+}
+
+.game-updates p {
+    margin: 0;
+}
+
+.game-updates h2 {
+    margin-top: 0;
 }
 
 .game-chat li {
     list-style: none;
     background: #fff;
     margin-bottom: 1em;
+    border-radius: 5px;
+    padding: 0.5em;
+    border: 1px solid rgba(0,0,0,0.1)
 }
 
 .game-chat li p {
-    margin: 0;
+    margin: 0.25em 0;
     padding: 0;
 }
 
 .game-chat {
-    height: 50vh;
     display: flex;
     flex-wrap: wrap;
 }
@@ -410,17 +405,10 @@ header h2 {
 }
 
 .game-chat ul {
-    /* EXPERIMENT: ____________________*/
-    -webkit-mask-image: -webkit-gradient(linear, left top, left bottom,  
-        from(rgba(0,0,0,1)), 
-        to(rgba(0,0,0,0)), 
-        color-stop(0.5, #eee));
-    /* _________________ */
     width: 100%;
     padding: 0;
     overflow: auto;
-    height: 80%;
-    /* flex-direction: column-reverse; */
+    margin-bottom: 4em;
 }
 
 .game-chat form {
@@ -431,7 +419,6 @@ header h2 {
     margin: 0;
     left: 0;
     display: flex;
-    justify-content: space-evenly;
 }
 
 .game-chat form input {
@@ -512,7 +499,7 @@ header h2 {
 }
 
 .nav-update {
-    padding: 1em 1em 0 1em;
+    padding: 1em 1em 0 1em!important;
 }
 
 .score-update div:first-of-type h3, .nav h3 {
@@ -525,7 +512,6 @@ header h2 {
     border: 0;
     background: inherit;
     margin-right: 0.5em;
-    margin-left: 0.25em;
 }
 
 .close-btn, .back-btn {
@@ -534,7 +520,7 @@ header h2 {
 
 .score-update form {
     position: relative;
-    background: #fff;
+    background: #FF8A65;
     height: 100vh;
 }
 
@@ -710,13 +696,23 @@ input[type="checkbox"]:focus + label::before {
         padding: 0;
     }
 
+    .header-section--info {
+        margin-top: 11em;
+    }
+
+    .header-section--info,
+    .game-updates,
+    .game-chat,
+    .next-game,
+    .team-games,
+    .team-desc,
+    .nav  {
+        padding: 1em;
+    }
+
     .gameslist li {
         width: 48%;
     }
-}
-
-gamelist li a {
-    padding: 0 0.25em;
 }
 
 .tournament-info {
@@ -748,7 +744,7 @@ gamelist li a {
 .team-games {
     background: #fff;
     padding: 0.5em;
-    display: flex;
+    display: flex; 
     flex-wrap: wrap;
     position: relative;
 }
@@ -813,11 +809,6 @@ gamelist li a {
     margin: 0 0 1em 0;
 }
 
-.gamelist__teampage .team1 p ,
-.gamelist__teampage .team2 p {
-    min-height: 3;
-}
-
 .gameslist .team1 {
     text-align: right;
 }
@@ -853,7 +844,7 @@ gamelist li a {
 
 .score__compact {
     display: flex;
-    width: 13%; 
+    width: 17%; 
     justify-content: center; 
 }
 
@@ -919,6 +910,10 @@ tr:first-of-type {
          justify-content: center;
      }
 
+     .score-update > section {
+         width: 50vw;
+     }
+
     .swiss-standings {
         display: block!important;
         width: 25%;
@@ -938,6 +933,24 @@ tr:first-of-type {
         display: none;
     }
 
+    .content__team-page {
+        display: flex;
+        width: 75vw;
+        margin: 0 auto;
+    }
+
+    .team-desc {
+        width: 50%;
+    }
+
+    .team-games__team {
+        width: 100%;
+    }
+
+    .team-games__team li {
+        width: 100%;
+    }
+
     .team-games {
         display: block!important;
         width: 50%;
@@ -947,6 +960,13 @@ tr:first-of-type {
     section {
         margin: 0 auto;
         width: 75vw;
+    }
+
+    .header-section-score > section,
+    .header-section--info,
+    .game-updates,
+    .game-chat {
+        width: 50vw;
     }
 }
 
@@ -1006,11 +1026,6 @@ tr:first-of-type {
     border-radius: 50%;
   }
 
-
 .hide {
     display: none;
-}
-
-.hides {
-    opacity: 0;
 }

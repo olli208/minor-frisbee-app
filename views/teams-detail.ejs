@@ -31,7 +31,7 @@
 
 <section class="next-game">
   <div class="">
-    <h2>Next game - ROUND <%= next.swiss_round.round_number %></h2>
+    <h2>Next game - Round <%= next.swiss_round.round_number %></h2>
         
     <div class="info">
       <% if (next.team_1.short_name === data.short_name ) { %>
@@ -44,32 +44,37 @@
   </div>
 </section>
 
-<section class="team-desc">
-  <h2>About</h2>
-  <p>
-    <%= data.info  %>
-  </p>
-</section>
+<div class="content__team-page">
+  <section class="team-desc">
+    <h2>About</h2>
+    <p>
+      <%= data.info  %>
+    </p>
+  </section>
 
-<section class="team-games">
+  <section class="team-games team-games__team">
   <h2>Games Played</h2>    
-    <ul class="gameslist">
+    <ul class="gameslist gamelist__detail">
       <% games.forEach(function (obj) { %>
       <li class="boxshadow">
-        <h3 class="tournament-info">ROUND <%= obj.swissRoundNumber %> - @<%= obj.tournamentStyle %></h3>
+        <div class="tournament-info">
+          <p class=""><%= obj.tournamentStyle %></p>
+          <p><%= new Date(obj.startTime).toString().substr(15,6) %> </p>
+        </div>
+
         <a href="#" class="game">
-          <div class="team1">
-            <h4><%= obj.team_1.name %></h4>
-            <h4><span><%= obj.team_1_score %></span></h4>
+        
+          <div class="team team1">
+            <p><%= obj.team_1.name %></p>
+            <h4><span><%= obj.team_1_score %></span></h>
           </div>
 
           <div class="info">
-            <p> <b><%= h.moment(obj.startTime).format('dddd Do') %></b></p>
-            <p> <b><%= new Date(obj.startTime).toString().substr(15,6) %></b></p>
+            <p><b>-</b></p>
           </div>
 
-          <div class="team2">
-            <h4><%= obj.team_2.name %></h4>
+          <div class="team team2">
+            <p><%= obj.team_2.name %></p>
             <h4><span><%= obj.team_2_score %></span></h4>
           </div>
         </a>
@@ -77,5 +82,9 @@
       <% }) %>
     </ul>
 </section>
+
+</div>
+
+
 
 <% include partials/footer.ejs %>

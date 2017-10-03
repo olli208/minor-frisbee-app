@@ -8,7 +8,6 @@
     </div>
   </section>
   
-
   <section class="header-section--score">
     <div class="team team-1">
       <a href="/teams/<%= game.team_1_id %>"><h3><%= game.team_1.name %></h3></a>
@@ -65,12 +64,12 @@
 
   <ul id="chat<%= game.id %>">
     <% messages.forEach(function (obj) { %>
-    <li class="chat-message"> 
-      <p><b>Message:</b></p>
+    <li class="chat-message boxshadow"> 
+      <p><b><%= obj.message.time %></b> <%= obj.message.date %></p>
       <p> <%= obj.message.content %> </p>
-      <span> <%= obj.message.date %> , <%= obj.message.time %> </span>
     </li>
     <% }) %>
+    <li><p>no more messages.</p></li>
   </ul>
 
   <form>

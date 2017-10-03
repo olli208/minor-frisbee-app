@@ -183,9 +183,8 @@
         var newMessage = document.createElement('li');
         newMessage.className = 'chat-message';
         newMessage.innerHTML = 
-          '<p><b>Message:</b></p>' +
-          '<p>'+ data.message +'</p>' +
-          '<span>'+ data.date + ', ' + data.time +'</span>';
+          '<p><b>' + data.time + '</b>' + data.date + '</p>' +
+          '<p>'+ data.message +'</p>';
   
         oldMessages.insertBefore(newMessage, oldMessages.childNodes[0]);
       });
