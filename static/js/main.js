@@ -13,60 +13,6 @@
     }
   }
 
-  var compactView = {
-    innit: function () {
-      var self = this;
-      var viewToggle = document.querySelector('.switch input');
-      viewToggle.addEventListener('click' , self.toggle)
-
-    },
-    toggle: function() {  
-      var elemCompact = document.querySelector('.gamelist__compact'); 
-      var elemDetail = document.querySelector('.gamelist__detail');  
-      var toggle = document.querySelector('.switch input'); 
-
-      console.log(toggle.checked)
-      if (toggle.checked === true) {
-        elemCompact.classList.remove('hide');
-        elemDetail.classList.add('hide');
-
-      } else if (toggle.checked === false) {
-        elemCompact.classList.add('hide');
-        elemDetail.classList.remove('hide');
-
-      }
-      // document.querySelector('.switch input').checked ? this.compactView : this.detailView;
-    }
-  }
-
-  var navTabs = {
-    innit: function() {
-      var self = this;
-
-      var buttonPressed = document.querySelector('.header-tabs');
-      buttonPressed.addEventListener('click' , self.toggle)
-
-    },
-    toggle: function(e) {
-      var swissStandings = document.querySelector('.swiss-standings');
-      var games = document.querySelector('.team-games');
-
-      if (e.target.textContent === 'Games') {
-        swissStandings.classList.add('hide');
-        games.classList.remove('hide');
-
-        document.querySelector('.header-tabs_games').classList.add('active');
-        document.querySelector('.header-tabs_rankings').classList.remove('active');
-      } else if (e.target.textContent === 'RANKINGS') {
-        games.classList.add('hide');
-        swissStandings.classList.remove('hide');
-
-        document.querySelector('.header-tabs_games').classList.remove('active');
-        document.querySelector('.header-tabs_rankings').classList.add('active');
-      }
-    }
-  }
-
   var score = {
     add: function() {
       var self = this;
@@ -130,6 +76,7 @@
       }  
       
       if (document.querySelector('.game-chat')) {
+        loginButton.innit()
         var gameID = document.querySelector('input[name="game_id"]').value;
         var chatID = document.querySelector('#game-chat' + gameID);
         var chatForm = chatID.querySelector('form');
@@ -188,6 +135,67 @@
   
         oldMessages.insertBefore(newMessage, oldMessages.childNodes[0]);
       });
+    }
+  }  
+
+  var loginButton = {
+    innit: function() {
+      var loginBtn = document.querySelector('.login-button');
+      loginBtn.addEventListener('click' , function() {
+        document.querySelector('.login-msg').classList.toggle('login-msg__hide');
+      })
+    }
+  }
+
+  var compactView = {
+    innit: function () {
+      var self = this;
+      var viewToggle = document.querySelector('.switch input');
+      viewToggle.addEventListener('click' , self.toggle)
+
+    },
+    toggle: function() {  
+      var elemCompact = document.querySelector('.gamelist__compact'); 
+      var elemDetail = document.querySelector('.gamelist__detail');  
+      var toggle = document.querySelector('.switch input'); 
+
+      console.log(toggle.checked)
+      if (toggle.checked === true) {
+        elemCompact.classList.remove('hide');
+        elemDetail.classList.add('hide');
+
+      } else if (toggle.checked === false) {
+        elemCompact.classList.add('hide');
+        elemDetail.classList.remove('hide');
+
+      }
+    }
+  }
+
+  var navTabs = {
+    innit: function() {
+      var self = this;
+
+      var buttonPressed = document.querySelector('.header-tabs');
+      buttonPressed.addEventListener('click' , self.toggle)
+    },
+    toggle: function(e) {
+      var swissStandings = document.querySelector('.swiss-standings');
+      var games = document.querySelector('.team-games');
+
+      if (e.target.textContent === 'Games') {
+        swissStandings.classList.add('hide');
+        games.classList.remove('hide');
+
+        document.querySelector('.header-tabs_games').classList.add('active');
+        document.querySelector('.header-tabs_rankings').classList.remove('active');
+      } else if (e.target.textContent === 'RANKINGS') {
+        games.classList.add('hide');
+        swissStandings.classList.remove('hide');
+
+        document.querySelector('.header-tabs_games').classList.remove('active');
+        document.querySelector('.header-tabs_rankings').classList.add('active');
+      }
     }
   }
 

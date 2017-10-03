@@ -23,9 +23,14 @@
 
     <div class="update-login-btn">
     <% if (accessToken) { %>
-      <a href="#lightbox">Update Score</a>
+      <button class="login-button"><a href="#lightbox">Update Score</a></button>
     <% } else { %>
-      <a href="/login">Log in</a>
+      <button class="login-button">Update Score</button>
+      <div class="login-msg login-msg__hide">
+        <p>To update the score, you need to have a Leaguevine account.</p>
+        <a href="/login">Log in</a>
+        <a href="/login">Register</a>
+      </div>
     <% } %> 
     </div>
   </section>
@@ -49,11 +54,11 @@
     <% var categories =  Object.keys(flashes); %>
     <% categories.forEach(function (cat) { %>
       <% flashes[cat].forEach(message => { %>
-        <section class="flash-message boxshadow"> 
+        <div class="flash-message boxshadow"> 
           <button id="close-message">close</button>
           <h2>Score Update!</h2>
           <p><%= message %></p> 
-        </section>
+        </div>
       <% }) %>
     <% }) %>
   <% } %>

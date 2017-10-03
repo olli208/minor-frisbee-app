@@ -55,7 +55,7 @@ input {
     background: #42A5F5;
     border: 0;
     border-radius: 500px;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     text-transform: uppercase;
     color: #fff;
     margin: 1em 0;
@@ -63,20 +63,23 @@ input {
 
 .action-button {
     padding: 1em 1.5em;
-    margin: 1em 0;
     background: #2196F3;
     border: 0;
     border-radius: 500px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 1em 1.5em;
+    letter-spacing: 1px;
     text-decoration: none;
+    text-transform: uppercase;
     color: #fff;
+    margin: 1em 0;
 }
 
 @media (min-width: 40em) {
     section {
         margin: 0 auto;
+        width: 55vw;
+    }
+
+    .login-msg, .game-chat form {
         width: 55vw;
     }
 
@@ -287,7 +290,7 @@ header h2 {
     display: block;
     position: fixed;
     top: 0;
-    z-index: 1;
+    z-index: 99;
 }
 
 .header-nav {
@@ -353,17 +356,43 @@ header h2 {
 
 .update-login-btn {
     position: absolute;
-    bottom: 0.5em;
+    bottom: 0;
 }
 
-.update-login-btn a {
+.login-msg {
+    background: #FF8A65;
+    width: 100vw;
+    left: 0;
+    position: fixed;
+    padding: 1em 0.5em;
+    margin: 0 auto;
+    z-index: -1;
+    left: 0;
+    right: 0;
+    transition: .3s;
+}
+
+.login-msg__hide {
+    transition: .3s;
+    margin: -9em auto;
+    z-index: -1;
+}
+
+.login-msg p {
+    color: #fff;
+}
+
+.login-msg > a {
+    padding: 0!important;
+    margin-right: 1em;
+}
+
+.update-login-btn a, .update-login-btn button {
     color: #fff;
     font-size: 0.9em;
-    margin-top: 0.5em;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
     background: #FF8A65;
     padding: 0.5em;
+    border: 0;
 }
 
 .game-updates, .game-chat {
@@ -696,6 +725,16 @@ input[type="checkbox"]:focus + label::before {
         padding: 0;
     }
 
+    .login-msg, .game-chat form {
+        width: 55vw;
+    }
+
+    .game-chat form {
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+    }
+
     .header-section--info {
         margin-top: 11em;
     }
@@ -705,8 +744,11 @@ input[type="checkbox"]:focus + label::before {
     .game-chat,
     .next-game,
     .team-games,
-    .team-desc,
-    .nav  {
+    .team-desc  {
+        padding: 1em!important;
+    }
+
+    .nav {
         padding: 1em;
     }
 
@@ -822,7 +864,7 @@ input[type="checkbox"]:focus + label::before {
     position: absolute;
     right: 0;
     top: 0;
-    padding: 0.5em;
+    padding: 1em;
     display: flex;
 }
 
@@ -910,7 +952,9 @@ tr:first-of-type {
          justify-content: center;
      }
 
-     .score-update > section {
+     .score-update > section,
+     .login-msg, 
+     .game-chat form {
          width: 50vw;
      }
 
