@@ -54,7 +54,6 @@ app.use('/', require('./routes/index'));
 
 // SOCKET Things here
 io.on('connect', function (socket) {
-  console.log('user connected ->' , socket.id);
   var Chat = mongoose.model('Chat');
   var Game = mongoose.model('Game');
 

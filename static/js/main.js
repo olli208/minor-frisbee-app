@@ -70,7 +70,6 @@
       socket.emit('check ID', { gameIDs });
 
       socket.on('games DB' , function (data) {
-        console.log(data)
         self.scoreUpdate(data , gameIDs);
       });
       
@@ -84,6 +83,7 @@
       }
     },
     scoreUpdate: function (data, clientIDs) {
+      var self = this;
       var games = data.games;
       var elem = document.querySelectorAll('.gameslist li a');
 
@@ -103,11 +103,11 @@
           gamesList.forEach(function (el) {
             // update score games overview
             el.querySelectorAll('.game-score .team1-score span').forEach( function(x) {
-              x.innerHTML = games[key].team_1_score; 
+              self.animate(x, games[key].team_1_score)
             });
   
             el.querySelectorAll('.game-score .team2-score span').forEach( function(z) {
-              z.innerHTML = games[key].team_2_score;   
+              self.animate(z, games[key].team_2_score) 
             });          
           })
         }
@@ -139,6 +139,14 @@
         messageBox.value = "";  
       });
 
+    },
+    animate: function(elem , score) {
+      elem.classList.add('orange');
+      elem.innerHTML = score; 
+      
+      setTimeout(function(){
+        elem.classList.remove('orange')
+      },400)
     }
   }
 

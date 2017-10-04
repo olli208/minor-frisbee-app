@@ -13,6 +13,7 @@ h1, h2, h3, h4, p {
 
 span {
     color: #FF8A65;
+    transition: .3s;
 }
 
 h1 {
@@ -339,7 +340,7 @@ header h2 {
     text-align: center; 
     padding: 0.5em;
     margin: 0;
-    max-width: 7em;
+    max-width: 7em; 
 }
 
 .header-section--score .game-score h3 {
@@ -814,6 +815,13 @@ input[type="checkbox"]:focus + label::before {
      width: 100%;
  }
 
+ .gameslist span {
+     padding: 0.2em!important;
+     width: 1.5em;
+     display: inline-block;
+     height: 1.5em;
+ }
+
 .gameslist a {
     display: flex;
     justify-content: space-around;
@@ -956,7 +964,10 @@ tr:first-of-type {
          justify-content: center;
      }
 
-     .score-update > section,
+     score-update > section {
+        width: 40vw;
+     }
+
      .login-msg, 
      .game-chat form {
          width: 50vw;
@@ -1077,4 +1088,16 @@ tr:first-of-type {
 
 .hide {
     display: none;
+}
+
+.orange, .orange * {
+    background: #FF8A65;
+    border-radius: 50%;
+    color: #FF8A65;
+    padding: 0.2em!important;
+    width: 1.5em;
+    display: inline-block;
+    height: 1.5em;
+    margin: 0 auto;
+    transition: .1s;
 }
