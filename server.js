@@ -85,7 +85,12 @@ io.on('connect', function (socket) {
     
     games
       .then(function (games) {
-        io.emit('games DB', { games });
+        console.log('games -->' , games)
+        var difference = diff(games, data); // Compare old with new data
+
+        if (difference) {
+          io.emit('games DB', { games });
+        }
       })
       .catch(function (err) {
         console.log(`Could not find GAMES from DATABASE -> ${err}`)
