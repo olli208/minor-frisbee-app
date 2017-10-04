@@ -57,7 +57,7 @@
   } 
 
   var realTime = {
-    innit: function() {  
+    innit: function() {        
       var self = this;
 
       var elem = document.querySelectorAll('.game__detail');
@@ -118,6 +118,8 @@
       chatForm.addEventListener('submit' , function(e) {
         e.preventDefault();        
         var date = new Date();
+
+        var oldMessages = chatID.querySelector('ul');
         var messageBox = document.querySelector('input[type="text"]');
         var message = messageBox.value;
 
@@ -128,8 +130,11 @@
           gameID,
         }
 
-        socket.emit('chat message' , messageContent );  
-        chatRoom.newMessage(gameID , chatID)      
+        socket.emit('chat message' , messageContent );
+           
+        socket.on('new message' , function (data) {
+          chatRoom.newMessage(chatID , oldMessages , data); 
+        });
 
         messageBox.value = "";  
       });
@@ -138,18 +143,14 @@
   }
 
   var chatRoom = {
-    newMessage: function (gameID , chatID) {
-      io('/' + gameID).on('new message' , function (data) {  
-        console.log(data);
-        var oldMessages = chatID.querySelector('ul')
-        var newMessage = document.createElement('li');
-        newMessage.className = 'chat-message';
-        newMessage.innerHTML = 
-          '<p><b>' + data.time + '</b>' + data.date + '</p>' +
-          '<p>'+ data.message +'</p>';
-  
-        oldMessages.insertBefore(newMessage, oldMessages.childNodes[0]);
-      });
+    newMessage: function (chatID, oldMessages , data) {
+      var newMessage = document.createElement('li');
+      newMessage.className = 'chat-message boxshadow';
+      newMessage.innerHTML = 
+        '<p><b>' + data.message.time + '</b> ' + data.message.date + '</p>' +
+        '<p>'+ data.message.content +'</p>';
+
+      oldMessages.insertBefore(newMessage, oldMessages.childNodes[0]);
     }
   }  
 

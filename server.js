@@ -54,10 +54,14 @@ app.use('/', require('./routes/index'));
 
 // SOCKET Things here
 io.on('connect', function (socket) {
+  console.log('user connected ->' , socket.id);
   var Chat = mongoose.model('Chat');
   var Game = mongoose.model('Game');
 
   socket.on('chat message', function (data){
+    var ns = io.of(`/${data.gameID}`);
+    console.log(ns)
+
     var formatChat = {
       gameID: data.gameID,
       message: 
@@ -71,8 +75,9 @@ io.on('connect', function (socket) {
     new Chat(formatChat)
       .save()
       .then(function (chat) {
-        console.log('SUCCESS!! NEW CHAT MESSAGES ADDED!');
-        updateChat(data , data.gameID);
+        console.log('NEW MESSAGE');
+        // ns.emit('new message', chat);
+        io.emit('new message', chat);
       });
   });
   
@@ -88,12 +93,11 @@ io.on('connect', function (socket) {
       })
   });
 
-});
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
 
-function updateChat (messageContent, gameID) {
-  var ns = io.of(`/${gameID}`);
-  ns.emit('new message', messageContent);
-}
+});
 
 server.listen(process.env.PORT, function (){
     console.log('server is running on: ' + process.env.PORT);
