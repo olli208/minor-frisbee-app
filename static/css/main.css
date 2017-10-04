@@ -339,6 +339,7 @@ header h2 {
     text-align: center; 
     padding: 0.5em;
     margin: 0;
+    max-width: 7em;
 }
 
 .header-section--score .game-score h3 {
@@ -966,6 +967,7 @@ tr:first-of-type {
         width: 25%;
         margin: 0;
         border-left: 1px solid rgba(0,0,0,0.1);
+        padding: 1em;
     }
 
     .swiss-standings h2 {
@@ -982,7 +984,7 @@ tr:first-of-type {
 
     .content__team-page {
         display: flex;
-        width: 75vw;
+        width: 70vw;
         margin: 0 auto;
     }
 
@@ -1006,7 +1008,7 @@ tr:first-of-type {
 
     section {
         margin: 0 auto;
-        width: 75vw;
+        width: 70vw;
     }
 
     .header-section-score > section,

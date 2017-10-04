@@ -178,7 +178,6 @@
       var elemDetail = document.querySelector('.gamelist__detail');  
       var toggle = document.querySelector('.switch input'); 
 
-      console.log(toggle.checked)
       if (toggle.checked === true) {
         elemCompact.classList.remove('hide');
         elemDetail.classList.add('hide');

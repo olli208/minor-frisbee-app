@@ -57,7 +57,7 @@
         <% games.forEach(function (obj) { %>
         <li class="boxshadow">     
           <a href="/update/<%= obj.id %>" class="game game__compact x<%= obj.id %>" id="<%= obj.id %>">
-            <p class="team-name__compact" <% winners.forEach(function (winner) { if (winner.short_name === obj.team_1.short_name) { %> class="game-winner" <% }}) %> >
+            <p class="team-name__compact <% winners.forEach(function (winner) { if (winner.short_name === obj.team_1.short_name) { %> game-winner" <% }}) %> " >
               <%= obj.team_1.short_name %>
             </p>
 
@@ -65,7 +65,7 @@
               <p class="team1-score"><span><%= obj.team_1_score %></span> - </p><p class="team2-score"><span><%= obj.team_2_score %></span></p>
             </div>
             
-            <p class="team-name__compact team-name2__compact" <% winners.forEach(function (winner) { if (winner.short_name === obj.team_2.short_name) { %> class="game-winner" <% }}) %> >
+            <p class="team-name__compact team-name2__compact <% winners.forEach(function (winner) { if (winner.short_name === obj.team_2.short_name) { %> game-winner" <% }}) %> " >
               <%= obj.team_2.short_name %>
             </p>
           </a>
