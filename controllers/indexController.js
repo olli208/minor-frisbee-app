@@ -1,9 +1,5 @@
 exports.index = function (req , res) {
-  if (req.session.accessToken === undefined) {
-    res.render('index')
-  } else {
-    res.redirect('/games');
-  }
+  res.render('index')
 }
 
 exports.confirmOauth = function (req, res) {
