@@ -807,7 +807,6 @@ input[type="checkbox"]:focus + label::before {
 
  .gamelist-date {
      width: 100%;
-     background: yellowgreen;
      margin: 0;
  }
 
@@ -1094,10 +1093,6 @@ tr:first-of-type {
     background: #FF8A65;
     border-radius: 50%;
     color: #FF8A65;
-    padding: 0.2em!important;
-    width: 1.5em;
     display: inline-block;
-    height: 1.5em;
-    margin: 0 auto;
     transition: .1s;
 }

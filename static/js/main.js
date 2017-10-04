@@ -97,8 +97,12 @@
 
         if (scorePage) {
           // Update the score page
-          scorePage.querySelector('.team1-score').innerHTML = games[key].team_1_score;
-          scorePage.querySelector('.team2-score').innerHTML = games[key].team_2_score;
+          scorePage.querySelector('.team1-score span').innerHTML = games[key].team_1_score;
+          scorePage.querySelector('.team2-score span').innerHTML = games[key].team_2_score;
+
+          self.animate(scorePage.querySelector('.team1-score span'), games[key].team_1_score);
+          self.animate(scorePage.querySelector('.team2-score span'), games[key].team_2_score);
+
         } else if (gamesList) {
           gamesList.forEach(function (el) {
             // update score games overview
@@ -143,7 +147,7 @@
     animate: function(elem , score) {
       elem.classList.add('orange');
       elem.innerHTML = score; 
-      
+
       setTimeout(function(){
         elem.classList.remove('orange')
       },400)
