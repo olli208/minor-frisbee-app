@@ -87,35 +87,41 @@
       var games = data.games;
       var elem = document.querySelectorAll('.gameslist li a');
 
-      if (games.length < 2 ) {
-        for (var key in games) {
-          // skip loop if the property is from prototype
-          if (!games.hasOwnProperty(key)) continue;
+      for (var key in games) {
+        // skip loop if the property is from prototype
+        if (!games.hasOwnProperty(key)) continue;
+
+        var scorePage = document.querySelector(`.header-section--score .sc${games[key].gameID}`);
+        var gamesList = document.querySelectorAll(`.x${games[key].gameID}`);
+
+
+        if (scorePage) {
+          // Update the score page
+          scorePage.querySelector('.team1-score span').innerHTML = games[key].team_1_score;
+          scorePage.querySelector('.team2-score span').innerHTML = games[key].team_2_score;
+
+          self.animate(scorePage.querySelector('.team1-score span'), games[key].team_1_score);
+          self.animate(scorePage.querySelector('.team2-score span'), games[key].team_2_score);
+
+        } else if (gamesList) {
+          gamesList.forEach(function (el) {
+            // update score games overview
+            el.querySelectorAll('.game-score .team1-score span').forEach( function(x) {
+              if (games.length < 2) {
+                self.animate(x, games[key].team_1_score);
+              } else if (games.length > 2) {
+                x.innerHTML =  games[key].team_1_score
+              }
+            });
   
-          var scorePage = document.querySelector(`.header-section--score .sc${games[key].gameID}`);
-          var gamesList = document.querySelectorAll(`.x${games[key].gameID}`);
-  
-  
-          if (scorePage) {
-            // Update the score page
-            scorePage.querySelector('.team1-score span').innerHTML = games[key].team_1_score;
-            scorePage.querySelector('.team2-score span').innerHTML = games[key].team_2_score;
-  
-            self.animate(scorePage.querySelector('.team1-score span'), games[key].team_1_score);
-            self.animate(scorePage.querySelector('.team2-score span'), games[key].team_2_score);
-  
-          } else if (gamesList) {
-            gamesList.forEach(function (el) {
-              // update score games overview
-              el.querySelectorAll('.game-score .team1-score span').forEach( function(x) {
-                self.animate(x, games[key].team_1_score)
-              });
-    
-              el.querySelectorAll('.game-score .team2-score span').forEach( function(z) {
-                self.animate(z, games[key].team_2_score) 
-              });          
-            })
-          }
+            el.querySelectorAll('.game-score .team2-score span').forEach( function(z) {
+              if (games.length < 2) {
+                self.animate(z, games[key].team_2_score);
+              } else if (games.length > 2) {
+                z.innerHTML =  games[key].team_2_score
+              }
+            });          
+          })
         }
       }
     },
