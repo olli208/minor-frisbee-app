@@ -970,8 +970,16 @@ tr:first-of-type {
 
      .login-msg, 
      .game-chat form,
-     .intro {
-         width: 50vw;
+     .intro,
+     .next-game,
+     .content__team-page,
+     .team-quick-info,
+     .nav-team {
+         width: 50vw!important;
+     }
+
+     .team-quick-info, .nav-team {
+         margin: 0 auto;
      }
 
      .login-msg {
