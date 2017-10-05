@@ -974,6 +974,10 @@ tr:first-of-type {
          width: 50vw;
      }
 
+     .login-msg {
+         padding: 1em!important;
+     }
+
     .swiss-standings {
         display: block!important;
         width: 25%;
