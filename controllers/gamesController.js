@@ -57,16 +57,8 @@ exports.getGames = function (req, res) {
       }
 
       return info
-
-      // res.render('games', {
-      //   games: data.objects || {},
-      //   tournamentLong: tournamentName,
-      //   tournamentShort: tournamentNameShort(tournamentName),
-      //   winners
-      // })
     })
     .then(function (info) {
-      console.log(info.games[0].swiss_round_id);
       rp(`http://api.playwithlv.com/v1/swiss_rounds/?swiss_round_ids=%5B${info.games[0].swiss_round_id}%5D&access_token=${req.session.accessToken}`)
       .then( function (body) { 
         var swissRank = JSON.parse(body);
@@ -184,6 +176,7 @@ function chat(data , score , req, res ) {
     
     chatRoom
       .then(function (chat) {
+        req.session.return = req.path;
         var messages = [];
   
         chat.forEach(function (e) {

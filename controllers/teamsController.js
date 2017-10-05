@@ -27,11 +27,13 @@ exports.getTeamDetail = function (req, res) {
           rp(`http://api.playwithlv.com/v1/games/?tournament_id=${parseInt(tournamentIDS[0])}&team_ids=%5B${teamData.id}%5D&starts_after=${lastGame.toISOString()}&order_by=['start_time']&limit=1&access_token=${req.session.accessToken}`)
             .then(function (body) {
               var nextGames = JSON.parse(body);
+              console.log(req.session.return);
             
               res.render('teams-detail', {
                 data: teamData,
                 games: games || {},
-                next: nextGames.objects[0]
+                next: nextGames.objects[0],
+                returnto: req.session.return || "/games"
               });
 
             })

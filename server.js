@@ -85,7 +85,6 @@ io.on('connect', function (socket) {
     
     games
       .then(function (games) {
-        console.log('games -->' , games)
         var difference = diff(games, data); // Compare old with new data
 
         if (difference) {
