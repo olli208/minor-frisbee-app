@@ -20,7 +20,7 @@
     "moment": "^2.18.1",
     "mongoose": "4.10.6",
     "querystring": "~0.2.0",
-    "request": "~2.34.0",
+    "request": "~2.88.0",
     "request-promise": "^4.2.1",
     "socket.io": "1.7.3",
     "nodemon": "^1.11.0"
